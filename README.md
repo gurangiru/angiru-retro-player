@@ -14,21 +14,17 @@ A retro gaming player for the Angiru community. A responsive web interface accep
 
 ## Real game artwork
 
-- Searches **Wikimedia Commons** first through its public MediaWiki API.
-- If Commons does not find a strong title match, it checks **Wikidata** for an exact game-title entity, verifies that it is a video game (`P31: Q7889`), then uses its Commons image (`P18`) if the file has licence metadata.
-- Normalizes ROM names by removing region, translation, hack/bootleg, revision, release-code and hash markers. It also tries the saved title and the embed URL slug.
-- Uses a strict title score and checks numeric sequel titles. Images without a licence label or weak matches are rejected.
-- Displays the Commons file/source link and licence label (with a separate licence link when supplied), and uses the stylized fallback if no safe match is found.
-- **Retry cover** lets the user re-run the search. The small status text indicates searching, found, no match, or a request failure.
-- Searches are client-side, key-free, CORS-enabled, and limited to two concurrent lookups. No ROM or game file is uploaded.
+- Artwork lookup starts when a library card is near the viewport (and searches immediately in browsers without `IntersectionObserver`). The lookup queue limits the app to two concurrent searches.
+- **Wikimedia Commons** is searched first. Only image results with licence metadata are eligible.
+- **Wikidata** is a fallback metadata source: the match must be a high-confidence title, identify as a video game, and have a Commons image with licence metadata.
+- The game name is normalized to remove common region, translation, revision and ROM tags. Sequel numbers are compared strictly to reduce mismatches. The embed slug is also used to form search terms.
+- Cards link to the image/file page and licence; creator/artist metadata is included when available.
+- Artwork URLs and attribution are saved in the local library. Images are not downloaded into this repository. If no confident/licensed match exists, the request fails, or an image breaks, the stylized fallback remains; **Retry cover** searches again.
+- Search queries send game titles to Wikimedia/Wikidata. No ROM or game file is uploaded.
 
-The RetroArch/libretro thumbnail repositories were considered but are not used: the saved RetroGames.cc URL does not reliably identify the console, and the artwork's reuse licence was not verified for this project. Coverage is limited and Commons metadata can be incomplete; users should still review the linked file page's attribution/licence requirements.
+**Copyright note:** Commons images have individual attribution/licence conditions. Check the linked file page before reusing artwork elsewhere. The player intentionally avoids unlicensed or uncertain matches.
 
-## Try it
-
-Paste a game URL from RetroGames.cc, for example:
-
-`https://www.retrogames.cc/embed/19846-super-bomberman-4-english-translated.html`
+Libretro's public box-art thumbnails were also evaluated. The saved RetroGames.cc embed link does not reliably identify the console/platform, so that source is not used yet to avoid incorrect covers.
 
 ## Tests
 
@@ -38,10 +34,5 @@ Run the cover-search tests with Node.js:
 node --test tests/cover-search.test.js
 ```
 
-## Important
-
-Games are loaded from RetroGames.cc. Whether a game runs depends on its embed support, browser restrictions and device compatibility. This project does not host ROMs or game files.
-
 ## Status
-
-Prototype / Beta 0.1 — UI, embed-link loader and local collection.
+Prototype / Beta 0.1 — UI and embed-link loader.
