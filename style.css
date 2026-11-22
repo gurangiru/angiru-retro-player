@@ -304,3 +304,7 @@ body[data-theme="snes"][data-variant="snes-pal"] .snes-power-button,body[data-th
 body[data-theme="snes"][data-variant="snes-pal"] .snes-power-button:before{content:"";width:38%;height:70%;border-radius:2px;background:#96969d;border:1px solid #55555c;box-shadow:1px 1px 2px #0005;transform:translateY(-3px)}
 body[data-theme="snes"][data-variant="snes-pal"] .snes-reset-button:before{width:65%;height:65%;border-radius:3px;background:#85858c;border:1px solid #55555c;box-shadow:inset 1px 1px 2px #fff3}
 body[data-theme="snes"][data-variant="snes-pal"] .snes-power-button span,body[data-theme="snes"][data-variant="snes-pal"] .snes-reset-button span{color:#4d4d54}
+
+/* PAL system buttons: slightly larger with more spacing */
+body[data-theme="snes"][data-variant="snes-pal"] .snes-power-reset{gap:clamp(22px,5vw,34px)}
+body[data-theme="snes"][data-variant="snes-pal"] .snes-power-button,body[data-theme="snes"][data-variant="snes-pal"] .snes-reset-button{width:clamp(46px,9vw,60px);height:clamp(46px,9vw,60px)}
