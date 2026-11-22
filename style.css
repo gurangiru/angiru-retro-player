@@ -308,3 +308,16 @@ body[data-theme="snes"][data-variant="snes-pal"] .snes-power-button span,body[da
 /* PAL system buttons: slightly larger with more spacing */
 body[data-theme="snes"][data-variant="snes-pal"] .snes-power-reset{gap:clamp(22px,5vw,34px)}
 body[data-theme="snes"][data-variant="snes-pal"] .snes-power-button,body[data-theme="snes"][data-variant="snes-pal"] .snes-reset-button{width:clamp(46px,9vw,60px);height:clamp(46px,9vw,60px)}
+
+
+/* Japanese Super Famicom: PAL-style controls with lighter gray accents */
+body[data-theme="snes"][data-variant="snes-japan"] .snes-button-cluster{width:clamp(94px,19vw,126px);height:clamp(94px,19vw,126px);background:#85858d;border:2px solid #73737b;border-radius:50%;box-shadow:inset 2px 3px 5px #fff3,inset -3px -4px 6px #0002;padding:5px}
+body[data-theme="snes"][data-variant="snes-japan"] .snes-button-cluster i{width:clamp(29px,6vw,40px);height:clamp(29px,6vw,40px);border-color:#777780;box-shadow:inset 1px 2px 3px #fff5,1px 3px 3px #0004}
+body[data-theme="snes"][data-variant="snes-japan"] .snes-power-reset{gap:clamp(22px,5vw,34px);padding:12px 0 7px}
+body[data-theme="snes"][data-variant="snes-japan"] .snes-power-button,body[data-theme="snes"][data-variant="snes-japan"] .snes-reset-button{width:clamp(46px,9vw,60px);height:clamp(46px,9vw,60px);border-radius:5px;background:#85858d;border:2px solid #73737b;box-shadow:inset 2px 2px 3px #fff4,0 2px 2px #0003}
+body[data-theme="snes"][data-variant="snes-japan"] .snes-power-button:before{content:"";width:38%;height:70%;border-radius:2px;background:#b0b0b7;border:1px solid #73737b;box-shadow:1px 1px 2px #0004;transform:translateY(-3px)}
+body[data-theme="snes"][data-variant="snes-japan"] .snes-reset-button:before{width:65%;height:65%;border-radius:3px;background:#a6a6ad;border:1px solid #73737b;box-shadow:inset 1px 1px 2px #fff4}
+body[data-theme="snes"][data-variant="snes-japan"] .snes-power-button span,body[data-theme="snes"][data-variant="snes-japan"] .snes-reset-button span{color:#55555c}
+body[data-theme="snes"][data-variant="snes-japan"] .snes-cart-label b{font-size:0}
+body[data-theme="snes"][data-variant="snes-japan"] .snes-cart-label b:after{content:"SUPER FAMICOM";font-size:inherit;letter-spacing:1px}
+body[data-theme="snes"][data-variant="snes-japan"] .snes-cart-label b:after{font-size:12px}
