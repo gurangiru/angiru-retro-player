@@ -192,3 +192,17 @@ body[data-theme="gbc"][data-variant="grape"] .gbc-console-shell{background:#7144
 body[data-theme="gbc"][data-variant="kiwi"] .gbc-console-shell{background:#83ae46}
 body[data-theme="gbc"][data-variant="berry"] .gbc-console-shell{background:#cf669e}
 @media(max-width:520px){body[data-theme="gbc"] .gbc-console-shell{border-radius:25px;padding:12px}body[data-theme="gbc"] .gbc-bezel{border-radius:16px;padding:15px 10px 12px;gap:8px}body[data-theme="gbc"] .gbc-power{flex-basis:26px;margin-top:24px;font-size:6px}body[data-theme="gbc"] .gbc-controls{height:152px} .gbc-dpad{left:4%;top:16px}.gbc-action-buttons{right:5%;top:20px}.gbc-system-buttons{top:91px}.gbc-speaker{right:3%;bottom:5px;gap:4px;grid-template-columns:repeat(4,4px)}.gbc-speaker span{height:4px;width:4px}}
+
+/* GBC refinement: matching action buttons, lower system keys, larger aligned speaker */
+body[data-theme="gbc"] .gbc-action-buttons i{background:#762d58;border-color:#9b4778;color:#f2d6e7}
+body[data-theme="gbc"] .gbc-action-buttons .gbc-a{background:#762d58;border-color:#9b4778;color:#f2d6e7}
+body[data-theme="gbc"] .gbc-system-buttons{top:clamp(112px,18vw,132px)}
+body[data-theme="gbc"] .gbc-controls{height:clamp(175px,31vw,220px)}
+body[data-theme="gbc"] .gbc-speaker{right:7%;bottom:16px;grid-template-columns:repeat(5,6px);gap:6px;transform:rotate(20deg)}
+body[data-theme="gbc"] .gbc-speaker span{width:6px;height:6px}
+@media(max-width:520px){
+ body[data-theme="gbc"] .gbc-controls{height:174px}
+ body[data-theme="gbc"] .gbc-system-buttons{top:106px}
+ body[data-theme="gbc"] .gbc-speaker{right:7%;bottom:13px;grid-template-columns:repeat(5,5px);gap:5px}
+ body[data-theme="gbc"] .gbc-speaker span{width:5px;height:5px}
+}
