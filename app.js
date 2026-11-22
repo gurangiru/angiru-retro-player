@@ -21,14 +21,6 @@ function coverPalette(url){const palettes=[["#392b68","#18233e","#a78bfa"],["#12
 
 /* COVER_SEARCH_TESTS_BEGIN */
 const coverLookupPromises=new Map();
-let coverSearchActive=0;
-const coverSearchQueue=[];
-function runCoverSearch(task){
- return new Promise((resolve,reject)=>{
-  const start=()=>{coverSearchActive++;Promise.resolve().then(task).then(resolve,reject).finally(()=>{coverSearchActive--;const next=coverSearchQueue.shift();if(next)next()})};
-  if(coverSearchActive<2)start();else coverSearchQueue.push(start);
- });
-}
 function normalizeGameTitle(raw){
  let s=String(raw||"").replace(/\.html?$/i,"").replace(/^\d{2,8}[-_.]\s*/,"").replace(/^\d{5,}\s+/,"");
  s=s.replace(/\b(?:nes|snes|n64|gba|gbc|gb|sms|md|psx|ps1|ps2|nds|3ds|wii|gc|dreamcast)[-_ ]?[a-z0-9]{3,}\b/gi," ").replace(/\b[a-f0-9]{8,}\b/gi," ").replace(/\[[^\]]*\]/g," ");
@@ -89,21 +81,33 @@ async function findRealCover(game,force=false){
  }catch{game.coverChecked=true;return null}finally{game.coverSearching=false;libraryPersist();coverLookupPromises.delete(game.url);if(library.some(g=>g.url===game.url))renderLibrary()}});
  coverLookupPromises.set(game.url,promise);return promise;
 }
+const coverObserver=typeof IntersectionObserver!=="undefined"?new IntersectionObserver(entries=>entries.forEach(entry=>{
+ if(!entry.isIntersecting)return;
+ coverObserver.unobserve(entry.target);
+ const game=entry.target.__coverGame,status=entry.target.querySelector(".cover-status");
+ if(game&&!game.coverChecked&&!game.coverSearching){if(status)status.textContent=(translations[languageSelect.value]||translations.pt)["cover-searching"];findRealCover(game)}
+}),{rootMargin:"220px 0px"}):null;
 function renderLibrary(){
- const d=translations[languageSelect.value]||translations.pt;libraryCount.textContent=library.length;libraryEmpty.hidden=library.length>0;libraryEmpty.textContent=d["library-empty"];libraryTools.hidden=library.length===0;libraryList.replaceChildren();saveGameButton.hidden=!(currentEmbedUrl&&!library.some(g=>g.url===currentEmbedUrl));
+ const d=translations[languageSelect.value]||translations.pt;
+ if(coverObserver)coverObserver.disconnect();
+ libraryCount.textContent=library.length;libraryEmpty.hidden=library.length>0;libraryEmpty.textContent=d["library-empty"];libraryTools.hidden=library.length===0;libraryList.replaceChildren();saveGameButton.hidden=!(currentEmbedUrl&&!library.some(g=>g.url===currentEmbedUrl));
  let games=[...library];if(libraryFilter==="favorites")games=games.filter(g=>g.favorite);if(libraryFilter==="recent")games=games.filter(g=>g.lastPlayed).sort((a,b)=>b.lastPlayed-a.lastPlayed);else games.sort((a,b)=>Number(b.favorite)-Number(a.favorite));
  const term=(librarySearch?.value||"").trim().toLowerCase();if(term)games=games.filter(g=>g.name.toLowerCase().includes(term));if(library.length&&games.length===0){libraryEmpty.hidden=false;libraryEmpty.textContent=d.noResults;return}libraryEmpty.hidden=library.length>0;
- games.forEach(game=>{const card=document.createElement("article");card.className="library-card";const cover=document.createElement("div");cover.className="library-cover";const palette=coverPalette(game.url);cover.style.background="linear-gradient(135deg,"+palette[0]+","+palette[1]+" 70%)";cover.style.setProperty("--cover-accent",palette[2]);
+ games.forEach(game=>{
+  const card=document.createElement("article");card.className="library-card";card.__coverGame=game;
+  const cover=document.createElement("div");cover.className="library-cover";const palette=coverPalette(game.url);cover.style.background="linear-gradient(135deg,"+palette[0]+","+palette[1]+" 70%)";cover.style.setProperty("--cover-accent",palette[2]);
   const orbit=document.createElement("span");orbit.className="cover-orbit";const tag=document.createElement("span");tag.className="cover-console";tag.textContent="ANGIRU RETRO";const ct=document.createElement("span");ct.className="cover-title";ct.textContent=game.name;const status=document.createElement("span");status.className="cover-status";status.textContent=game.coverSearching?d["cover-searching"]:game.coverChecked?(game.coverUrl?d["cover-found"]:d["cover-none"]):"";const symbol=document.createElement("span");symbol.className="cover-symbol";symbol.textContent="✦";cover.append(orbit,tag,ct,symbol,status);
   if(game.favorite){const favmark=document.createElement("span");favmark.className="cover-favorite";favmark.textContent="♥";cover.append(favmark)}
-  if(game.coverUrl){const img=document.createElement("img");img.className="library-artwork";img.src=game.coverUrl;img.alt="Artwork de "+game.name;img.loading="lazy";img.referrerPolicy="no-referrer";img.addEventListener("error",()=>{game.coverUrl=null;game.coverChecked=true;game.coverPage=null;game.coverSource=null;game.coverLicense=null;game.coverArtist=null;libraryPersist();renderLibrary()},{once:true});cover.append(img);cover.classList.add("has-artwork")}else if(!game.coverChecked&&!game.coverSearching){status.textContent=d["cover-searching"];findRealCover(game).then(url=>{if(url&&library.some(g=>g.url===game.url)&&card.isConnected)renderLibrary()})}
+  if(game.coverUrl&&/^https:/.test(game.coverUrl)){const img=document.createElement("img");img.className="library-artwork";img.src=game.coverUrl;img.alt=(d["cover-alt"]||"Artwork")+" "+game.name;img.loading="lazy";img.decoding="async";img.referrerPolicy="no-referrer";img.addEventListener("error",()=>{game.coverUrl=null;game.coverChecked=true;game.coverPage=null;game.coverSource=null;game.coverLicense=null;game.coverLicenseUrl=null;game.coverArtist=null;libraryPersist();renderLibrary()},{once:true});cover.append(img);cover.classList.add("has-artwork")}else if(game.coverUrl){game.coverUrl=null;game.coverChecked=true;libraryPersist()}
   const main=document.createElement("div");main.className="library-card-main";const title=document.createElement("div");title.className="library-card-title";title.textContent=game.name;const meta=document.createElement("div");meta.className="library-card-meta";meta.textContent=game.lastPlayed?d["last-played"]+" · "+new Date(game.lastPlayed).toLocaleDateString():"RETROGAMES.CC";main.append(title,meta);
-  if(game.coverPage){const credit=document.createElement("a");credit.className="art-credit";credit.href=game.coverPage;credit.target="_blank";credit.rel="noopener noreferrer";credit.textContent=(d["cover-source"]||"IMAGE SOURCE")+": "+(game.coverSource||"")+(game.coverLicense?" · "+game.coverLicense:"");const details=[game.coverArtist,game.coverLicense].filter(Boolean).join(" · ");if(details)credit.title=details;main.append(credit);if(game.coverLicenseUrl&&/^https:/.test(game.coverLicenseUrl)){const licenseLink=document.createElement("a");licenseLink.className="art-credit";licenseLink.href=game.coverLicenseUrl;licenseLink.target="_blank";licenseLink.rel="noopener noreferrer";licenseLink.textContent=game.coverLicense;main.append(licenseLink)}}
-  const actions=document.createElement("div");actions.className="library-card-actions";const retry=document.createElement("button");retry.className="library-action cover-retry";retry.textContent=d["cover-retry"];retry.disabled=!!game.coverSearching;retry.addEventListener("click",()=>{game.coverChecked=false;game.coverSearching=true;renderLibrary();findRealCover(game,true)});
+  if(game.coverPage){const credit=document.createElement("a");credit.className="art-credit";credit.href=game.coverPage;credit.target="_blank";credit.rel="noopener noreferrer";credit.textContent=(d["cover-source"]||"IMAGE SOURCE")+": "+(game.coverSource||"")+(game.coverLicense?" · "+game.coverLicense:"")+(game.coverArtist?" · "+game.coverArtist:"");const details=[game.coverArtist,game.coverLicense].filter(Boolean).join(" · ");if(details)credit.title=details;main.append(credit);if(game.coverLicenseUrl&&/^https:/.test(game.coverLicenseUrl)){const licenseLink=document.createElement("a");licenseLink.className="art-credit";licenseLink.href=game.coverLicenseUrl;licenseLink.target="_blank";licenseLink.rel="noopener noreferrer";licenseLink.textContent=game.coverLicense;main.append(licenseLink)}}
+  const actions=document.createElement("div");actions.className="library-card-actions";const retry=document.createElement("button");retry.className="library-action cover-retry";retry.textContent=d["cover-retry"];retry.disabled=!!game.coverSearching;retry.addEventListener("click",()=>{if(coverObserver)coverObserver.unobserve(card);game.coverChecked=false;game.coverSearching=true;renderLibrary();findRealCover(game,true)});
   const play=document.createElement("button");play.className="library-action play";play.textContent=d.play;play.addEventListener("click",()=>{game.lastPlayed=Date.now();libraryPersist();loadGame(game.url)});
   const fav=document.createElement("button");fav.className="library-action fav";fav.textContent=game.favorite?d.unfavorite:d.favorite;fav.title=game.favorite?d.unfavorite:d.favorite;fav.addEventListener("click",()=>{game.favorite=!game.favorite;libraryPersist();renderLibrary()});
   const remove=document.createElement("button");remove.className="library-action remove";remove.textContent=d.remove;remove.addEventListener("click",()=>{library=library.filter(g=>g.url!==game.url);libraryPersist();renderLibrary();if(currentEmbedUrl===game.url)saveGameButton.hidden=false});
-  actions.append(play,fav,retry,remove);card.append(cover,main,actions);libraryList.append(card)});
+  actions.append(play,fav,retry,remove);card.append(cover,main,actions);libraryList.append(card);
+  if(!game.coverUrl&&!game.coverChecked&&!game.coverSearching){if(coverObserver)coverObserver.observe(card);else{status.textContent=d["cover-searching"];findRealCover(game)}}
+ });
 }
 document.querySelectorAll(".library-filter").forEach(button=>button.addEventListener("click",()=>{libraryFilter=button.dataset.filter;document.querySelectorAll(".library-filter").forEach(b=>b.classList.toggle("active",b===button));renderLibrary()}));librarySearch.addEventListener("input",renderLibrary);
 saveGameButton.addEventListener("click",()=>{if(!currentEmbedUrl)return;const d=translations[languageSelect.value]||translations.pt;if(library.some(g=>g.url===currentEmbedUrl)){message.textContent=d.alreadySaved;return}library.push({url:currentEmbedUrl,name:friendlyName(currentEmbedUrl),favorite:false,lastPlayed:Date.now(),coverChecked:false});libraryPersist();renderLibrary();message.textContent=d.saved;});
