@@ -353,3 +353,67 @@ body[data-theme="gbc"][data-variant="pokemon-gold"] .gbc-action-buttons i{backgr
 body[data-theme="gbc"][data-variant="pokemon-silver"] .gbc-console-shell{background:linear-gradient(145deg,#e9edf2,#aeb9c8 58%,#78889d);border-color:#fff}
 body[data-theme="gbc"][data-variant="pokemon-silver"] .gbc-action-buttons i{background:#6c4f83;border-color:#9272a9}
 body[data-theme="gbc"][data-variant^="clear-"] .gbc-console-shell:after{content:"";position:absolute;inset:5px;border-radius:inherit;pointer-events:none;border:1px solid #ffffff45;background:linear-gradient(125deg,#ffffff35,transparent 28%,transparent 65%,#ffffff15)}
+
+/* Pokémon Yellow special edition detailing */
+body[data-theme="gbc"][data-variant="pokemon-yellow"] .gbc-console-shell{
+ background:linear-gradient(90deg,#f5d33b 0%,#ffdf43 78%,#3266a9 78%,#24528e 100%);
+ border-color:#f9ed9c;
+ box-shadow:inset 5px 5px 12px #fff6a055,inset -7px -8px 14px #4b330022,0 18px 34px #0005;
+}
+body[data-theme="gbc"][data-variant="pokemon-yellow"] .gbc-dpad i{background:#174c9a;border-color:#2e70c7;box-shadow:inset 1px 1px 3px #ffffff20}
+body[data-theme="gbc"][data-variant="pokemon-yellow"] .gbc-dpad .center{background:#0d3979}
+body[data-theme="gbc"][data-variant="pokemon-yellow"] .gbc-action-buttons .gbc-b{background:#25a45a;border-color:#47c77b;color:#eaffef}
+body[data-theme="gbc"][data-variant="pokemon-yellow"] .gbc-action-buttons .gbc-a{background:#dc3c38;border-color:#f36b60;color:#fff0ed}
+body[data-theme="gbc"][data-variant="pokemon-yellow"] .gbc-system-buttons i{background:#273c7d;border-color:#506db3;color:#e2eaff}
+body[data-theme="gbc"][data-variant="pokemon-yellow"] .gbc-power .gbc-power-led{display:none}
+body[data-theme="gbc"][data-variant="pokemon-yellow"] .gbc-power::before{
+ content:"";display:block;width:19px;height:19px;border-radius:50%;
+ background:linear-gradient(#e83e36 0 46%,#222 46% 55%,#f7f5ec 55% 100%);
+ border:1px solid #222;box-shadow:0 0 0 2px #f5d33b, inset 0 0 0 2px #ffffff35;
+ position:relative;
+}
+body[data-theme="gbc"][data-variant="pokemon-yellow"] .gbc-power::after{
+ content:"";position:absolute;left:50%;top:42px;width:7px;height:7px;border-radius:50%;
+ background:#fff;border:2px solid #222;transform:translateX(-50%);box-shadow:0 0 0 1px #fff8;
+}
+body[data-theme="gbc"][data-variant="pokemon-yellow"] .gbc-power{position:relative}
+body[data-theme="gbc"][data-variant="pokemon-yellow"] .gbc-screen-and-logo::before,
+body[data-theme="gbc"][data-variant="pokemon-yellow"] .gbc-screen-and-logo::after{
+ position:absolute;z-index:2;bottom:42px;font-size:clamp(13px,3vw,22px);line-height:1;
+ filter:drop-shadow(0 1px 1px #0005);pointer-events:none;
+}
+body[data-theme="gbc"][data-variant="pokemon-yellow"] .gbc-screen-and-logo::before{content:"⚡🐭";left:2px}
+body[data-theme="gbc"][data-variant="pokemon-yellow"] .gbc-screen-and-logo::after{content:"🌸🐣";right:2px}
+body[data-theme="gbc"][data-variant="pokemon-yellow"] .gbc-controls::before{
+ content:"Pokémon";position:absolute;left:50%;top:12px;transform:translateX(-50%) rotate(-5deg);
+ font:bold italic clamp(15px,3.3vw,23px) Arial,sans-serif;color:#ffcf24;
+ -webkit-text-stroke:1px #2454a3;text-shadow:2px 2px 0 #183d85,0 1px 2px #0005;z-index:2;
+}
+body[data-theme="gbc"][data-variant="pokemon-yellow"] .gbc-system-buttons{top:clamp(140px,21vw,155px)}
+body[data-theme="gbc"][data-variant="pokemon-yellow"] .gbc-speaker span{background:#24528e}
+body[data-theme="gbc"][data-variant="pokemon-yellow"] .gbc-console-shell{background-clip:padding-box}
+
+/* Pikachu & Pichu edition: sunny shell, metallic accents, cheek-like power glow */
+body[data-theme="gbc"][data-variant="pikachu"] .gbc-console-shell{
+ background:linear-gradient(145deg,#ffe86c,#f4c92c 60%,#e5aa21);
+ border-color:#fff3a7;
+}
+body[data-theme="gbc"][data-variant="pikachu"] .gbc-dpad i{background:#174c9a;border-color:#2e70c7}
+body[data-theme="gbc"][data-variant="pikachu"] .gbc-dpad .center{background:#0d3979}
+body[data-theme="gbc"][data-variant="pikachu"] .gbc-action-buttons .gbc-b{background:#25a45a;border-color:#47c77b;color:#eaffef}
+body[data-theme="gbc"][data-variant="pikachu"] .gbc-action-buttons .gbc-a{background:#dc3c38;border-color:#f36b60;color:#fff0ed}
+body[data-theme="gbc"][data-variant="pikachu"] .gbc-system-buttons i{background:#273c7d;border-color:#506db3;color:#e2eaff}
+body[data-theme="gbc"][data-variant="pikachu"] .gbc-screen-and-logo::before,
+body[data-theme="gbc"][data-variant="pikachu"] .gbc-screen-and-logo::after{
+ position:absolute;z-index:2;bottom:42px;font-size:clamp(15px,3vw,23px);line-height:1;
+ filter:drop-shadow(0 1px 1px #0005);pointer-events:none;
+}
+body[data-theme="gbc"][data-variant="pikachu"] .gbc-screen-and-logo::before{content:"⚡🐭";left:2px}
+body[data-theme="gbc"][data-variant="pikachu"] .gbc-screen-and-logo::after{content:"🐭✨";right:2px}
+body[data-theme="gbc"][data-variant="pikachu"] .gbc-controls::before{
+ content:"Pokémon";position:absolute;left:50%;top:12px;transform:translateX(-50%) rotate(-5deg);
+ font:bold italic clamp(15px,3.3vw,23px) Arial,sans-serif;color:#ffcf24;
+ -webkit-text-stroke:1px #2454a3;text-shadow:2px 2px 0 #183d85,0 1px 2px #0005;z-index:2;
+}
+body[data-theme="gbc"][data-variant="pikachu"] .gbc-system-buttons{top:clamp(140px,21vw,155px)}
+body[data-theme="gbc"][data-variant="pikachu"] .gbc-speaker span{background:#8c6b20}
