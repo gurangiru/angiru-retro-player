@@ -83,7 +83,7 @@
 .cover-retry:disabled{opacity:.55;cursor:wait}
 
 /* Console-inspired color themes: only presentation tokens and surfaces are changed. */
-body[data-theme="angiru"]{--bg:#101522;--panel:#171e2e;--panel2:#111827;--text:#eef2ff;--muted:#9aa7c1;--purple:#a78bfa;--pink:#f472b6;--cyan:#67e8f9;--line:#2a354a;--green:#86efac}
+body[data-theme="angiru"]{--bg:#dce9f6;--panel:#ffffff;--panel2:#f3f7fc;--text:#34495f;--muted:#899bad;--purple:#5b94bd;--pink:#f04f9b;--cyan:#78c5e6;--line:#c9dceb;--green:#65b984}
 body[data-theme="snes"]{--bg:#252335;--panel:#d0d0d8;--panel2:#e5e5eb;--text:#292938;--muted:#5f6176;--purple:#7b50a9;--pink:#d34f77;--cyan:#4475c5;--line:#a3a3b4;--green:#5b9e58}
 body[data-theme="gbc"]{--bg:#e1e6bd;--panel:#c5d38a;--panel2:#eff2d3;--text:#243d35;--muted:#58725b;--purple:#7457a8;--pink:#d14e87;--cyan:#248baf;--line:#95a86a;--green:#39874b}
 body[data-theme="ps1"]{--bg:#111d36;--panel:#26334d;--panel2:#18253c;--text:#edf3ff;--muted:#a4b5d0;--purple:#5b8bd6;--pink:#f05b72;--cyan:#5fc4e9;--line:#40516c;--green:#7bd59d}
@@ -424,3 +424,17 @@ body[data-theme="gbc"][data-variant="pokemon-yellow"] .gbc-power::before{
  background:radial-gradient(circle at 50% 50%,#f5f3eb 0 3px,#222 3px 4px,transparent 4px),linear-gradient(#e83e36 0 46%,#222 46% 55%,#f7f5ec 55% 100%);
 }
 body[data-theme="gbc"][data-variant="pokemon-yellow"] .gbc-power::after{display:none}
+
+/* Angiru community palette: soft sky blues, white cards, and signature pink. */
+body[data-theme="angiru"] .hero h1 span,body[data-theme="angiru"] .brand b,body[data-theme="angiru"] .brand-mark{color:var(--pink)}
+body[data-theme="angiru"] .eyebrow{color:#4f91bd}
+body[data-theme="angiru"] .start-button{background:linear-gradient(110deg,#5596c4,#78b9df);color:#fff}
+body[data-theme="angiru"] .library-filter.active,body[data-theme="angiru"] .save-game-button{background:#e4f1fb;color:#397aa8;border-color:#75add2}
+body[data-theme="angiru"] .library-action.play{color:#397aa8;border-color:#75add2}
+body[data-theme="angiru"] .library-count{color:#397aa8}
+body[data-theme="angiru"] .step-number,body[data-theme="angiru"] .library-action.fav{color:var(--pink)}
+body[data-theme="angiru"] .pixel-console{background:linear-gradient(145deg,#77b7dc,#4d88b6);border-color:#9ccce9;box-shadow:10px 10px 0 #b6cde0}
+body[data-theme="angiru"] .console-screen{border-color:#b7dff2;color:#d9f3ff}
+body[data-theme="angiru"] .console-controls i:first-child{background:var(--pink)}
+body[data-theme="angiru"] .console-controls i:nth-child(2){background:#77c5e5}
+body[data-theme="angiru"] .console-controls i:nth-child(3){background:#f5ce49}
