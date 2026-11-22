@@ -77,8 +77,14 @@ iframe.addEventListener("load", () => {
 });
 fullscreenButton.addEventListener("click", async () => {
   try {
-    if (document.fullscreenElement) await document.exitFullscreen();
-    else await gameArea.requestFullscreen();
+    if (document.fullscreenElement) {
+      await document.exitFullscreen();
+      try { if (screen.orientation?.unlock) screen.orientation.unlock(); } catch {}
+    } else {
+      await gameArea.requestFullscreen();
+      // On phones, request landscape when the browser supports orientation locking.
+      try { await screen.orientation?.lock?.("landscape"); } catch {}
+    }
   } catch { message.textContent = "Fullscreen is not available in this browser."; }
 });
 setLanguage("pt");
