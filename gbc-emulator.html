@@ -4,7 +4,7 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Angiru GBC Emulator</title>
 <style>
-html,body,#game{margin:0;width:100%;height:100%;background:#000;overflow:hidden}
+html,body,#game{margin:0;width:100%;height:100%;background:#000;overflow:hidden} .ejs_virtualGamepad_parent,.ejs_virtualGamepad_left,.ejs_virtualGamepad_right,.ejs_virtualGamepad_bottom,.ejs_virtualGamepad_top{display:none!important}
 body{font-family:system-ui,sans-serif}#status{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#d5d5d5;background:#000;font-size:14px;text-align:center;padding:20px;z-index:3}#game{position:absolute;inset:0}#game canvas{max-width:100%;max-height:100%;object-fit:contain}
 </style>
 </head>
@@ -19,8 +19,8 @@ window.addEventListener("message",event=>{
  if(msg.type==="load-rom"&&msg.file){
    if(window.EJS_terminate)try{window.EJS_terminate()}catch{}
    document.querySelector("#game").replaceChildren();document.querySelector("#status").textContent="Carregando emulador…";document.querySelector("#status").style.display="flex";
-   const romUrl=URL.createObjectURL(msg.file);
-   window.EJS_player="#game";window.EJS_core="gb";window.EJS_gameUrl=romUrl;
+   
+   window.EJS_player="#game";window.EJS_core="gb";window.EJS_controlScheme="gb";window.EJS_gameUrl=msg.file;
    window.EJS_pathtodata="https://cdn.emulatorjs.org/stable/data/";
    window.EJS_language="pt-BR";window.EJS_startOnLoaded=true;window.EJS_color="#8b5cf6";
    window.EJS_Buttons={playPause:false,restart:false,mute:false,settings:false,fullscreen:false,saveState:false,loadState:false,screenRecord:false,gamepad:false,cheat:false,volume:false,saveSavFiles:false,loadSavFiles:false,quickSave:false,quickLoad:false,screenshot:false,cacheManager:false,exitEmulation:false};
