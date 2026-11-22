@@ -23,29 +23,45 @@
 .secondary-button:hover{background:#2b3850;border-color:#a78bfa;color:#fff}
 @media(max-width:480px){.game-actions{display:grid;grid-template-columns:1fr 1fr}.secondary-button{padding:10px 8px}}
 
-/* Personal game library */
+
+/* Retro library cards and filter tools */
 .library-section{padding:26px 0 18px}
 .library-heading{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
 .library-count{font:11px 'DM Mono',monospace;color:var(--purple);border:1px solid #51446e;border-radius:999px;padding:4px 9px}
 .library-subtitle{font-size:12px;color:var(--muted);margin:0 0 16px}
-.save-game-button{margin:0 0 16px;background:#26213c;color:#d7c8ff;border:1px solid #625080;border-radius:8px;padding:11px 14px;font:11px 'DM Mono',monospace;letter-spacing:.5px;cursor:pointer}
-.save-game-button:hover{background:#342b50}
-.save-game-button[hidden]{display:none}
-.library-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-.library-card{display:flex;align-items:center;gap:12px;min-width:0;padding:13px;background:#151c2a;border:1px solid #293449;border-radius:10px}
-.library-game-icon{width:44px;height:44px;flex-shrink:0;display:grid;place-items:center;background:#24213a;border:1px solid #51446e;border-radius:8px;font-size:22px}
-.library-card-main{min-width:0;flex:1}
-.library-card-title{font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:4px}
-.library-card-url{font:9px 'DM Mono',monospace;color:#718099;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.library-card-actions{display:flex;gap:6px;flex-shrink:0}
+.library-tools{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin:0 0 16px}
+.library-tools[hidden]{display:none}
+.library-search{flex:1;min-width:160px}
+.library-tools input{width:100%;background:#101725;color:var(--text);border:1px solid #364258;border-radius:8px;padding:10px 12px;font:12px 'DM Mono',monospace;outline:none}
+.library-tools input:focus{border-color:var(--purple)}
+.library-filters{display:flex;gap:6px;flex-wrap:wrap}
+.library-filter{background:#202a3c;color:#93a1ba;border:1px solid #39465d;border-radius:7px;padding:8px 10px;font:10px 'DM Mono',monospace;cursor:pointer}
+.library-filter.active{background:#342b50;color:#d7c8ff;border-color:#8b76b5}
+.library-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.library-card{overflow:hidden;min-width:0;background:#151c2a;border:1px solid #293449;border-radius:12px;transition:transform .18s,border-color .18s}
+.library-card:hover{transform:translateY(-2px);border-color:#66558a}
+.library-cover{height:150px;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:18px;background:linear-gradient(135deg,#342b59,#111827 60%,#172f48)}
+.library-cover:before,.library-cover:after{content:"";position:absolute;border:1px solid #ffffff20;transform:rotate(22deg);width:170px;height:170px;border-radius:38px}
+.library-cover:after{width:100px;height:100px;transform:rotate(-18deg);border-color:#f472b650}
+.library-cover .cover-orbit{position:absolute;width:120px;height:120px;border:2px dotted #a78bfa65;border-radius:50%;right:-28px;top:-40px}
+.library-cover .cover-console{position:absolute;left:12px;top:10px;font:9px 'DM Mono',monospace;color:#cbd5e1;letter-spacing:1px;opacity:.8}
+.library-cover .cover-title{position:relative;z-index:1;text-align:center;font-size:clamp(14px,1.5vw,20px);font-weight:700;line-height:1.1;text-shadow:0 2px 8px #0008;max-width:100%;overflow-wrap:anywhere}
+.library-cover .cover-symbol{position:absolute;bottom:9px;right:12px;font-size:25px;opacity:.6}
+.library-cover .cover-favorite{position:absolute;right:10px;top:9px;color:#f472b6;font-size:15px;z-index:2}
+.library-card-main{padding:12px 13px 8px;min-width:0}
+.library-card-title{font-size:13px;font-weight:700;line-height:1.35;margin-bottom:5px;overflow-wrap:anywhere}
+.library-card-meta{font:9px 'DM Mono',monospace;color:#718099;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.library-card-actions{display:flex;gap:6px;flex-wrap:wrap;padding:0 12px 12px}
 .library-action{background:#202a3c;color:#cbd5e1;border:1px solid #39465d;border-radius:6px;padding:7px 9px;font:10px 'DM Mono',monospace;cursor:pointer}
 .library-action.play{color:#c4b5fd;border-color:#51446e}
 .library-action.fav{color:#f472b6}
 .library-action.remove{color:#fda4af}
 .library-empty{border:1px dashed #354258;border-radius:10px;padding:18px;text-align:center;color:#7f8da6;font-size:12px;line-height:1.6}
-@media(max-width:700px){.library-list{grid-template-columns:1fr}.library-card{padding:11px}.library-game-icon{width:38px;height:38px}.library-action{padding:7px 8px}}
-
-/* Make the collection button visible and prominent next to game controls */
+.save-game-button{margin:0 0 16px;background:#26213c;color:#d7c8ff;border:1px solid #625080;border-radius:8px;padding:11px 14px;font:11px 'DM Mono',monospace;letter-spacing:.5px;cursor:pointer}
+.save-game-button:hover{background:#342b50}
+.save-game-button[hidden]{display:none}
 #save-game[hidden]{display:none!important}
 #save-game.save-game-button{display:inline-flex;align-items:center;justify-content:center;margin:0 0 16px;background:#26213c;color:#d7c8ff;border:1px solid #8b76b5;border-radius:8px;padding:10px 12px;font:11px 'DM Mono',monospace;letter-spacing:.4px;cursor:pointer}
 #save-game.save-game-button:hover{background:#342b50;border-color:#a78bfa}
+@media(max-width:800px){.library-list{grid-template-columns:repeat(2,minmax(0,1fr))}.library-cover{height:125px}}
+@media(max-width:520px){.library-list{grid-template-columns:1fr 1fr;gap:8px}.library-card-main{padding:9px}.library-cover{height:105px;padding:10px}.library-cover .cover-title{font-size:13px}.library-card-actions{padding:0 8px 9px;gap:4px}.library-action{padding:6px 7px;font-size:9px}.library-tools{align-items:stretch}.library-filters{justify-content:space-between}.library-filter{flex:1;text-align:center;padding:7px 5px}}
