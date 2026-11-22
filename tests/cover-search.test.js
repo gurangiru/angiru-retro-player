@@ -88,6 +88,14 @@ test("query candidates include the normalized title, slug and artwork variants",
   ]);
 });
 
+test("a matching embed slug is accepted when the saved display title differs", async () => {
+  const api = createCoverApi(async () => response(commonsResult("File:Super Bomberman 4 box art.png")));
+  const item = game("Friendly Title");
+  const found = await api.findRealCover(item);
+  assert.equal(found, "https://upload.wikimedia.org/example/cover.png");
+  assert.equal(item.coverSource, "Wikimedia Commons");
+});
+
 test("Commons only returns licensed image results and parses attribution", async () => {
   const payload = commonsResult();
   payload.query.pages["2"] = {
