@@ -151,7 +151,10 @@ body[data-theme="gbc"][data-variant="berry"]{--bg:#442239;--panel:#743d60;--pane
 .cover-status:empty{display:none}
 
 /* Game Boy Color handheld-inspired console shell */
-.gbc-console-shell{display:none}
+.gbc-console-shell{display:block}
+/* The shared game screen lives inside this wrapper; hide handheld decorations outside GBC mode. */
+body:not([data-theme="gbc"]) .gbc-power,body:not([data-theme="gbc"]) .gbc-logo,body:not([data-theme="gbc"]) .gbc-controls{display:none}
+body:not([data-theme="gbc"]) .gbc-bezel{display:block}
 body[data-theme="gbc"] .gbc-console-shell{display:block;margin:4px auto 0;max-width:660px;border-radius:34px 34px 28px 28px;padding:clamp(14px,3vw,24px);background:var(--purple);border:2px solid color-mix(in srgb,var(--text) 20%,var(--purple));box-shadow:inset 5px 5px 12px #ffffff25,inset -7px -8px 14px #00000022,0 18px 34px #0005;position:relative}
 body[data-theme="gbc"] #game-area{border:0;border-radius:0;background:transparent;overflow:visible}
 body[data-theme="gbc"] .frame-toolbar{display:none}
