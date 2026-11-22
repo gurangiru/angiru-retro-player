@@ -417,3 +417,10 @@ body[data-theme="gbc"][data-variant="pikachu"] .gbc-controls::before{
 }
 body[data-theme="gbc"][data-variant="pikachu"] .gbc-system-buttons{top:clamp(140px,21vw,155px)}
 body[data-theme="gbc"][data-variant="pikachu"] .gbc-speaker span{background:#8c6b20}
+
+/* Anchor the Pokémon decals to the screen assembly and keep the Poké Ball power icon self-contained. */
+body[data-theme="gbc"] .gbc-screen-and-logo{position:relative}
+body[data-theme="gbc"][data-variant="pokemon-yellow"] .gbc-power::before{
+ background:radial-gradient(circle at 50% 50%,#f5f3eb 0 3px,#222 3px 4px,transparent 4px),linear-gradient(#e83e36 0 46%,#222 46% 55%,#f7f5ec 55% 100%);
+}
+body[data-theme="gbc"][data-variant="pokemon-yellow"] .gbc-power::after{display:none}
