@@ -73,7 +73,7 @@ test("normalization removes ROM tags and preserves sequel numbers", () => {
   assert.equal(api.titleSimilarity("Super Bomberman 4", "Super Bomberman 4 box art.png"), 1);
 });
 
-test("search query candidates include normalized game name and embed slug", () => {
+test("query candidates include the normalized title, slug and artwork variants", () => {
   const api = createCoverApi(async () => response({}));
   assert.deepEqual(Array.from(api.coverSearchQueries(game())), [
     "super bomberman 4",
