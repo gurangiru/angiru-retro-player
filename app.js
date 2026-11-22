@@ -44,7 +44,7 @@ function normalizeCoverCandidateTitle(raw){
  s=s.replace(/\s*(?:[-–—_:]+\s*)?(?:box ?art|boxart|cover(?: art)?|front cover|artwork|cover scan|scan|thumbnail|image|file)\s*$/i,"");
  return normalizeGameTitle(s);
 }
-function titleTokens(s){return normalizeCoverCandidateTitle(s).split(" ").filter(w=>w.length>1&&!["the","and","of","for","a","an"].includes(w))}
+function titleTokens(s){return normalizeCoverCandidateTitle(s).split(" ").filter(w=>(w.length>1||/[0-9]+/.test(w))&&!["the","and","of","for","a","an"].includes(w))}
 function titleSimilarity(a,b){
  const aa=titleTokens(a),bb=titleTokens(b);if(!aa.length||!bb.length)return 0;
  const A=new Set(aa),B=new Set(bb),na=aa.filter(w=>/^\d+$/.test(w)),nb=bb.filter(w=>/^\d+$/.test(w));
@@ -55,15 +55,10 @@ function titleSimilarity(a,b){
 }
 function coverSearchQueries(game){const t=normalizeGameTitle(game.name);return t?[t,t+" box art",t+" cover"]:[]}
 function cleanMetadata(v){return String(v||"").replace(/<[^>]*>/g," ").replace(/&nbsp;/gi," ").replace(/&amp;/gi,"&").replace(/&#39;/g,"'").replace(/&quot;/g,'"').replace(/\s+/g," ").trim()}
-async function searchWikiCover(query){
- const u="https://en.wikipedia.org/w/api.php?action=query&generator=search&gsrsearch="+encodeURIComponent(query+" video game")+"&gsrnamespace=0&gsrlimit=5&prop=pageimages|info&piprop=thumbnail&pithumbsize=480&inprop=url&format=json&origin=*";
- const r=await fetch(u,{headers:{Accept:"application/json"}});if(!r.ok)throw Error("Wikipedia API");const d=await r.json();
- return Object.values(d.query?.pages||{}).map(p=>({title:p.title,image:p.thumbnail?.source,page:p.fullurl||"https://en.wikipedia.org/wiki/"+encodeURIComponent(p.title.replace(/ /g,"_")),source:"Wikipedia article image"})).filter(x=>x.image);
-}
 async function searchCommonsCover(query){
  const u="https://commons.wikimedia.org/w/api.php?action=query&generator=search&gsrsearch="+encodeURIComponent(query)+"&gsrnamespace=6&gsrlimit=6&prop=imageinfo&iiprop=url|size|extmetadata&iiurlwidth=480&format=json&origin=*";
  const r=await fetch(u,{headers:{Accept:"application/json"}});if(!r.ok)throw Error("Commons API");const d=await r.json();
- return Object.values(d.query?.pages||{}).map(p=>{const i=p.imageinfo?.[0]||{},m=i.extmetadata||{};return{title:p.title.replace(/^File:/,""),image:i.thumburl||i.url,page:i.descriptionurl||"https://commons.wikimedia.org/wiki/"+encodeURIComponent(p.title.replace(/ /g,"_")),source:"Wikimedia Commons",license:cleanMetadata(m.LicenseShortName?.value),licenseUrl:m.LicenseUrl?.value||"",artist:cleanMetadata(m.Artist?.value||m.Credit?.value),mime:i.mime}}).filter(x=>x.image&&(!x.mime||x.mime.startsWith("image/")));
+ return Object.values(d.query?.pages||{}).map(p=>{const i=p.imageinfo?.[0]||{},m=i.extmetadata||{};return{title:p.title.replace(/^File:/,""),image:i.thumburl||i.url,page:i.descriptionurl||"https://commons.wikimedia.org/wiki/"+encodeURIComponent(p.title.replace(/ /g,"_")),source:"Wikimedia Commons",license:cleanMetadata(m.LicenseShortName?.value),licenseUrl:m.LicenseUrl?.value||"",artist:cleanMetadata(m.Artist?.value||m.Credit?.value),mime:i.mime}}).filter(x=>x.image&&x.license&&(!x.mime||x.mime.startsWith("image/")));
 }
 async function searchWikidataCover(query){
  const u="https://www.wikidata.org/w/api.php?action=wbsearchentities&search="+encodeURIComponent(query)+"&language=en&uselang=en&type=item&limit=5&format=json&origin=*";
@@ -72,7 +67,7 @@ async function searchWikidataCover(query){
  const er=await fetch(eu,{headers:{Accept:"application/json"}});if(!er.ok)throw Error("Wikidata entities");const entities=(await er.json()).entities||{},out=[];
  for(const x of matches){const c=entities[x.id]?.claims||{},isGame=(c.P31||[]).some(v=>v.mainsnak?.datavalue?.value?.id==="Q7889"),file=(c.P18||[]).find(v=>v.mainsnak?.datavalue?.value)?.mainsnak.datavalue.value;if(!isGame||!file)continue;
   const fu="https://commons.wikimedia.org/w/api.php?action=query&titles="+encodeURIComponent("File:"+file)+"&prop=imageinfo&iiprop=url|size|extmetadata&iiurlwidth=480&format=json&origin=*";
-  const fr=await fetch(fu,{headers:{Accept:"application/json"}});if(!fr.ok)continue;const fd=await fr.json(),p=Object.values(fd.query?.pages||{})[0],i=p?.imageinfo?.[0],m=i?.extmetadata||{};if(!i?.thumburl&&!i?.url)continue;
+  const fr=await fetch(fu,{headers:{Accept:"application/json"}});if(!fr.ok)continue;const fd=await fr.json(),p=Object.values(fd.query?.pages||{})[0],i=p?.imageinfo?.[0],m=i?.extmetadata||{};if((!i?.thumburl&&!i?.url)||!cleanMetadata(m.LicenseShortName?.value))continue;
   out.push({title:x.label,image:i.thumburl||i.url,page:i.descriptionurl||"https://commons.wikimedia.org/wiki/"+encodeURIComponent(("File:"+file).replace(/ /g,"_")),source:"Wikidata · Wikimedia Commons",license:cleanMetadata(m.LicenseShortName?.value),licenseUrl:m.LicenseUrl?.value||"",artist:cleanMetadata(m.Artist?.value||m.Credit?.value),mime:i.mime});if(out.length===2)break;
  }return out;
 }
@@ -85,8 +80,8 @@ async function findRealCover(game,force=false){
  game.coverSearching=true;libraryPersist();
  const promise=scheduleCoverLookup(async()=>{try{
   const qs=coverSearchQueries(game);let candidates=[];
-  for(let n=0;n<qs.length;n++){const requests=[searchCommonsCover(qs[n])];if(n===0)requests.push(searchWikiCover(qs[n]));const settled=await Promise.allSettled(requests);for(const x of settled)if(x.status==="fulfilled")candidates.push(...x.value);if(candidates.some(c=>titleSimilarity(game.name,c.title)>=.88&&c.image&&/^https:/.test(c.image)))break}
-  let ranked=candidates.map(c=>({...c,score:titleSimilarity(game.name,c.title)})).filter(c=>c.score>=.88&&c.image&&/^https:/.test(c.image));
+  for(let n=0;n<qs.length;n++){const requests=[searchCommonsCover(qs[n])];const settled=await Promise.allSettled(requests);for(const x of settled)if(x.status==="fulfilled")candidates.push(...x.value);if(candidates.some(c=>titleSimilarity(game.name,c.title)>=.88&&c.image&&/^https:/.test(c.image)))break}
+  let ranked=candidates.map(c=>({...c,score:titleSimilarity(game.name,c.title)})).filter(c=>c.score>=.88&&c.image&&/^https:/.test(c.image)&&c.license);
   if(!ranked.length){try{candidates.push(...await searchWikidataCover(normalizeGameTitle(game.name)))}catch{}ranked=candidates.map(c=>({...c,score:titleSimilarity(game.name,c.title)})).filter(c=>c.score>=.88&&c.image&&/^https:/.test(c.image))}
   const priority=c=>["Wikimedia Commons","Wikidata · Wikimedia Commons"].includes(c.source)?0:1;ranked.sort((a,b)=>b.score-a.score||priority(a)-priority(b));const best=ranked[0];
   if(best){game.coverUrl=best.image;game.coverSource=best.source;game.coverPage=best.page;game.coverLicense=best.license||"";game.coverLicenseUrl=best.licenseUrl||"";game.coverArtist=best.artist||"";game.coverChecked=true;return best.image}
@@ -103,7 +98,7 @@ function renderLibrary(){
   if(game.favorite){const favmark=document.createElement("span");favmark.className="cover-favorite";favmark.textContent="♥";cover.append(favmark)}
   if(game.coverUrl){const img=document.createElement("img");img.className="library-artwork";img.src=game.coverUrl;img.alt="Artwork de "+game.name;img.loading="lazy";img.referrerPolicy="no-referrer";img.addEventListener("error",()=>{game.coverUrl=null;game.coverChecked=true;game.coverPage=null;game.coverSource=null;game.coverLicense=null;game.coverArtist=null;libraryPersist();renderLibrary()},{once:true});cover.append(img);cover.classList.add("has-artwork")}else if(!game.coverChecked&&!game.coverSearching){status.textContent=d["cover-searching"];findRealCover(game).then(url=>{if(url&&library.some(g=>g.url===game.url)&&card.isConnected)renderLibrary()})}
   const main=document.createElement("div");main.className="library-card-main";const title=document.createElement("div");title.className="library-card-title";title.textContent=game.name;const meta=document.createElement("div");meta.className="library-card-meta";meta.textContent=game.lastPlayed?d["last-played"]+" · "+new Date(game.lastPlayed).toLocaleDateString():"RETROGAMES.CC";main.append(title,meta);
-  if(game.coverPage){const credit=document.createElement("a");credit.className="art-credit";credit.href=game.coverPage;credit.target="_blank";credit.rel="noopener noreferrer";credit.textContent=(d["cover-source"]||"IMAGE SOURCE")+": "+(game.coverSource||"");const details=[game.coverArtist,game.coverLicense].filter(Boolean).join(" · ");if(details)credit.title=details;main.append(credit)}
+  if(game.coverPage){const credit=document.createElement("a");credit.className="art-credit";credit.href=game.coverPage;credit.target="_blank";credit.rel="noopener noreferrer";credit.textContent=(d["cover-source"]||"IMAGE SOURCE")+": "+(game.coverSource||"")+(game.coverLicense?" · "+game.coverLicense:"");const details=[game.coverArtist,game.coverLicense].filter(Boolean).join(" · ");if(details)credit.title=details;main.append(credit)}
   const actions=document.createElement("div");actions.className="library-card-actions";const retry=document.createElement("button");retry.className="library-action cover-retry";retry.textContent=d["cover-retry"];retry.disabled=!!game.coverSearching;retry.addEventListener("click",()=>{game.coverChecked=false;game.coverSearching=true;renderLibrary();findRealCover(game,true)});
   const play=document.createElement("button");play.className="library-action play";play.textContent=d.play;play.addEventListener("click",()=>{game.lastPlayed=Date.now();libraryPersist();loadGame(game.url)});
   const fav=document.createElement("button");fav.className="library-action fav";fav.textContent=game.favorite?d.unfavorite:d.favorite;fav.title=game.favorite?d.unfavorite:d.favorite;fav.addEventListener("click",()=>{game.favorite=!game.favorite;libraryPersist();renderLibrary()});
