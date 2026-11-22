@@ -65,3 +65,11 @@
 #save-game.save-game-button:hover{background:#342b50;border-color:#a78bfa}
 @media(max-width:800px){.library-list{grid-template-columns:repeat(2,minmax(0,1fr))}.library-cover{height:125px}}
 @media(max-width:520px){.library-list{grid-template-columns:1fr 1fr;gap:8px}.library-card-main{padding:9px}.library-cover{height:105px;padding:10px}.library-cover .cover-title{font-size:13px}.library-card-actions{padding:0 8px 9px;gap:4px}.library-action{padding:6px 7px;font-size:9px}.library-tools{align-items:stretch}.library-filters{justify-content:space-between}.library-filter{flex:1;text-align:center;padding:7px 5px}}
+
+/* Real cover art with graceful fallback to the generated retro cover */
+.library-cover.has-artwork{background:#080b12!important;padding:0}
+.library-cover.has-artwork:before,.library-cover.has-artwork:after,.library-cover.has-artwork .cover-orbit{display:none}
+.library-artwork{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:1}
+.library-cover.has-artwork .cover-title{position:absolute;left:0;right:0;bottom:0;padding:26px 10px 9px;background:linear-gradient(transparent,#000b 75%);font-size:clamp(11px,1.2vw,15px);z-index:2}
+.library-cover.has-artwork .cover-console{z-index:2;text-shadow:0 1px 4px #000}
+.library-cover.has-artwork .cover-symbol{z-index:2}
