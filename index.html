@@ -73,6 +73,14 @@
           <span class="library-count" id="library-count">0</span>
         </div>
         <p class="library-subtitle" data-i18n="library-subtitle">Seus jogos favoritos guardados para jogar novamente.</p>
+        <div class="library-tools" id="library-tools" hidden>
+          <input type="search" id="library-search" placeholder="Buscar jogo..." aria-label="Buscar jogos salvos">
+          <div class="library-filters" role="group" aria-label="Filtros da coleção">
+            <button type="button" class="library-filter active" data-filter="all" data-i18n="filter-all">TODOS</button>
+            <button type="button" class="library-filter" data-filter="favorites" data-i18n="filter-favorites">FAVORITOS</button>
+            <button type="button" class="library-filter" data-filter="recent" data-i18n="filter-recent">RECENTES</button>
+          </div>
+        </div>
         <div id="library-list" class="library-list"></div>
         <div id="library-empty" class="library-empty" data-i18n="library-empty">Sua coleção ainda está vazia. Carregue um jogo e adicione-o aqui!</div>
       </section>
