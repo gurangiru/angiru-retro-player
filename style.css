@@ -69,12 +69,12 @@
 /* Real cover art with graceful fallback to the generated retro cover */
 .library-cover.has-artwork{background:#080b12!important;padding:0}
 .library-cover.has-artwork:before,.library-cover.has-artwork:after,.library-cover.has-artwork .cover-orbit{display:none}
-.library-artwork{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:1}
+.library-artwork{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center;background:#080b12;z-index:1}
 .library-cover.has-artwork .cover-title{position:absolute;left:0;right:0;bottom:0;padding:26px 10px 9px;background:linear-gradient(transparent,#000b 75%);font-size:clamp(11px,1.2vw,15px);z-index:2}
 .library-cover.has-artwork .cover-console{z-index:2;text-shadow:0 1px 4px #000}
 .library-cover.has-artwork .cover-symbol{z-index:2}
 
-.art-credit{display:inline-block;margin-top:4px;color:#8b91a5;font:8px 'DM Mono',monospace;text-decoration:underline;text-underline-offset:2px;opacity:.8}.art-credit:hover{color:#c4b5fd;opacity:1}
+.art-credit{display:block;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-top:4px;color:#8b91a5;font:8px 'DM Mono',monospace;text-decoration:underline;text-underline-offset:2px;opacity:.8}.art-credit:hover{color:#c4b5fd;opacity:1}
 
 /* Cover search status and retry control */
 .cover-status{position:absolute;left:0;right:0;bottom:0;z-index:3;text-align:center;font:8px 'DM Mono',monospace;color:#c4b5fd;background:#111827b8;padding:5px 4px;letter-spacing:.4px}
