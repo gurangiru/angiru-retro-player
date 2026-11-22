@@ -295,3 +295,12 @@ body[data-theme="snes"][data-variant="snes-mini"] .gbc-bezel{padding-left:clamp(
 body[data-theme="snes"][data-variant="snes-mini"] .snes-power-reset{left:clamp(8px,2vw,15px);right:auto;top:50%;transform:translateY(-50%);flex-direction:column;gap:clamp(12px,3vw,18px)}
 body[data-theme="snes"][data-variant="snes-mini"] .snes-power-button{width:clamp(36px,7vw,46px);height:clamp(36px,7vw,46px);border-radius:50%;background:#8878a3;border-color:#75658f}
 body[data-theme="snes"][data-variant="snes-mini"] .snes-reset-button{width:clamp(30px,6vw,38px);height:clamp(54px,10vw,68px);border-radius:14px;background:#8878a3;border-color:#75658f}
+
+/* European/PAL SNES: dark grey button recess and square system controls */
+body[data-theme="snes"][data-variant="snes-pal"] .snes-button-cluster{width:clamp(94px,19vw,126px);height:clamp(94px,19vw,126px);background:#66666d;border:2px solid #55555c;border-radius:50%;box-shadow:inset 2px 3px 5px #fff2,inset -3px -4px 6px #0003;padding:5px}
+body[data-theme="snes"][data-variant="snes-pal"] .snes-button-cluster i{width:clamp(29px,6vw,40px);height:clamp(29px,6vw,40px);border-color:#5a5a61;box-shadow:inset 1px 2px 3px #fff4,1px 3px 3px #0005}
+body[data-theme="snes"][data-variant="snes-pal"] .snes-power-reset{gap:clamp(14px,4vw,24px);padding:12px 0 7px}
+body[data-theme="snes"][data-variant="snes-pal"] .snes-power-button,body[data-theme="snes"][data-variant="snes-pal"] .snes-reset-button{width:clamp(38px,8vw,52px);height:clamp(38px,8vw,52px);border-radius:5px;background:#66666d;border:2px solid #55555c;box-shadow:inset 2px 2px 3px #fff3,0 2px 2px #0004}
+body[data-theme="snes"][data-variant="snes-pal"] .snes-power-button:before{content:"";width:38%;height:70%;border-radius:2px;background:#96969d;border:1px solid #55555c;box-shadow:1px 1px 2px #0005;transform:translateY(-3px)}
+body[data-theme="snes"][data-variant="snes-pal"] .snes-reset-button:before{width:65%;height:65%;border-radius:3px;background:#85858c;border:1px solid #55555c;box-shadow:inset 1px 1px 2px #fff3}
+body[data-theme="snes"][data-variant="snes-pal"] .snes-power-button span,body[data-theme="snes"][data-variant="snes-pal"] .snes-reset-button span{color:#4d4d54}
