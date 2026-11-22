@@ -39,3 +39,9 @@ node --test tests/cover-search.test.js
 
 ## Status
 Prototype / Beta 0.1 — UI and embed-link loader.
+
+## Automatic cover art lookup
+
+The collection tries a conservative, key-free lookup using the Wikimedia Commons API, then Wikidata's open API (only exact game-title matches with a video-game type and a Commons image). It removes common ROM tags such as regions, translation notes, revisions, hashes and release codes before searching, and checks title similarity strictly—including sequel numbers. It only displays images with a license label in Commons metadata. The source/file page and license are shown below the artwork; if the match or license is uncertain, it keeps the stylized fallback. Use **Retry cover** to search again.
+
+Requests use the MediaWiki/Wikidata APIs with CORS enabled and a small client-side concurrency limit. Coverage is not guaranteed; Commons metadata and artwork can be incomplete, and the file page should still be checked for any attribution/license requirements.
