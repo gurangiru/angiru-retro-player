@@ -75,3 +75,9 @@
 .library-cover.has-artwork .cover-symbol{z-index:2}
 
 .art-credit{display:inline-block;margin-top:4px;color:#8b91a5;font:8px 'DM Mono',monospace;text-decoration:underline;text-underline-offset:2px;opacity:.8}.art-credit:hover{color:#c4b5fd;opacity:1}
+
+/* Cover search status and retry control */
+.cover-status{position:absolute;left:0;right:0;bottom:0;z-index:3;text-align:center;font:8px 'DM Mono',monospace;color:#c4b5fd;background:#111827b8;padding:5px 4px;letter-spacing:.4px}
+.library-cover.has-artwork .cover-status{display:none}
+.cover-retry{color:#a5b4fc!important;border-color:#51446e!important}
+.cover-retry:disabled{opacity:.55;cursor:wait}
