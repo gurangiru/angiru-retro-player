@@ -58,16 +58,30 @@
           </div>
         </form>
 
-        <div class="game-frame-wrap" id="game-area">
-          <div class="frame-toolbar"><span class="frame-title"><span class="live-indicator"></span><span id="game-name" data-i18n="no-game">NENHUM JOGO CARREGADO</span></span><button id="fullscreen" class="icon-button" type="button" title="Fullscreen" aria-label="Fullscreen">⛶</button></div>
-          <div class="game-stage" id="game-stage">
-            <div class="empty-state" id="empty-state">
-              <div class="controller-icon">🎮</div>
-              <h2 data-i18n="empty-title">Seu próximo jogo começa aqui</h2>
-              <p data-i18n="empty-desc">Insira um link acima e prepare-se para viajar no tempo.</p>
-              <div class="key-hints"><span><kbd>START</kbd> <small data-i18n="start-hint">iniciar</small></span><span><kbd>SELECT</kbd> <small data-i18n="select-hint">escolher</small></span></div>
+        <div class="gbc-console-shell" id="gbc-console">
+          <div class="gbc-bezel">
+            <div class="gbc-power"><span class="gbc-power-led" aria-hidden="true"></span><span>POWER</span></div>
+            <div class="gbc-screen-and-logo">
+              <div class="game-frame-wrap" id="game-area">
+                <div class="frame-toolbar"><span class="frame-title"><span class="live-indicator"></span><span id="game-name" data-i18n="no-game">NENHUM JOGO CARREGADO</span></span><button id="fullscreen" class="icon-button" type="button" title="Fullscreen" aria-label="Fullscreen">⛶</button></div>
+                <div class="game-stage" id="game-stage">
+                  <div class="empty-state" id="empty-state">
+                    <div class="controller-icon">🎮</div>
+                    <h2 data-i18n="empty-title">Seu próximo jogo começa aqui</h2>
+                    <p data-i18n="empty-desc">Insira um link acima e prepare-se para viajar no tempo.</p>
+                    <div class="key-hints"><span><kbd>START</kbd> <small data-i18n="start-hint">iniciar</small></span><span><kbd>SELECT</kbd> <small data-i18n="select-hint">escolher</small></span></div>
+                  </div>
+                  <iframe id="game-frame" title="Retro game" src="about:blank" allow="autoplay; fullscreen; gamepad; cross-origin-isolated" allowfullscreen webkitallowfullscreen mozallowfullscreen scrolling="no" referrerpolicy="strict-origin-when-cross-origin" hidden></iframe>
+                </div>
+              </div>
+              <div class="gbc-logo" aria-label="Game Boy Color"><span>GAME BOY</span><b>COLOR</b></div>
             </div>
-            <iframe id="game-frame" title="Retro game" src="about:blank" allow="autoplay; fullscreen; gamepad; cross-origin-isolated" allowfullscreen webkitallowfullscreen mozallowfullscreen scrolling="no" referrerpolicy="strict-origin-when-cross-origin" hidden></iframe>
+          </div>
+          <div class="gbc-controls" aria-hidden="true">
+            <div class="gbc-dpad"><i class="up"></i><i class="right"></i><i class="down"></i><i class="left"></i><i class="center"></i></div>
+            <div class="gbc-action-buttons"><i class="gbc-b">B</i><i class="gbc-a">A</i></div>
+            <div class="gbc-system-buttons"><i>SELECT</i><i>START</i></div>
+            <div class="gbc-speaker"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
           </div>
         </div>
         <div class="player-footer"><span data-i18n="footer-note">Dica: alguns jogos precisam de alguns segundos para carregar.</span><span class="footer-symbol">✦ ANGIRU</span></div>
