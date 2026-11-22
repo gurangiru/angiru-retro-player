@@ -334,3 +334,22 @@ body[data-theme="snes"][data-snes-age="old"] .snes-power-button,body[data-theme=
 body[data-theme="snes"][data-snes-age="old"] .snes-power-button:before,body[data-theme="snes"][data-snes-age="old"] .snes-reset-button:before{background:#c8bc9b!important;border-color:#a1967c!important}
 body[data-theme="snes"][data-snes-age="old"] .snes-button-cluster i{border-color:#8f856d!important}
 body[data-theme="snes"][data-snes-age="old"] .snes-power-button span,body[data-theme="snes"][data-snes-age="old"] .snes-reset-button span{color:#665d4b!important}
+
+/* Expanded Game Boy Color palette: solid, translucent, and special editions. */
+body[data-theme="gbc"][data-variant="clear-green"] .gbc-console-shell{background:linear-gradient(145deg,#b7f5c7aa,#28a85b99 45%,#137443aa);border-color:#b8f6d0;box-shadow:inset 5px 5px 14px #ffffff65,inset -7px -8px 15px #003b2440,0 18px 34px #0005}
+body[data-theme="gbc"][data-variant="clear-blue"] .gbc-console-shell{background:linear-gradient(145deg,#b4e9ffaa,#3498d899 48%,#1563a9aa);border-color:#d4f5ff;box-shadow:inset 5px 5px 14px #ffffff65,inset -7px -8px 15px #003b5b40,0 18px 34px #0005}
+body[data-theme="gbc"][data-variant="ice-blue"] .gbc-console-shell{background:linear-gradient(145deg,#d8f4ff,#87c9e8 55%,#5ba6d2);border-color:#e9fbff}
+body[data-theme="gbc"][data-variant="clear-black"] .gbc-console-shell{background:linear-gradient(145deg,#9fa8b5aa,#414b5cbb 48%,#1d2533cc);border-color:#c0c8d2;box-shadow:inset 5px 5px 14px #ffffff45,inset -7px -8px 15px #0007,0 18px 34px #0005}
+body[data-theme="gbc"][data-variant="water-blue"] .gbc-console-shell{background:linear-gradient(145deg,#69d7f5,#1d98d2 55%,#0873b1);border-color:#b8f3ff}
+body[data-theme="gbc"][data-variant="clear-orange"] .gbc-console-shell{background:linear-gradient(145deg,#ffd4a3bb,#ff8d32aa 48%,#d65a13bb);border-color:#ffe3c2;box-shadow:inset 5px 5px 14px #ffffff65,inset -7px -8px 15px #69290040,0 18px 34px #0005}
+body[data-theme="gbc"][data-variant="clear-pink"] .gbc-console-shell{background:linear-gradient(145deg,#ffd5edbb,#e96db5aa 48%,#a8377bbb);border-color:#ffe7f5;box-shadow:inset 5px 5px 14px #ffffff65,inset -7px -8px 15px #56002c40,0 18px 34px #0005}
+body[data-theme="gbc"][data-variant="pokemon-yellow"] .gbc-console-shell{background:linear-gradient(145deg,#f6df53,#e9bd25);border-color:#fff09b}
+body[data-theme="gbc"][data-variant="pokemon-yellow"] .gbc-action-buttons i{background:#2875bd;border-color:#4798de;color:#fff}
+body[data-theme="gbc"][data-variant="pikachu"] .gbc-console-shell{background:linear-gradient(145deg,#ffe76b,#f5c832 58%,#e7a91c);border-color:#fff2a9}
+body[data-theme="gbc"][data-variant="pikachu"] .gbc-action-buttons i{background:#d94339;border-color:#f36b5d;color:#fff}
+body[data-theme="gbc"][data-variant="pikachu"] .gbc-system-buttons i{background:#3c76b7;color:#eaf4ff;border-color:#6ca6df}
+body[data-theme="gbc"][data-variant="pokemon-gold"] .gbc-console-shell{background:linear-gradient(145deg,#f5d66d,#c99c36 58%,#9d7624);border-color:#fff0a8}
+body[data-theme="gbc"][data-variant="pokemon-gold"] .gbc-action-buttons i{background:#7b4b83;border-color:#a56cad}
+body[data-theme="gbc"][data-variant="pokemon-silver"] .gbc-console-shell{background:linear-gradient(145deg,#e9edf2,#aeb9c8 58%,#78889d);border-color:#fff}
+body[data-theme="gbc"][data-variant="pokemon-silver"] .gbc-action-buttons i{background:#6c4f83;border-color:#9272a9}
+body[data-theme="gbc"][data-variant^="clear-"] .gbc-console-shell:after{content:"";position:absolute;inset:5px;border-radius:inherit;pointer-events:none;border:1px solid #ffffff45;background:linear-gradient(125deg,#ffffff35,transparent 28%,transparent 65%,#ffffff15)}
