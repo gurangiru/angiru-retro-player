@@ -119,7 +119,7 @@ form.addEventListener("submit",e=>{e.preventDefault();const url=getEmbedUrl(inpu
 // Experimental local Game Boy / Game Boy Color mode using EmulatorJS.
 loadRomButton.addEventListener("click",()=>romFileInput.click());
 romFileInput.addEventListener("change",()=>{
- const file=romFileInput.files?.[0];if(!file)return;
+ const file=romFileInput.files?.[0];if(!file)return;romFileInput.value="";
  const valid=/\.(gb|gbc|zip|7z)$/i.test(file.name);
  if(!valid){message.textContent="Arquivo não reconhecido. Selecione .gb, .gbc ou um arquivo compactado.";message.classList.add("error");romFileInput.value="";return}
  gbcEmulatorMode=true;gbcEmulatorReady=false;currentEmbedUrl="";input.value="";iframe.src="about:blank";iframe.hidden=true;emulatorFrame.hidden=false;emptyState.hidden=true;actions.hidden=true;gameName.textContent=file.name.replace(/\.(gb|gbc|zip|7z)$/i,"");liveIndicator.classList.add("active");document.querySelector(".gbc-power-led")?.classList.add("on");message.textContent=translations[languageSelect.value]["rom-loading"];message.classList.remove("error");
