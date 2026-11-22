@@ -438,3 +438,26 @@ body[data-theme="angiru"] .console-screen{border-color:#b7dff2;color:#d9f3ff}
 body[data-theme="angiru"] .console-controls i:first-child{background:var(--pink)}
 body[data-theme="angiru"] .console-controls i:nth-child(2){background:#77c5e5}
 body[data-theme="angiru"] .console-controls i:nth-child(3){background:#f5ce49}
+
+/* Angiru palette selector: light and dark community-inspired appearances. */
+body[data-theme="angiru"][data-variant="light"]{--bg:#dce9f6;--panel:#fff;--panel2:#f3f7fc;--text:#34495f;--muted:#899bad;--purple:#5b94bd;--pink:#f04f9b;--cyan:#78c5e6;--line:#c9dceb;--green:#65b984}
+body[data-theme="angiru"][data-variant="dark"]{--bg:#35374c;--panel:#42455d;--panel2:#35374c;--text:#f1eff9;--muted:#b4b5c8;--purple:#bd8df5;--pink:#ed4c9c;--cyan:#59a9ff;--line:#555871;--green:#72c68b}
+body[data-theme="angiru"][data-variant="dark"]{background:radial-gradient(ellipse at 72% 0%,color-mix(in srgb,var(--purple) 20%,transparent),transparent 42%),var(--bg)}
+body[data-theme="angiru"][data-variant="dark"] .player-card,body[data-theme="angiru"][data-variant="dark"] .step,body[data-theme="angiru"][data-variant="dark"] .library-card{background:var(--panel);border-color:var(--line);box-shadow:0 5px 18px #15152235}
+body[data-theme="angiru"][data-variant="dark"] .frame-toolbar,body[data-theme="angiru"][data-variant="dark"] .library-card-main,body[data-theme="angiru"][data-variant="dark"] .library-empty{background:var(--panel2);border-color:var(--line)}
+body[data-theme="angiru"][data-variant="dark"] .game-stage{background:radial-gradient(ellipse,#4a4d68,#303246 75%)}
+body[data-theme="angiru"][data-variant="dark"] .input-row input,body[data-theme="angiru"][data-variant="dark"] .library-tools input{background:#303246;color:var(--text);border-color:#5b5e78}
+body[data-theme="angiru"][data-variant="dark"] select,body[data-theme="angiru"][data-variant="dark"] .library-filter,body[data-theme="angiru"][data-variant="dark"] .library-action,body[data-theme="angiru"][data-variant="dark"] .secondary-button{background:#35374c;color:var(--text);border-color:#5b5e78}
+body[data-theme="angiru"][data-variant="dark"] .library-filter.active,body[data-theme="angiru"][data-variant="dark"] .save-game-button{background:#57466e;color:#f3e8ff;border-color:var(--purple)}
+body[data-theme="angiru"][data-variant="dark"] .start-button{background:linear-gradient(110deg,#b78bf0,#c697f7);color:#30283f}
+body[data-theme="angiru"][data-variant="dark"] .library-action.play{color:#c8a0ff;border-color:#b78bf0}
+body[data-theme="angiru"][data-variant="dark"] .library-action.fav,body[data-theme="angiru"][data-variant="dark"] .library-action.remove{color:#ff84bd}
+body[data-theme="angiru"][data-variant="dark"] .pixel-console{background:linear-gradient(145deg,#71638e,#4c5275);border-color:#b78bf0;box-shadow:10px 10px 0 #25283b}
+body[data-theme="angiru"][data-variant="dark"] .console-screen{border-color:#75c9ee;color:#75c9ee}
+body[data-theme="angiru"][data-variant="dark"] .console-controls i:first-child{background:#ed4c9c}
+body[data-theme="angiru"][data-variant="dark"] .console-controls i:nth-child(2){background:#59a9ff}
+body[data-theme="angiru"][data-variant="dark"] .console-controls i:nth-child(3){background:#f5ce49}
+body[data-theme="angiru"][data-variant="dark"] .library-count{color:#c8a0ff;border-color:var(--line)}
+body[data-theme="angiru"][data-variant="dark"] .eyebrow{color:#78c5e6}
+body[data-theme="angiru"][data-variant="dark"] .hero h1 span,body[data-theme="angiru"][data-variant="dark"] .brand b,body[data-theme="angiru"][data-variant="dark"] .brand-mark{color:#ed4c9c}
+body[data-theme="angiru"][data-variant="dark"] .step-number{color:#ed4c9c}
