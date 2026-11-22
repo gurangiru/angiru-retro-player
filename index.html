@@ -51,6 +51,11 @@
             <button class="start-button" type="submit"><span>▶</span><span data-i18n="start">START GAME</span></button>
           </div>
           <p id="form-message" class="form-message" role="status" aria-live="polite" data-i18n="hint">Cole um link de jogo do RetroGames.cc para começar.</p>
+          <div class="rom-upload-row">
+            <input id="gbc-rom-file" type="file" accept=".gb,.gbc,.zip,.7z" hidden>
+            <button type="button" id="load-gbc-rom" class="secondary-button">🎮 JOGAR ARQUIVO GB / GBC</button>
+            <small>Protótipo experimental · arquivo local no seu aparelho</small>
+          </div>
           <div class="game-actions" id="game-actions" hidden>
             <button type="button" id="copy-link" class="secondary-button" data-i18n="copy">⧉ COPIAR LINK</button>
             <button type="button" id="clear-game" class="secondary-button" data-i18n="change">↻ TROCAR JOGO</button>
@@ -72,15 +77,21 @@
                     <div class="key-hints"><span><kbd>START</kbd> <small data-i18n="start-hint">iniciar</small></span><span><kbd>SELECT</kbd> <small data-i18n="select-hint">escolher</small></span></div>
                   </div>
                   <iframe id="game-frame" title="Retro game" src="about:blank" allow="autoplay; fullscreen; gamepad; cross-origin-isolated" allowfullscreen webkitallowfullscreen mozallowfullscreen scrolling="no" referrerpolicy="strict-origin-when-cross-origin" hidden></iframe>
+                  <iframe id="emulator-frame" title="Game Boy / Game Boy Color emulator" src="about:blank" allow="autoplay; fullscreen; gamepad" hidden></iframe>
                 </div>
               </div>
               <div class="gbc-logo" aria-label="Game Boy Color"><span>GAME BOY</span><b>COLOR</b></div>
             </div>
           </div>
-          <div class="gbc-controls" aria-hidden="true">
-            <div class="gbc-dpad"><i class="up"></i><i class="right"></i><i class="down"></i><i class="left"></i><i class="center"></i></div>
-            <div class="gbc-action-buttons"><i class="gbc-b">B</i><i class="gbc-a">A</i></div>
-            <div class="gbc-system-buttons"><i>SELECT</i><i>START</i></div>
+          <div class="gbc-controls" id="gbc-controls">
+            <div class="gbc-dpad" role="group" aria-label="Direcional">
+              <button type="button" class="up" data-gbc-input="4" aria-label="Para cima">▲</button>
+              <button type="button" class="right" data-gbc-input="7" aria-label="Para direita">▶</button>
+              <button type="button" class="down" data-gbc-input="5" aria-label="Para baixo">▼</button>
+              <button type="button" class="left" data-gbc-input="6" aria-label="Para esquerda">◀</button><span class="center" aria-hidden="true"></span>
+            </div>
+            <div class="gbc-action-buttons" role="group" aria-label="Botões de ação"><button type="button" class="gbc-b" data-gbc-input="0" aria-label="B">B</button><button type="button" class="gbc-a" data-gbc-input="8" aria-label="A">A</button></div>
+            <div class="gbc-system-buttons" role="group" aria-label="Botões de sistema"><button type="button" data-gbc-input="2">SELECT</button><button type="button" data-gbc-input="3">START</button></div>
             <div class="gbc-speaker"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
           </div>
         </div>
