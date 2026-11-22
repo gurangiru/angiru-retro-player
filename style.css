@@ -233,7 +233,7 @@ body[data-theme="snes"] .snes-a{top:35%;right:0;background:#d34d52}
 body[data-theme="snes"] .snes-b{bottom:0;left:35%;background:#e0b83b;color:#333!important}
 body[data-theme="snes"] .snes-system-buttons{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);display:flex;gap:12px}
 body[data-theme="snes"] .snes-system-buttons i{border-radius:10px;background:#777983;border:1px solid #666;padding:4px 13px;color:#34343b;font:8px 'DM Mono',monospace;letter-spacing:1px;transform:rotate(-12deg);box-shadow:1px 2px 2px #0003}
-body[data-theme="snes"] .snes-cartridge,body[data-theme="snes"] .snes-controls{display:block}
+body[data-theme="snes"] .snes-cartridge{display:block}body[data-theme="snes"] .snes-controls{display:flex}
 .snes-cartridge,.snes-controls{display:none}
 body[data-theme="snes"][data-variant="snes-america"] .gbc-console-shell{background:#b9bac2;border-radius:18px}
 body[data-theme="snes"][data-variant="snes-america"] .snes-system-buttons i{background:#777a88}
@@ -248,3 +248,7 @@ body[data-theme="snes"][data-variant="snes-japan"] .gbc-console-shell{background
 body[data-theme="snes"][data-variant="snes-japan"] .snes-cart-label{background:linear-gradient(135deg,#d5c5a0,#b69c72);color:#3c3023}
 body[data-theme="snes"][data-variant="snes-japan"] .snes-cart-label b{letter-spacing:1px}
 @media(max-width:520px){body[data-theme="snes"] .gbc-console-shell{border-radius:16px;padding:12px}body[data-theme="snes"] .gbc-bezel{padding:10px;border-radius:10px}body[data-theme="snes"] .snes-controls{height:125px;padding:8px 3%}body[data-theme="snes"] .snes-system-buttons{bottom:8px}}
+
+/* Region-specific controller button finishes */
+body[data-theme="snes"][data-variant="snes-america"] .snes-button-cluster i,body[data-theme="snes"][data-variant="snes-mini"] .snes-button-cluster i{background:#77758d;border-color:#575568;color:#f1eff8}
+body[data-theme="snes"][data-variant="snes-america"] .snes-b,body[data-theme="snes"][data-variant="snes-mini"] .snes-b{background:#67657d;color:#f1eff8!important}
