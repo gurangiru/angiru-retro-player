@@ -18,16 +18,17 @@ This is an early prototype. Games are loaded from RetroGames.cc, and whether a g
 
 ## Real game artwork
 
-- Library cards search for artwork only when they are near the visible part of the page, limiting unnecessary requests.
-- **Wikimedia Commons** is preferred for strong title matches. Its API can return the image file page, creator/credit and licence metadata when available.
-- **English Wikipedia** article thumbnails are a fallback for games with no strong Commons result.
-- The search uses the game title and the slug from its RetroGames.cc embed URL. A confidence threshold is used to avoid unrelated images.
-- Artwork is referenced remotely (not downloaded into this repository) and the source link is shown on the card. If a match is missing, the image fails, or the request is unavailable, the existing generated retro cover remains. The “Retry cover” action allows another search.
-- Game title searches are sent to Wikimedia. No ROM or game file is uploaded.
+- Artwork lookup starts when a library card is near the viewport (and searches immediately in browsers without `IntersectionObserver`). The lookup queue limits the app to two concurrent searches.
+- **Wikimedia Commons** is searched first. Only image results with licence metadata are eligible.
+- **Wikidata** is a fallback metadata source: the match must be a high-confidence title, identify as a video game, and have a Commons image with licence metadata.
+- The game name is normalized to remove common region, translation, revision and ROM tags. Sequel numbers are compared strictly to reduce mismatches. The embed slug is also used to form search terms.
+- Cards link to the image/file page and licence; creator/artist metadata is included when available.
+- Artwork URLs and attribution are saved in the local library. Images are not downloaded into this repository. If no confident/licensed match exists, the request fails, or an image breaks, the stylized fallback remains; **Retry cover** searches again.
+- Search queries send game titles to Wikimedia/Wikidata. No ROM or game file is uploaded.
 
-**Copyright note:** Wikimedia Commons entries can have different attribution/licence conditions; the card links to the file page and shows the licence metadata when available. Wikipedia thumbnails may have restrictions, so check the linked page before reusing an image outside this identification UI.
+**Copyright note:** Commons images have individual attribution/licence conditions. Check the linked file page before reusing artwork elsewhere. The player intentionally avoids unlicensed or uncertain matches.
 
-Libretro’s public thumbnail collection was also evaluated. It has platform-specific box art, but the RetroGames.cc embed URL stored by the player does not reliably identify the console, so it is not used yet to avoid showing covers from the wrong system.
+Libretro's public box-art thumbnails were also evaluated. The saved RetroGames.cc embed link does not reliably identify the console/platform, so that source is not used yet to avoid incorrect covers.
 
 ## Tests
 
@@ -39,9 +40,3 @@ node --test tests/cover-search.test.js
 
 ## Status
 Prototype / Beta 0.1 — UI and embed-link loader.
-
-## Automatic cover art lookup
-
-The collection tries a conservative, key-free lookup using the Wikimedia Commons API, then Wikidata's open API (only exact game-title matches with a video-game type and a Commons image). It removes common ROM tags such as regions, translation notes, revisions, hashes and release codes before searching, and checks title similarity strictly—including sequel numbers. It only displays images with a license label in Commons metadata. The source/file page and license are shown below the artwork; if the match or license is uncertain, it keeps the stylized fallback. Use **Retry cover** to search again.
-
-Requests use the MediaWiki/Wikidata APIs with CORS enabled and a small client-side concurrency limit. Coverage is not guaranteed; Commons metadata and artwork can be incomplete, and the file page should still be checked for any attribution/license requirements.
