@@ -250,5 +250,13 @@ body[data-theme="snes"][data-variant="snes-japan"] .snes-cart-label b{letter-spa
 @media(max-width:520px){body[data-theme="snes"] .gbc-console-shell{border-radius:16px;padding:12px}body[data-theme="snes"] .gbc-bezel{padding:10px;border-radius:10px}body[data-theme="snes"] .snes-controls{height:125px;padding:8px 3%}body[data-theme="snes"] .snes-system-buttons{bottom:8px}}
 
 /* Region-specific controller button finishes */
-body[data-theme="snes"][data-variant="snes-america"] .snes-button-cluster i,body[data-theme="snes"][data-variant="snes-mini"] .snes-button-cluster i{background:#77758d;border-color:#575568;color:#f1eff8}
-body[data-theme="snes"][data-variant="snes-america"] .snes-b,body[data-theme="snes"][data-variant="snes-mini"] .snes-b{background:#67657d;color:#f1eff8!important}
+/* American SNES SNS-001: gray button well, lavender X/Y and deep-purple A/B */
+body[data-theme="snes"][data-variant="snes-america"] .snes-button-cluster{width:clamp(94px,19vw,126px);height:clamp(94px,19vw,126px);background:#777781;border:2px solid #64646e;border-radius:50%;box-shadow:inset 2px 3px 5px #fff2,inset -3px -4px 6px #0002;padding:5px}
+body[data-theme="snes"][data-variant="snes-america"] .snes-button-cluster i{width:clamp(29px,6vw,40px);height:clamp(29px,6vw,40px);border-color:#777;box-shadow:inset 1px 2px 3px #fff5,1px 3px 3px #0005}
+body[data-theme="snes"][data-variant="snes-america"] .snes-x,body[data-theme="snes"][data-variant="snes-america"] .snes-y{background:#b7a9dc;color:#4b4266}
+body[data-theme="snes"][data-variant="snes-america"] .snes-a,body[data-theme="snes"][data-variant="snes-america"] .snes-b{background:#6c5a9b;color:#f4efff!important}
+body[data-theme="snes"][data-variant="snes-america"] .snes-system-buttons{position:static;transform:none;display:flex;justify-content:center;gap:12px;margin-top:4px}
+body[data-theme="snes"][data-variant="snes-america"] .snes-system-buttons i{height:clamp(18px,3vw,24px);min-width:48px;padding:3px 15px;background:#777781;border:1px solid #64646e;border-radius:5px;color:#4b4b53;font:9px Arial,sans-serif;letter-spacing:.8px;transform:none;box-shadow:inset 1px 1px 2px #fff3,0 1px 2px #0002}
+body[data-theme="snes"][data-variant="snes-america"] .snes-system-buttons i:first-child{background:#8c8c96}
+body[data-theme="snes"][data-variant="snes-mini"] .snes-button-cluster i{background:#77758d;border-color:#575568;color:#f1eff8}
+body[data-theme="snes"][data-variant="snes-mini"] .snes-b{background:#67657d;color:#f1eff8!important}
