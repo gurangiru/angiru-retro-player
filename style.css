@@ -145,3 +145,7 @@ body[data-theme="gbc"][data-variant="yellow"]{--bg:#463d16;--panel:#786a28;--pan
 body[data-theme="gbc"][data-variant="grape"]{--bg:#30223e;--panel:#573c70;--panel2:#251832;--text:#f7edff;--muted:#c8afd9;--purple:#c69aff;--pink:#f08bcd;--cyan:#93c9ff;--line:#795591;--green:#a4e5a2}
 body[data-theme="gbc"][data-variant="kiwi"]{--bg:#283c1d;--panel:#4d682e;--panel2:#1d2d16;--text:#f4ffe6;--muted:#bfd39c;--purple:#a5d45b;--pink:#e983aa;--cyan:#8dd9c4;--line:#6b8743;--green:#d0f16c}
 body[data-theme="gbc"][data-variant="berry"]{--bg:#442239;--panel:#743d60;--panel2:#2d1728;--text:#fff0fa;--muted:#d5a9c4;--purple:#ee80c5;--pink:#ff9bd8;--cyan:#91cfff;--line:#995b82;--green:#a2e4b4}
+
+/* Keep a small outcome badge visible over real artwork as well as the fallback. */
+.library-cover.has-artwork .cover-status{display:block;background:#080b12c9;color:#c4b5fd}
+.cover-status:empty{display:none}
