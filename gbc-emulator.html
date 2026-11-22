@@ -18,11 +18,11 @@ window.addEventListener("message",event=>{
  const msg=event.data;
  if(msg.type==="load-rom"&&msg.file){
    if(window.EJS_terminate)try{window.EJS_terminate()}catch{}
-   document.querySelector("#game").replaceChildren();document.querySelector("#status").textContent="Carregando emulador…";document.querySelector("#status").style.display="flex";
+   document.querySelector("#game").replaceChildren();document.querySelector("#status").textContent=msg.language==="en"?"Loading emulator…":msg.language==="es"?"Cargando emulador…":"Carregando emulador…";document.querySelector("#status").style.display="flex";
    
    window.EJS_player="#game";window.EJS_core="gb";window.EJS_controlScheme="gb";window.EJS_gameUrl=msg.file;
    window.EJS_pathtodata="https://cdn.emulatorjs.org/stable/data/";
-   window.EJS_language="pt-BR";window.EJS_startOnLoaded=true;window.EJS_color="#8b5cf6";
+   window.EJS_language=msg.language==="en"?"en-US":msg.language==="es"?"es-ES":"pt-BR";window.EJS_startOnLoaded=true;window.EJS_color="#8b5cf6";
    window.EJS_Buttons={playPause:false,restart:false,mute:false,settings:false,fullscreen:false,saveState:false,loadState:false,screenRecord:false,gamepad:false,cheat:false,volume:false,saveSavFiles:false,loadSavFiles:false,quickSave:false,quickLoad:false,screenshot:false,cacheManager:false,exitEmulation:false};
    window.EJS_ready=function(){loaded=true;document.querySelector("#status").style.display="none";send("ready",{name:msg.file.name});pending.splice(0).forEach(([i,v])=>press(i,v));};
    const loader=document.createElement("script");loader.src=window.EJS_pathtodata+"loader.js";loader.onerror=()=>{document.querySelector("#status").textContent="Não foi possível carregar o EmulatorJS. Verifique sua conexão e tente novamente.";send("error")};document.body.append(loader);
