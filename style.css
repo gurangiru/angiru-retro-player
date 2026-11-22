@@ -287,3 +287,11 @@ body[data-theme="snes"][data-variant="snes-mini"] .snes-reset-button{width:clamp
 body[data-theme="snes"][data-variant="snes-mini"] .snes-power-button:before{width:0;height:0;border:0}
 body[data-theme="snes"][data-variant="snes-mini"] .snes-reset-button:before{width:55%;height:70%;border-radius:8px;background:#b5a8ca}
 body[data-theme="snes"][data-variant="snes-mini"] .snes-power-button span,body[data-theme="snes"][data-variant="snes-mini"] .snes-reset-button span{display:none}
+
+/* Compact SNES corrections: explicit face-button colors and left-side system controls */
+body[data-theme="snes"][data-variant="snes-mini"] .snes-x,body[data-theme="snes"][data-variant="snes-mini"] .snes-y{background:#b7a9dc!important;color:#4b4266!important}
+body[data-theme="snes"][data-variant="snes-mini"] .snes-a,body[data-theme="snes"][data-variant="snes-mini"] .snes-b{background:#6c5a9b!important;color:#f4efff!important}
+body[data-theme="snes"][data-variant="snes-mini"] .gbc-bezel{padding-left:clamp(62px,13vw,88px);padding-right:clamp(10px,2vw,16px)}
+body[data-theme="snes"][data-variant="snes-mini"] .snes-power-reset{left:clamp(8px,2vw,15px);right:auto;top:50%;transform:translateY(-50%);flex-direction:column;gap:clamp(12px,3vw,18px)}
+body[data-theme="snes"][data-variant="snes-mini"] .snes-power-button{width:clamp(36px,7vw,46px);height:clamp(36px,7vw,46px);border-radius:50%;background:#8878a3;border-color:#75658f}
+body[data-theme="snes"][data-variant="snes-mini"] .snes-reset-button{width:clamp(30px,6vw,38px);height:clamp(54px,10vw,68px);border-radius:14px;background:#8878a3;border-color:#75658f}
