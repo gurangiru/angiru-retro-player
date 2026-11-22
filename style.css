@@ -44,3 +44,8 @@
 .library-action.remove{color:#fda4af}
 .library-empty{border:1px dashed #354258;border-radius:10px;padding:18px;text-align:center;color:#7f8da6;font-size:12px;line-height:1.6}
 @media(max-width:700px){.library-list{grid-template-columns:1fr}.library-card{padding:11px}.library-game-icon{width:38px;height:38px}.library-action{padding:7px 8px}}
+
+/* Make the collection button visible and prominent next to game controls */
+#save-game[hidden]{display:none!important}
+#save-game.save-game-button{display:inline-flex;align-items:center;justify-content:center;margin:0 0 16px;background:#26213c;color:#d7c8ff;border:1px solid #8b76b5;border-radius:8px;padding:10px 12px;font:11px 'DM Mono',monospace;letter-spacing:.4px;cursor:pointer}
+#save-game.save-game-button:hover{background:#342b50;border-color:#a78bfa}
