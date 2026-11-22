@@ -16,3 +16,9 @@
 @media (orientation:portrait) {
   #game-area:fullscreen .game-stage{height:calc(100dvh - 36px)}
 }
+
+.game-actions{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 16px}
+.game-actions[hidden]{display:none}
+.secondary-button{background:#202a3c;color:#cbd5e1;border:1px solid #39465d;border-radius:8px;padding:9px 12px;font:10px 'DM Mono',monospace;letter-spacing:.5px;cursor:pointer;transition:.2s}
+.secondary-button:hover{background:#2b3850;border-color:#a78bfa;color:#fff}
+@media(max-width:480px){.game-actions{display:grid;grid-template-columns:1fr 1fr}.secondary-button{padding:10px 8px}}
