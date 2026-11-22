@@ -13,12 +13,12 @@ function libraryPersist(){try{localStorage.setItem(LIBRARY_KEY,JSON.stringify(li
 function coverPalette(url){const palettes=[["#392b68","#18233e","#a78bfa"],["#124d5a","#15273d","#67e8f9"],["#6a2e43","#20213d","#f472b6"],["#4c4822","#1b2838","#facc15"],["#24543a","#19263c","#86efac"]];let n=0;for(const ch of url)n=(n+ch.charCodeAt(0))%palettes.length;return palettes[n]}
 const coverLookupPromises=new Map();
 function normalizeGameTitle(raw){
- let s=(raw||"").replace(/\\.html?$/i,"").replace(/^\\d{2,8}\\s*/,"").replace(/[-_]+/g," ");
- s=s.replace(/\\b(english translated|translated|translation|europe|usa|japan|world|bootleg|hack|rom hack|prototype|beta|demo|unlicensed|rev ?[a-z0-9]+|version|v[0-9.]+|set ?[0-9]+|no intro|good|bad|verified|unverified|etc|yuc|yyc)\\b/gi," ");
- s=s.replace(/\\([^)]*\\)|\\[[^\\]]*\\]/g," ");
- s=s.replace(/\\b(?:19|20)\\d{2}\\b/g," ");
- s=s.replace(/\\b[a-f0-9]{6,}\\b/gi," ");
- return s.toLowerCase().normalize("NFD").replace(/[\\u0300-\\u036f]/g,"").replace(/[^a-z0-9]+/g," ").trim().replace(/\\s+/g," ");
+ let s=(raw||"").replace(/\.html?$/i,"").replace(/^\d{2,8}\s*/,"").replace(/[-_]+/g," ");
+ s=s.replace(/\b(english translated|translated|translation|europe|usa|japan|world|bootleg|hack|rom hack|prototype|beta|demo|unlicensed|rev ?[a-z0-9]+|version|v[0-9.]+|set ?[0-9]+|no intro|good|bad|verified|unverified|etc|yuc|yyc)\b/gi," ");
+ s=s.replace(/\([^)]*\)|\[[^\]]*\]/g," ");
+ s=s.replace(/\b(?:19|20)\d{2}\b/g," ");
+ s=s.replace(/\b[a-f0-9]{6,}\b/gi," ");
+ return s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g," ").trim().replace(/\s+/g," ");
 }
 function titleTokens(s){return normalizeGameTitle(s).split(" ").filter(w=>w.length>1&&!["the","and","of","for","game","cover","box","art","file","image","front"].includes(w))}
 function titleSimilarity(a,b){const aa=titleTokens(a),bb=titleTokens(b);if(!aa.length||!bb.length)return 0;const A=new Set(aa),B=new Set(bb);let intersection=0;for(const w of A)if(B.has(w))intersection++;const precision=intersection/B.size,recall=intersection/A.size;return 2*precision*recall/(precision+recall||1)}
