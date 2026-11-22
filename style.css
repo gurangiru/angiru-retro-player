@@ -321,3 +321,16 @@ body[data-theme="snes"][data-variant="snes-japan"] .snes-power-button span,body[
 body[data-theme="snes"][data-variant="snes-japan"] .snes-cart-label b{font-size:0}
 body[data-theme="snes"][data-variant="snes-japan"] .snes-cart-label b:after{content:"SUPER FAMICOM";font-size:inherit;letter-spacing:1px}
 body[data-theme="snes"][data-variant="snes-japan"] .snes-cart-label b:after{font-size:12px}
+
+
+/* SNES aged plastic option: subtle warm yellowing, independent of selected model */
+body[data-theme="snes"][data-snes-age="old"][data-variant="snes-america"] .gbc-console-shell{background:#d1c5a3!important}
+body[data-theme="snes"][data-snes-age="old"][data-variant="snes-mini"] .gbc-console-shell{background:#d8cba8!important}
+body[data-theme="snes"][data-snes-age="old"][data-variant="snes-pal"] .gbc-console-shell{background:#d6c9a7!important}
+body[data-theme="snes"][data-snes-age="old"][data-variant="snes-japan"] .gbc-console-shell{background:#d4c5a0!important}
+body[data-theme="snes"][data-snes-age="old"] .snes-cartridge{filter:sepia(.22) saturate(.82)}
+body[data-theme="snes"][data-snes-age="old"] .snes-button-cluster{background:#a49a7e!important;border-color:#8f856d!important}
+body[data-theme="snes"][data-snes-age="old"] .snes-power-button,body[data-theme="snes"][data-snes-age="old"] .snes-reset-button{background:#b6aa8a!important;border-color:#988d74!important}
+body[data-theme="snes"][data-snes-age="old"] .snes-power-button:before,body[data-theme="snes"][data-snes-age="old"] .snes-reset-button:before{background:#c8bc9b!important;border-color:#a1967c!important}
+body[data-theme="snes"][data-snes-age="old"] .snes-button-cluster i{border-color:#8f856d!important}
+body[data-theme="snes"][data-snes-age="old"] .snes-power-button span,body[data-theme="snes"][data-snes-age="old"] .snes-reset-button span{color:#665d4b!important}
