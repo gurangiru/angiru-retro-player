@@ -73,3 +73,5 @@
 .library-cover.has-artwork .cover-title{position:absolute;left:0;right:0;bottom:0;padding:26px 10px 9px;background:linear-gradient(transparent,#000b 75%);font-size:clamp(11px,1.2vw,15px);z-index:2}
 .library-cover.has-artwork .cover-console{z-index:2;text-shadow:0 1px 4px #000}
 .library-cover.has-artwork .cover-symbol{z-index:2}
+
+.art-credit{display:inline-block;margin-top:4px;color:#8b91a5;font:8px 'DM Mono',monospace;text-decoration:underline;text-underline-offset:2px;opacity:.8}.art-credit:hover{color:#c4b5fd;opacity:1}
