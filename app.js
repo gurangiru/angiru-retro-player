@@ -72,10 +72,10 @@ async function findRealCover(game,force=false){
  if(force){game.coverChecked=false;game.coverSearchFailed=false;game.coverUrl=null;game.coverPage=null;game.coverSource=null;game.coverLicense=null;game.coverLicenseUrl=null;game.coverArtist=null}
  game.coverSearching=true;game.coverSearchFailed=false;libraryPersist();
  const promise=scheduleCoverLookup(async()=>{try{
-  const qs=coverSearchQueries(game);let candidates=[];
-  for(let n=0;n<qs.length;n++){const requests=[searchCommonsCover(qs[n])];const settled=await Promise.allSettled(requests);for(const x of settled)if(x.status==="fulfilled")candidates.push(...x.value);if(candidates.some(c=>titleSimilarity(game.name,c.title)>=.88&&c.image&&/^https:/.test(c.image)))break}
+  const qs=coverSearchQueries(game);let candidates=[],searchHadError=false;
+  for(let n=0;n<qs.length;n++){const settled=await Promise.allSettled([searchCommonsCover(qs[n])]);for(const x of settled){if(x.status==="fulfilled")candidates.push(...x.value);else searchHadError=true}if(candidates.some(c=>titleSimilarity(game.name,c.title)>=.88&&c.image&&/^https:/.test(c.image)&&c.license))break}
   let ranked=candidates.map(c=>({...c,score:titleSimilarity(game.name,c.title)})).filter(c=>c.score>=.88&&c.image&&/^https:/.test(c.image)&&c.license);
-  if(!ranked.length){const wq=[normalizeGameTitle(game.name),gameSlugTitle(game)].filter((q,i,a)=>q&&a.indexOf(q)===i);for(const q of wq){try{candidates.push(...await searchWikidataCover(q))}catch{}}ranked=candidates.map(c=>({...c,score:titleSimilarity(game.name,c.title)})).filter(c=>c.score>=.88&&c.image&&/^https:/.test(c.image)&&c.license)}
+  if(!ranked.length){const wq=[normalizeGameTitle(game.name),gameSlugTitle(game)].filter((q,i,a)=>q&&a.indexOf(q)===i);for(const q of wq){try{candidates.push(...await searchWikidataCover(q))}catch{searchHadError=true}}ranked=candidates.map(c=>({...c,score:titleSimilarity(game.name,c.title)})).filter(c=>c.score>=.88&&c.image&&/^https:/.test(c.image)&&c.license)}
   const priority=c=>["Wikimedia Commons","Wikidata · Wikimedia Commons"].includes(c.source)?0:1;ranked.sort((a,b)=>b.score-a.score||priority(a)-priority(b));const best=ranked[0];
   if(best){game.coverUrl=best.image;game.coverSource=best.source;game.coverPage=best.page;game.coverLicense=best.license||"";game.coverLicenseUrl=best.licenseUrl||"";game.coverArtist=best.artist||"";game.coverSearchFailed=false;game.coverChecked=true;return best.image}
   game.coverSearchFailed=false;game.coverChecked=true;return null;
