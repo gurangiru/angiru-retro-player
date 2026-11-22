@@ -45,7 +45,7 @@ function titleSimilarity(a,b){
  let n=0;for(const w of A)if(B.has(w))n++;
  const p=n/B.size,r=n/A.size;return 2*p*r/(p+r||1);
 }
-function gameSlugTitle(game){try{const slug=new URL(game.url).pathname.split("/").pop().replace(/\.html?$/i,"").replace(/^\d{2,8}[-_]/,"").replace(/[-_]+/g," ");return normalizeGameTitle(slug)}catch{return ""}}
+function gameSlugTitle(game){try{const path=String(game.url||"").split(/[?#]/,1)[0].split("/"),slug=path[path.length-1].replace(/\.html?$/i,"").replace(/^\d{2,8}[-_]/,"").replace(/[-_]+/g," ");return normalizeGameTitle(slug)}catch{return ""}}
 function coverSearchQueries(game){const title=normalizeGameTitle(game.name),slug=gameSlugTitle(game),primary=title||slug;return [...new Set([title,slug,primary+" box art",primary+" cover"].filter(Boolean))].slice(0,4)}
 function cleanMetadata(v){return String(v||"").replace(/<[^>]*>/g," ").replace(/&nbsp;/gi," ").replace(/&amp;/gi,"&").replace(/&#39;/g,"'").replace(/&quot;/g,'"').replace(/\s+/g," ").trim()}
 async function searchCommonsCover(query){
