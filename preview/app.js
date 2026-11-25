@@ -75,7 +75,9 @@ function libretroCoverCandidates(game){
   if(base)names=[base+" (Japan).png",base+" (USA).png",base+" (Europe).png",base+".png"];
  }
  const folder=encodeURIComponent(system).replace(/%20/g,"%20");
- const cdn=[...new Set(names)].map(name=>"https://thumbnails.libretro.com/"+folder+"/Named_Boxarts/"+encodeURIComponent(name).replace(/%28/g,"(").replace(/%29/g,")"));\n const raw=system==="Nintendo - Super Nintendo Entertainment System"?"https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Super_Nintendo_Entertainment_System/master/Named_Boxarts/Super%20Bomberman%204%20(Japan).png":"";\n return [...new Set([raw,...cdn].filter(Boolean))];
+ const cdn=[...new Set(names)].map(name=>"https://thumbnails.libretro.com/"+folder+"/Named_Boxarts/"+encodeURIComponent(name).replace(/%28/g,"(").replace(/%29/g,")"));
+ const raw=system==="Nintendo - Super Nintendo Entertainment System"?"https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Super_Nintendo_Entertainment_System/master/Named_Boxarts/Super%20Bomberman%204%20(Japan).png":"";
+ return [...new Set([raw,...cdn].filter(Boolean))];
 }
 function coverNeedsRetry(game){
  if(!game.coverChecked)return true;
