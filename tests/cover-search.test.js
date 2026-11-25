@@ -26,7 +26,7 @@ function createCoverApi(fetchMock) {
   };
   vm.createContext(context);
   vm.runInContext(
-    helpers + "\nthis.coverApi = { normalizeGameTitle, normalizeCoverCandidateTitle, titleSimilarity, gameSlugTitle, coverSearchQueries, searchCommonsCover, searchWikidataCover, findRealCover };",
+    helpers + "\nthis.coverApi = { normalizeGameTitle, normalizeCoverCandidateTitle, titleSimilarity, gameSlugTitle, coverSearchQueries, inferLibretroSystem, libretroCoverCandidates, coverNeedsRetry, searchCommonsCover, searchWikidataCover, findRealCover };",
     context
   );
   return context.coverApi;
@@ -40,6 +40,7 @@ function game(name = "Super Bomberman 4 English Translated") {
   return {
     name,
     url: "https://www.retrogames.cc/embed/19846-super-bomberman-4-english-translated.html",
+    skipLibretro: true,
   };
 }
 
@@ -64,6 +65,24 @@ function commonsResult(title = "File:Super Bomberman 4 box art.png") {
     },
   };
 }
+
+
+test("Super Bomberman 4 embed is identified as SNES and gets exact archive filename candidates", () => {
+  const api = createCoverApi(async () => response({}));
+  const item = game();
+  item.skipLibretro = false;
+  assert.equal(api.inferLibretroSystem(item), "Nintendo - Super Nintendo Entertainment System");
+  const candidates = Array.from(api.libretroCoverCandidates(item));
+  assert.match(candidates[0], /Named_Boxarts\/Super%20Bomber%20Man%204%20\(Japan\)\.png$/);
+  assert.ok(candidates.length >= 4);
+});
+
+test("legacy failed cover entries are eligible for a fresh search", () => {
+  const api = createCoverApi(async () => response({}));
+  assert.equal(api.coverNeedsRetry({ coverChecked: true, coverUrl: null }), true);
+  assert.equal(api.coverNeedsRetry({ coverChecked: true, coverUrl: null, coverCheckedAt: Date.now(), coverSearchFailed: false }), false);
+  assert.equal(api.coverNeedsRetry({ coverChecked: true, coverUrl: "https://example.com/cover.png" }), false);
+});
 
 test("normalization removes ROM tags and preserves sequel numbers", () => {
   const api = createCoverApi(async () => response({}));
