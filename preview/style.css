@@ -1,0 +1,463 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+:root{--bg:#101522;--panel:#171e2e;--panel2:#111827;--text:#eef2ff;--muted:#9aa7c1;--purple:#a78bfa;--pink:#f472b6;--cyan:#67e8f9;--line:#2a354a;--green:#86efac}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 72% 0%,#202945 0,transparent 42%),var(--bg);color:var(--text);font-family:'Space Grotesk',sans-serif;min-height:100vh}.page-shell{max-width:1100px;margin:auto;padding:0 28px}.topbar{height:78px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #283147}.brand{display:flex;align-items:center;gap:10px;color:var(--text);text-decoration:none;font-weight:700;letter-spacing:1.4px;font-size:14px}.brand b{color:var(--purple)}.brand-mark{color:var(--pink);font-size:22px}.topbar-actions{display:flex;align-items:center;gap:12px}.status-pill{font:11px 'DM Mono',monospace;letter-spacing:.7px;color:#c0cbe0;display:flex;gap:8px;align-items:center}.status-dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 10px #86efac80}.language-label{color:var(--muted)}select{background:#202a3c;color:var(--text);border:1px solid #39455c;border-radius:8px;padding:7px 9px;font-family:'DM Mono',monospace}.hero{display:flex;align-items:center;justify-content:space-between;min-height:260px;padding:36px 0 22px;overflow:hidden}.hero-copy{max-width:610px}.eyebrow,.section-tag,.version,.link-form label,.frame-title,.player-footer,.how-heading,footer{font-family:'DM Mono',monospace;letter-spacing:1px}.eyebrow{color:var(--cyan);font-size:11px;margin:0 0 16px}.hero h1{font-size:clamp(34px,5vw,56px);line-height:1.04;letter-spacing:-2px;margin:0}.hero h1 span{color:var(--purple)}.hero-subtitle{font-size:15px;color:var(--muted);max-width:510px;line-height:1.65;margin-top:18px}.pixel-art{position:relative;width:245px;height:210px;flex-shrink:0;display:grid;place-items:center}.pixel-console{width:160px;height:150px;background:#3b315b;border:5px solid #625080;border-radius:12px;box-shadow:10px 10px 0 #0a0e18;transform:rotate(5deg);padding:14px}.console-screen{height:80px;background:#11172a;border:3px solid #8b76b5;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#c4b5fd;font-family:'DM Mono',monospace;box-shadow:inset 0 0 14px #a78bfa20}.console-screen span{font-size:9px;letter-spacing:2px}.console-screen strong{font-size:19px;letter-spacing:2px}.console-screen small{font-size:7px;letter-spacing:3px;color:var(--pink)}.console-controls{display:flex;align-items:center;justify-content:space-between;padding:9px 8px}.console-controls i{width:10px;height:10px;border-radius:50%;background:var(--pink);box-shadow:0 0 8px #f472b680}.console-controls i:nth-child(2){background:var(--cyan)}.console-controls i:nth-child(3){background:#facc15}.pixel-star{position:absolute;color:var(--pink);font-size:25px}.star-one{top:20px;right:22px}.star-two{bottom:24px;left:18px;color:var(--cyan)}.player-card{background:linear-gradient(180deg,#1b2334,#151c2a);border:1px solid #2b364b;border-radius:16px;padding:22px;box-shadow:0 22px 50px #0002}.card-topline{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}.section-tag{font-size:11px;color:#c6d0e3;display:flex;align-items:center;gap:9px}.tiny-square{width:8px;height:8px;background:var(--purple);box-shadow:0 0 10px #a78bfa70}.version{font-size:10px;color:#74829d}.link-form label{display:block;color:#8e9bb4;font-size:10px;margin-bottom:9px}.input-row{display:flex;gap:10px}.input-row input{flex:1;min-width:0;border:1px solid #364258;border-radius:9px;background:#101725;color:var(--text);padding:13px 14px;font:13px 'DM Mono',monospace;outline:none}.input-row input:focus{border-color:var(--purple);box-shadow:0 0 0 3px #a78bfa18}.input-row input::placeholder{color:#62708a}.start-button{border:0;border-radius:9px;background:linear-gradient(110deg,#a78bfa,#8b79e8);color:#111525;font-weight:700;letter-spacing:.5px;padding:0 19px;display:flex;gap:9px;align-items:center;justify-content:center;cursor:pointer;white-space:nowrap;transition:.2s}.start-button:hover{filter:brightness(1.1);transform:translateY(-1px)}.start-button span:first-child{font-size:12px}.form-message{margin:9px 0 18px;font-size:11px;color:#8492aa;line-height:1.5}.form-message.error{color:#fda4af}.game-frame-wrap{border:1px solid #364258;border-radius:11px;overflow:hidden;background:#090d15}.frame-toolbar{height:38px;background:#121a29;display:flex;align-items:center;justify-content:space-between;padding:0 12px;border-bottom:1px solid #293448}.frame-title{font-size:10px;color:#94a3bb;display:flex;align-items:center;gap:8px}.live-indicator{height:6px;width:6px;border-radius:50%;background:#64748b}.live-indicator.active{background:var(--green);box-shadow:0 0 8px #86efac}.icon-button{background:#263247;border:1px solid #39465d;color:#cbd5e1;border-radius:6px;height:27px;width:32px;font-size:18px;line-height:1;cursor:pointer}.icon-button:hover{color:white;background:#36445d}.game-stage{aspect-ratio:16/9;max-height:650px;position:relative;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse,#1d2840,#090d15 75%);overflow:hidden}.game-stage iframe{width:100%;height:100%;border:0;background:#000}.empty-state{text-align:center;padding:24px;max-width:440px}.controller-icon{font-size:44px;filter:drop-shadow(0 5px 10px #a78bfa22)}.empty-state h2{font-size:20px;margin:14px 0 8px}.empty-state p{font-size:13px;color:var(--muted);line-height:1.6}.key-hints{display:flex;justify-content:center;gap:25px;margin-top:24px}.key-hints span{display:flex;gap:7px;align-items:center}kbd{font:10px 'DM Mono',monospace;color:#c4b5fd;border:1px solid #5b4c7d;background:#25213a;padding:5px 8px;border-radius:4px}.key-hints small{font-size:10px;color:#8592aa}.player-footer{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:14px;font-size:9px;color:#78869e}.footer-symbol{color:#a78bfa}.how-to{padding:35px 0 20px}.how-heading{margin-bottom:17px}.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.step{display:flex;gap:14px;padding:17px;border:1px solid #293449;border-radius:10px;background:#151c2a}.step-number{font:12px 'DM Mono',monospace;color:var(--pink)}.step h3{font-size:13px;margin:0 0 6px}.step p{font-size:11px;color:var(--muted);margin:0;line-height:1.5}footer{border-top:1px solid #283147;padding:18px 0 24px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;color:#718099;font-size:9px}.footer-dot{color:var(--pink);padding:0 5px}
+@media(max-width:700px){.page-shell{padding:0 16px}.topbar{height:65px}.status-pill{display:none}.hero{min-height:210px;padding:30px 0 18px}.hero h1{font-size:38px}.hero-subtitle{font-size:13px;max-width:330px}.pixel-art{width:115px;height:150px;transform:scale(.75);margin-left:-10px}.player-card{padding:15px}.card-topline{margin-bottom:18px}.input-row{flex-direction:column}.input-row input{padding:12px}.start-button{height:45px}.game-stage{aspect-ratio:16/9;max-height:none}.steps{grid-template-columns:1fr}.step{padding:14px}.player-footer{font-size:8px}.hero-copy{z-index:1}.pixel-art{opacity:.85}footer{font-size:8px}.empty-state h2{font-size:18px}.empty-state p{font-size:12px}}@media(max-width:420px){.hero h1{font-size:33px}.pixel-art{width:90px;margin-left:-22px}.brand{font-size:12px}.hero-subtitle{max-width:250px}}
+
+/* Fullscreen: use the available screen area rather than a fixed aspect ratio. */
+#game-area:fullscreen{width:100vw;height:100dvh;max-width:none;margin:0;border:0;border-radius:0;background:#000;display:flex;flex-direction:column;overflow:hidden}
+#game-area:fullscreen .frame-toolbar{flex:0 0 36px;height:36px}
+#game-area:fullscreen .game-stage{flex:1;min-height:0;width:100%;height:auto;max-height:none;aspect-ratio:auto}
+#game-area:fullscreen iframe{display:block;width:100%;height:100%;min-height:0}
+#game-area:fullscreen iframe[hidden]{display:none}
+@media (orientation:landscape) and (max-height:500px){
+  #game-area:fullscreen .frame-toolbar{flex-basis:30px;height:30px}
+  #game-area:fullscreen .frame-title{font-size:9px}
+}
+@media (orientation:portrait) {
+  #game-area:fullscreen .game-stage{height:calc(100dvh - 36px)}
+}
+
+.game-actions{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 16px}
+.game-actions[hidden]{display:none}
+.secondary-button{background:#202a3c;color:#cbd5e1;border:1px solid #39465d;border-radius:8px;padding:9px 12px;font:10px 'DM Mono',monospace;letter-spacing:.5px;cursor:pointer;transition:.2s}
+.secondary-button:hover{background:#2b3850;border-color:#a78bfa;color:#fff}
+@media(max-width:480px){.game-actions{display:grid;grid-template-columns:1fr 1fr}.secondary-button{padding:10px 8px}}
+
+
+/* Retro library cards and filter tools */
+.library-section{padding:26px 0 18px}
+.library-heading{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.library-count{font:11px 'DM Mono',monospace;color:var(--purple);border:1px solid #51446e;border-radius:999px;padding:4px 9px}
+.library-subtitle{font-size:12px;color:var(--muted);margin:0 0 16px}
+.library-tools{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin:0 0 16px}
+.library-tools[hidden]{display:none}
+.library-search{flex:1;min-width:160px}
+.library-tools input{width:100%;background:#101725;color:var(--text);border:1px solid #364258;border-radius:8px;padding:10px 12px;font:12px 'DM Mono',monospace;outline:none}
+.library-tools input:focus{border-color:var(--purple)}
+.library-filters{display:flex;gap:6px;flex-wrap:wrap}
+.library-filter{background:#202a3c;color:#93a1ba;border:1px solid #39465d;border-radius:7px;padding:8px 10px;font:10px 'DM Mono',monospace;cursor:pointer}
+.library-filter.active{background:#342b50;color:#d7c8ff;border-color:#8b76b5}
+.library-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.library-card{overflow:hidden;min-width:0;background:#151c2a;border:1px solid #293449;border-radius:12px;transition:transform .18s,border-color .18s}
+.library-card:hover{transform:translateY(-2px);border-color:#66558a}
+.library-cover{height:150px;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:18px;background:linear-gradient(135deg,#342b59,#111827 60%,#172f48)}
+.library-cover:before,.library-cover:after{content:"";position:absolute;border:1px solid #ffffff20;transform:rotate(22deg);width:170px;height:170px;border-radius:38px}
+.library-cover:after{width:100px;height:100px;transform:rotate(-18deg);border-color:#f472b650}
+.library-cover .cover-orbit{position:absolute;width:120px;height:120px;border:2px dotted #a78bfa65;border-radius:50%;right:-28px;top:-40px}
+.library-cover .cover-console{position:absolute;left:12px;top:10px;font:9px 'DM Mono',monospace;color:#cbd5e1;letter-spacing:1px;opacity:.8}
+.library-cover .cover-title{position:relative;z-index:1;text-align:center;font-size:clamp(14px,1.5vw,20px);font-weight:700;line-height:1.1;text-shadow:0 2px 8px #0008;max-width:100%;overflow-wrap:anywhere}
+.library-cover .cover-symbol{position:absolute;bottom:9px;right:12px;font-size:25px;opacity:.6}
+.library-cover .cover-favorite{position:absolute;right:10px;top:9px;color:#f472b6;font-size:15px;z-index:2}
+.library-card-main{padding:12px 13px 8px;min-width:0}
+.library-card-title{font-size:13px;font-weight:700;line-height:1.35;margin-bottom:5px;overflow-wrap:anywhere}
+.library-card-meta{font:9px 'DM Mono',monospace;color:#718099;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.library-card-actions{display:flex;gap:6px;flex-wrap:wrap;padding:0 12px 12px}
+.library-action{background:#202a3c;color:#cbd5e1;border:1px solid #39465d;border-radius:6px;padding:7px 9px;font:10px 'DM Mono',monospace;cursor:pointer}
+.library-action.play{color:#c4b5fd;border-color:#51446e}
+.library-action.fav{color:#f472b6}
+.library-action.remove{color:#fda4af}
+.library-empty{border:1px dashed #354258;border-radius:10px;padding:18px;text-align:center;color:#7f8da6;font-size:12px;line-height:1.6}
+.save-game-button{margin:0 0 16px;background:#26213c;color:#d7c8ff;border:1px solid #625080;border-radius:8px;padding:11px 14px;font:11px 'DM Mono',monospace;letter-spacing:.5px;cursor:pointer}
+.save-game-button:hover{background:#342b50}
+.save-game-button[hidden]{display:none}
+#save-game[hidden]{display:none!important}
+#save-game.save-game-button{display:inline-flex;align-items:center;justify-content:center;margin:0 0 16px;background:#26213c;color:#d7c8ff;border:1px solid #8b76b5;border-radius:8px;padding:10px 12px;font:11px 'DM Mono',monospace;letter-spacing:.4px;cursor:pointer}
+#save-game.save-game-button:hover{background:#342b50;border-color:#a78bfa}
+@media(max-width:800px){.library-list{grid-template-columns:repeat(2,minmax(0,1fr))}.library-cover{height:125px}}
+@media(max-width:520px){.library-list{grid-template-columns:1fr 1fr;gap:8px}.library-card-main{padding:9px}.library-cover{height:105px;padding:10px}.library-cover .cover-title{font-size:13px}.library-card-actions{padding:0 8px 9px;gap:4px}.library-action{padding:6px 7px;font-size:9px}.library-tools{align-items:stretch}.library-filters{justify-content:space-between}.library-filter{flex:1;text-align:center;padding:7px 5px}}
+
+/* Real cover art with graceful fallback to the generated retro cover */
+.library-cover.has-artwork{background:#080b12!important;padding:0}
+.library-cover.has-artwork:before,.library-cover.has-artwork:after,.library-cover.has-artwork .cover-orbit{display:none}
+.library-artwork{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center;background:#080b12;z-index:1}
+.library-cover.has-artwork .cover-title{position:absolute;left:0;right:0;bottom:0;padding:26px 10px 9px;background:linear-gradient(transparent,#000b 75%);font-size:clamp(11px,1.2vw,15px);z-index:2}
+.library-cover.has-artwork .cover-console{z-index:2;text-shadow:0 1px 4px #000}
+.library-cover.has-artwork .cover-symbol{z-index:2}
+
+.art-credit{display:block;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-top:4px;color:#8b91a5;font:8px 'DM Mono',monospace;text-decoration:underline;text-underline-offset:2px;opacity:.8}.art-credit:hover{color:#c4b5fd;opacity:1}
+
+/* Cover search status and retry control */
+.cover-status{position:absolute;left:0;right:0;bottom:0;z-index:3;text-align:center;font:8px 'DM Mono',monospace;color:#c4b5fd;background:#111827b8;padding:5px 4px;letter-spacing:.4px}
+.library-cover.has-artwork .cover-status{display:none}
+.cover-retry{color:#a5b4fc!important;border-color:#51446e!important}
+.cover-retry:disabled{opacity:.55;cursor:wait}
+
+/* Console-inspired color themes: only presentation tokens and surfaces are changed. */
+body[data-theme="angiru"]{--bg:#dce9f6;--panel:#ffffff;--panel2:#f3f7fc;--text:#34495f;--muted:#899bad;--purple:#5b94bd;--pink:#f04f9b;--cyan:#78c5e6;--line:#c9dceb;--green:#65b984}
+body[data-theme="snes"]{--bg:#252335;--panel:#d0d0d8;--panel2:#e5e5eb;--text:#292938;--muted:#5f6176;--purple:#7b50a9;--pink:#d34f77;--cyan:#4475c5;--line:#a3a3b4;--green:#5b9e58}
+body[data-theme="gbc"]{--bg:#e1e6bd;--panel:#c5d38a;--panel2:#eff2d3;--text:#243d35;--muted:#58725b;--purple:#7457a8;--pink:#d14e87;--cyan:#248baf;--line:#95a86a;--green:#39874b}
+body[data-theme="ps1"]{--bg:#111d36;--panel:#26334d;--panel2:#18253c;--text:#edf3ff;--muted:#a4b5d0;--purple:#5b8bd6;--pink:#f05b72;--cyan:#5fc4e9;--line:#40516c;--green:#7bd59d}
+body[data-theme="atari"]{--bg:#241b16;--panel:#34271d;--panel2:#1c1714;--text:#f0dfc2;--muted:#b79b78;--purple:#c58b46;--pink:#e28b51;--cyan:#d2b36d;--line:#5c4430;--green:#a4bd5b}
+body[data-theme="n64"]{--bg:#20232b;--panel:#2c3341;--panel2:#1b202a;--text:#f3f4f8;--muted:#aab3c4;--purple:#4c83e5;--pink:#ef5350;--cyan:#45c78b;--line:#465165;--green:#83d75d}
+body[data-theme="arcade"]{--bg:#090b18;--panel:#14152a;--panel2:#0b1020;--text:#f6f1ff;--muted:#9ca3c9;--purple:#bd5cff;--pink:#ff4fa3;--cyan:#39f5ff;--line:#33305a;--green:#4dff9c}
+body[data-theme="megadrive"]{--bg:#101316;--panel:#20252b;--panel2:#15191e;--text:#f1f3f5;--muted:#a1aab5;--purple:#d04c4c;--pink:#ef6767;--cyan:#a4b7c9;--line:#424b55;--green:#80c56e}
+body[data-theme="gba"]{--bg:#252036;--panel:#342b4a;--panel2:#201b31;--text:#f4edff;--muted:#b4a5d1;--purple:#a56de0;--pink:#ed75b6;--cyan:#63a9ed;--line:#4c3e65;--green:#85d39a}
+body[data-theme] {background:radial-gradient(ellipse at 72% 0%,color-mix(in srgb,var(--purple) 18%,transparent),transparent 42%),var(--bg);color:var(--text)}
+body[data-theme] .topbar,body[data-theme] footer{border-color:var(--line)}
+body[data-theme] .brand,body[data-theme] .hero h1,body[data-theme] .empty-state h2,body[data-theme] .step h3{color:var(--text)}
+body[data-theme] .brand b,body[data-theme] .hero h1 span,body[data-theme] .brand-mark,body[data-theme] .pixel-star,.section-tag .tiny-square,.footer-symbol{color:var(--purple)}
+body[data-theme] .eyebrow{color:var(--cyan)}
+body[data-theme] .player-card,body[data-theme] .step,body[data-theme] .library-card{background:var(--panel);border-color:var(--line)}
+body[data-theme] .frame-toolbar,body[data-theme] .library-card-main,body[data-theme] .library-empty{background:var(--panel2);border-color:var(--line)}
+body[data-theme] .game-stage{background:radial-gradient(ellipse,color-mix(in srgb,var(--purple) 12%,var(--panel2)),var(--panel2) 75%)}
+body[data-theme] .input-row input,body[data-theme] .library-tools input{background:var(--panel2);color:var(--text);border-color:var(--line)}
+body[data-theme] select,body[data-theme] .library-filter,body[data-theme] .library-action,body[data-theme] .secondary-button{background:var(--panel2);color:var(--text);border-color:var(--line)}
+body[data-theme] .library-filter.active,body[data-theme] .save-game-button{background:color-mix(in srgb,var(--purple) 28%,var(--panel2));color:var(--text);border-color:var(--purple)}
+body[data-theme] .start-button{background:linear-gradient(110deg,var(--purple),color-mix(in srgb,var(--purple) 72%,var(--cyan)));color:var(--bg)}
+body[data-theme] .library-action.play{color:var(--purple);border-color:var(--purple)}
+body[data-theme] .library-action.fav{color:var(--pink)}
+body[data-theme] .library-action.remove{color:var(--pink)}
+body[data-theme] .pixel-console{background:color-mix(in srgb,var(--purple) 40%,var(--panel));border-color:var(--purple)}
+body[data-theme] .console-screen{border-color:var(--cyan);color:var(--cyan)}
+body[data-theme] .console-screen small,body[data-theme] .console-controls i:first-child{background:var(--pink);color:var(--pink)}
+body[data-theme] .console-controls i:nth-child(2){background:var(--cyan)}
+body[data-theme] .console-controls i:nth-child(3){background:var(--green)}
+body[data-theme] .cover-retry{color:var(--purple)!important;border-color:var(--line)!important}
+body[data-theme] .library-count{color:var(--purple);border-color:var(--line)}
+body[data-theme] .status-dot,body[data-theme] .live-indicator.active{background:var(--green);box-shadow:0 0 10px color-mix(in srgb,var(--green) 45%,transparent)}
+.theme-label{font:9px 'DM Mono',monospace;color:var(--muted);letter-spacing:.5px}
+#theme{max-width:150px;font-size:10px}
+@media(max-width:520px){.theme-label{display:none}#theme{max-width:105px;padding:6px 5px;font-size:9px}}
+
+/* Optional color variants for handheld, N64 and arcade themes */
+.variant-label{font:9px 'DM Mono',monospace;color:var(--muted);letter-spacing:.4px}
+#theme-variant{max-width:118px;font-size:10px}
+#theme-variant[hidden],.variant-label[hidden]{display:none!important}
+@media(max-width:520px){#theme-variant{max-width:85px;padding:6px 4px;font-size:9px;flex:0 0 auto}.topbar{height:auto;min-height:65px;padding:10px 0;align-items:flex-start;gap:8px;flex-wrap:wrap}.topbar-actions{gap:6px;flex-wrap:wrap;justify-content:flex-end}.topbar-actions select{flex:0 0 auto}.variant-label{white-space:nowrap}}
+body[data-variant="atomic-purple"],body[data-variant="grape"],body[data-variant="neon-purple"]{--purple:#9b63d8;--pink:#d875ed;--cyan:#73b5ff;--green:#82e4a7}
+body[data-variant="teal"]{--purple:#1d7c89;--pink:#d05a91;--cyan:#45bfc1;--green:#8acb61}
+body[data-variant="yellow"]{--purple:#b38b2c;--pink:#d85b9a;--cyan:#4b8fc2;--green:#6da94b}
+body[data-variant="kiwi"],body[data-variant="neon-green"]{--purple:#6f9b37;--pink:#d45e92;--cyan:#4aa5a0;--green:#a8d83f}
+body[data-variant="berry"],body[data-variant="fuchsia"],body[data-variant="neon-pink"]{--purple:#b04d94;--pink:#ff70bd;--cyan:#5bbbe8;--green:#72d6a1}
+body[data-variant="glacier"],body[data-variant="ice-blue"],body[data-variant="neon-cyan"]{--purple:#4d83cc;--pink:#ed719a;--cyan:#6fe4ff;--green:#70d8a3}
+body[data-variant="indigo"]{--purple:#6553b8;--pink:#d67ebc;--cyan:#7aa8ec;--green:#77d49a}
+body[data-variant="spice"],body[data-variant="fire-orange"]{--purple:#d27a37;--pink:#e76c67;--cyan:#72a8d4;--green:#a4c85a}
+body[data-variant="smoke"]{--purple:#79889a;--pink:#d46b86;--cyan:#82b6cf;--green:#8ac69c}\nbody[data-theme="gba"][data-variant="black"]{--bg:#08090c;--panel:#14171d;--panel2:#090b10;--text:#f2f5fa;--muted:#9ba6b6;--purple:#596b83;--pink:#bd526d;--cyan:#6aa8cf;--line:#29313d;--green:#83b98b}\nbody[data-theme="gba"][data-variant="platinum"]{--bg:#d8dce3;--panel:#c3c9d2;--panel2:#eef1f5;--text:#303944;--muted:#687382;--purple:#8494ad;--pink:#c07c9a;--cyan:#5f9fbd;--line:#9da8b6;--green:#72a781}
+body[data-variant="platinum"]{--purple:#8997b3;--pink:#cf789d;--cyan:#74bad7;--green:#8dc7a2}
+body[data-variant="jungle-green"]{--purple:#35a86e;--pink:#e56d70;--cyan:#4eb6c6;--green:#9be36e}
+body[data-variant="watermelon"]{--purple:#dc4c64;--pink:#ff789b;--cyan:#56b8d5;--green:#79d69a}
+body[data-variant="neon-red"]{--purple:#ff475c;--pink:#ff6d9f;--cyan:#47f1ff;--green:#4dff9c}
+
+/* Game Boy Color variants tint the entire interface, not just accent details. */
+body[data-theme="gbc"][data-variant="atomic-purple"]{--bg:#302044;--panel:#55366f;--panel2:#241631;--text:#f8edff;--muted:#c5a8d8;--purple:#d39aff;--pink:#ff83d1;--cyan:#92dcff;--line:#795292;--green:#a9ed9d}
+body[data-theme="gbc"][data-variant="teal"]{--bg:#12383b;--panel:#246165;--panel2:#0d292c;--text:#e9ffff;--muted:#a4d4d1;--purple:#62d5c6;--pink:#f28cb8;--cyan:#8af4ed;--line:#397c7e;--green:#b4e66b}
+body[data-theme="gbc"][data-variant="yellow"]{--bg:#463d16;--panel:#786a28;--panel2:#302b10;--text:#fff9dc;--muted:#dfd095;--purple:#e9c84d;--pink:#e9829c;--cyan:#a5d8ed;--line:#9c8a3b;--green:#b6d65c}
+body[data-theme="gbc"][data-variant="grape"]{--bg:#30223e;--panel:#573c70;--panel2:#251832;--text:#f7edff;--muted:#c8afd9;--purple:#c69aff;--pink:#f08bcd;--cyan:#93c9ff;--line:#795591;--green:#a4e5a2}
+body[data-theme="gbc"][data-variant="kiwi"]{--bg:#283c1d;--panel:#4d682e;--panel2:#1d2d16;--text:#f4ffe6;--muted:#bfd39c;--purple:#a5d45b;--pink:#e983aa;--cyan:#8dd9c4;--line:#6b8743;--green:#d0f16c}
+body[data-theme="gbc"][data-variant="berry"]{--bg:#442239;--panel:#743d60;--panel2:#2d1728;--text:#fff0fa;--muted:#d5a9c4;--purple:#ee80c5;--pink:#ff9bd8;--cyan:#91cfff;--line:#995b82;--green:#a2e4b4}
+
+/* Keep a small outcome badge visible over real artwork as well as the fallback. */
+.library-cover.has-artwork .cover-status{display:block;background:#080b12c9;color:#c4b5fd}
+.cover-status:empty{display:none}
+
+/* Game Boy Color handheld-inspired console shell */
+.gbc-console-shell{display:block}
+/* The shared game screen lives inside this wrapper; hide handheld decorations outside GBC mode. */
+body:not([data-theme="gbc"]) .gbc-power,body:not([data-theme="gbc"]) .gbc-logo,body:not([data-theme="gbc"]) .gbc-controls{display:none}
+body:not([data-theme="gbc"]) .gbc-bezel{display:block}
+body[data-theme="gbc"] .gbc-console-shell{display:block;margin:4px auto 0;max-width:660px;border-radius:34px 34px 28px 28px;padding:clamp(14px,3vw,24px);background:var(--purple);border:2px solid color-mix(in srgb,var(--text) 20%,var(--purple));box-shadow:inset 5px 5px 12px #ffffff25,inset -7px -8px 14px #00000022,0 18px 34px #0005;position:relative}
+body[data-theme="gbc"] #game-area{border:0;border-radius:0;background:transparent;overflow:visible}
+body[data-theme="gbc"] .frame-toolbar{display:none}
+body[data-theme="gbc"] .gbc-bezel{background:#111216;border-radius:20px 20px 15px 15px;padding:clamp(18px,4vw,28px) clamp(12px,4vw,25px) 15px;display:flex;align-items:flex-start;gap:12px;box-shadow:inset 0 2px 4px #ffffff14,inset 0 -3px 5px #0008}
+body[data-theme="gbc"] .gbc-power{flex:0 0 34px;color:#d1d1d4;font:7px 'DM Mono',monospace;letter-spacing:.2px;text-align:center;margin-top:36px;display:flex;flex-direction:column;align-items:center;gap:5px}
+.gbc-power-led{height:7px;width:7px;border-radius:50%;background:#5c252a;box-shadow:inset 0 0 2px #000;transition:all .2s}
+.gbc-power-led.on{background:#ff3348;box-shadow:0 0 5px #ff2438,0 0 11px #ff243855}
+body[data-theme="gbc"] .gbc-screen-and-logo{flex:1;min-width:0}
+body[data-theme="gbc"] .game-stage{aspect-ratio:4/3;max-height:none;background:#000;border:2px solid #424247;border-radius:2px;box-shadow:0 0 0 2px #252529;overflow:hidden}
+body[data-theme="gbc"] .game-stage iframe{object-fit:contain}
+body[data-theme="gbc"] .empty-state{padding:12px;max-width:100%;color:#a2a2a6}
+body[data-theme="gbc"] .empty-state h2{font-size:clamp(12px,2.6vw,18px);color:#e4e4e7;margin:8px 0}
+body[data-theme="gbc"] .empty-state p{font-size:clamp(9px,1.7vw,12px);color:#aaa}
+body[data-theme="gbc"] .controller-icon{font-size:clamp(24px,5vw,40px)}
+body[data-theme="gbc"] .key-hints{margin-top:12px;gap:12px}
+body[data-theme="gbc"] .key-hints kbd{background:#25252a;border-color:#57575d;color:#ddd;padding:3px 5px;font-size:8px}
+.gbc-logo{display:flex;justify-content:center;align-items:center;gap:3px;margin-top:13px;font-family:Arial,sans-serif;font-weight:900;font-style:italic;font-size:clamp(12px,2.5vw,18px);letter-spacing:-.7px;color:#c6c6ca;text-shadow:1px 1px #444}
+.gbc-logo b{letter-spacing:-1px;background:linear-gradient(90deg,#5479d8,#69a846,#f3cb39,#e56c37,#d84b89);background-clip:text;color:transparent}
+body[data-theme="gbc"] .gbc-controls{position:relative;min-height:150px;height:clamp(150px,28vw,200px);margin:0 1px;padding:18px 4px 0}
+.gbc-dpad{position:absolute;left:6%;top:20px;width:clamp(72px,15vw,102px);height:clamp(72px,15vw,102px);filter:drop-shadow(1px 2px 1px #0005)}
+.gbc-dpad i{position:absolute;background:#303038;border:1px solid #55545d;border-radius:3px}
+.gbc-dpad .up,.gbc-dpad .down{left:33%;width:34%;height:34%}
+.gbc-dpad .up{top:0}.gbc-dpad .down{bottom:0}
+.gbc-dpad .left,.gbc-dpad .right{top:33%;height:34%;width:34%}
+.gbc-dpad .left{left:0}.gbc-dpad .right{right:0}
+.gbc-dpad .center{left:33%;top:33%;width:34%;height:34%;border-radius:50%;background:#24242b}
+.gbc-action-buttons{position:absolute;right:7%;top:27px;display:flex;gap:clamp(12px,3vw,22px);transform:rotate(-24deg)}
+.gbc-action-buttons i{height:clamp(32px,7vw,43px);width:clamp(32px,7vw,43px);border-radius:50%;display:flex;align-items:center;justify-content:center;background:#672b56;border:2px solid #913e76;color:#e9c6df;font: bold 12px Arial,sans-serif;box-shadow:inset 1px 2px 3px #ffffff25,1px 3px 2px #0005}
+.gbc-action-buttons .gbc-a{background:#672b56}
+.gbc-system-buttons{position:absolute;left:50%;top:100px;transform:translateX(-50%);display:flex;gap:12px}
+.gbc-system-buttons i{border-radius:9px;background:#33333b;border:1px solid #5c5b63;padding:4px 12px;color:#b7b7be;font:7px 'DM Mono',monospace;letter-spacing:1px;transform:rotate(-18deg);box-shadow:1px 2px 2px #0004}
+.gbc-speaker{position:absolute;right:5%;bottom:8px;display:grid;grid-template-columns:repeat(4,5px);gap:5px;transform:rotate(25deg)}
+.gbc-speaker span{width:5px;height:5px;border-radius:50%;background:#303038;box-shadow:inset 1px 1px 1px #0005}
+body[data-theme="gbc"][data-variant="atomic-purple"] .gbc-console-shell{background:#7c4d9b}
+body[data-theme="gbc"][data-variant="teal"] .gbc-console-shell{background:#258d96}
+body[data-theme="gbc"][data-variant="yellow"] .gbc-console-shell{background:#e3c747}
+body[data-theme="gbc"][data-variant="grape"] .gbc-console-shell{background:#71449a}
+body[data-theme="gbc"][data-variant="kiwi"] .gbc-console-shell{background:#83ae46}
+body[data-theme="gbc"][data-variant="berry"] .gbc-console-shell{background:#cf669e}
+@media(max-width:520px){body[data-theme="gbc"] .gbc-console-shell{border-radius:25px;padding:12px}body[data-theme="gbc"] .gbc-bezel{border-radius:16px;padding:15px 10px 12px;gap:8px}body[data-theme="gbc"] .gbc-power{flex-basis:26px;margin-top:24px;font-size:6px}body[data-theme="gbc"] .gbc-controls{height:152px} .gbc-dpad{left:4%;top:16px}.gbc-action-buttons{right:5%;top:20px}.gbc-system-buttons{top:91px}.gbc-speaker{right:3%;bottom:5px;gap:4px;grid-template-columns:repeat(4,4px)}.gbc-speaker span{height:4px;width:4px}}
+
+/* GBC refinement: matching action buttons, lower system keys, larger aligned speaker */
+body[data-theme="gbc"] .gbc-action-buttons i{background:#762d58;border-color:#9b4778;color:#f2d6e7}
+body[data-theme="gbc"] .gbc-action-buttons .gbc-a{background:#762d58;border-color:#9b4778;color:#f2d6e7}
+body[data-theme="gbc"] .gbc-system-buttons{top:clamp(112px,18vw,132px)}
+body[data-theme="gbc"] .gbc-controls{height:clamp(175px,31vw,220px)}
+body[data-theme="gbc"] .gbc-speaker{right:7%;bottom:16px;grid-template-columns:repeat(5,6px);gap:6px;transform:rotate(20deg)}
+body[data-theme="gbc"] .gbc-speaker span{width:6px;height:6px}
+@media(max-width:520px){
+ body[data-theme="gbc"] .gbc-controls{height:174px}
+ body[data-theme="gbc"] .gbc-system-buttons{top:106px}
+ body[data-theme="gbc"] .gbc-speaker{right:7%;bottom:13px;grid-template-columns:repeat(5,5px);gap:5px}
+ body[data-theme="gbc"] .gbc-speaker span{width:5px;height:5px}
+}
+
+/* Super Nintendo theme: 90s console-inspired casing, decorative cartridge and controller */
+body[data-theme="snes"] .gbc-console-shell{max-width:760px;margin:12px auto 0;padding:clamp(14px,3vw,25px);background:#b9bac2;border:2px solid #888994;border-radius:22px;box-shadow:inset 4px 4px 8px #fff8,inset -5px -6px 12px #0002,0 20px 34px #0005;position:relative}
+body[data-theme="snes"] .snes-cartridge{height:62px;max-width:190px;margin:0 auto 10px;background:#55565e;border:2px solid #393a41;border-radius:8px 8px 3px 3px;padding:5px;box-shadow:0 3px 3px #0004}
+body[data-theme="snes"] .snes-cart-label{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(135deg,#c8c8d1,#858691);border:1px solid #777;border-radius:3px;color:#363640;font-family:Arial,sans-serif;line-height:1.05}
+body[data-theme="snes"] .snes-cart-label span{font-size:8px;letter-spacing:2px;font-weight:900}
+body[data-theme="snes"] .snes-cart-label b{font-size:clamp(12px,2.5vw,17px);letter-spacing:-.5px;font-weight:1000}
+body[data-theme="snes"] .snes-cart-label small{font-size:6px;letter-spacing:1.6px;margin-top:2px}
+body[data-theme="snes"] .gbc-bezel{display:block;background:#41424b;padding:clamp(12px,3vw,20px);border-radius:12px;border:2px solid #303139;box-shadow:inset 2px 2px 4px #fff2,inset -3px -3px 5px #0004}
+body[data-theme="snes"] .gbc-power,body[data-theme="snes"] .gbc-logo,body[data-theme="snes"] .gbc-controls{display:none}
+body[data-theme="snes"] .game-stage{aspect-ratio:4/3;max-height:none;border:3px solid #202027;border-radius:2px;background:#000;box-shadow:0 0 0 2px #73737b}
+body[data-theme="snes"] .snes-controls{display:flex;position:relative;align-items:center;justify-content:space-between;height:clamp(105px,21vw,145px);margin:4px 2px 0;padding:12px 5%}
+body[data-theme="snes"] .snes-dpad{width:clamp(62px,13vw,82px);height:clamp(62px,13vw,82px);position:relative;filter:drop-shadow(1px 2px 1px #0005)}
+body[data-theme="snes"] .snes-dpad:before,body[data-theme="snes"] .snes-dpad:after{content:"";position:absolute;background:#45464e;border:1px solid #33343b;border-radius:4px}
+body[data-theme="snes"] .snes-dpad:before{left:33%;top:0;width:34%;height:100%}
+body[data-theme="snes"] .snes-dpad:after{left:0;top:33%;width:100%;height:34%}
+body[data-theme="snes"] .snes-button-cluster{position:relative;width:clamp(75px,17vw,105px);height:clamp(75px,17vw,105px);transform:rotate(-22deg)}
+body[data-theme="snes"] .snes-button-cluster i{position:absolute;width:clamp(27px,6vw,38px);height:clamp(27px,6vw,38px);display:flex;align-items:center;justify-content:center;border-radius:50%;font:bold 12px Arial;color:#f5f4f5;text-shadow:0 1px #0005;border:2px solid #555;box-shadow:inset 1px 2px 3px #fff4,1px 3px 3px #0005}
+body[data-theme="snes"] .snes-x{top:0;left:35%;background:#4167b6}
+body[data-theme="snes"] .snes-y{top:35%;left:0;background:#46a45a}
+body[data-theme="snes"] .snes-a{top:35%;right:0;background:#d34d52}
+body[data-theme="snes"] .snes-b{bottom:0;left:35%;background:#e0b83b;color:#333!important}
+body[data-theme="snes"] .snes-system-buttons{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);display:flex;gap:12px}
+body[data-theme="snes"] .snes-system-buttons i{border-radius:10px;background:#777983;border:1px solid #666;padding:4px 13px;color:#34343b;font:8px 'DM Mono',monospace;letter-spacing:1px;transform:rotate(-12deg);box-shadow:1px 2px 2px #0003}
+body[data-theme="snes"] .snes-cartridge{display:block}body[data-theme="snes"] .snes-controls{display:flex}
+.snes-cartridge,.snes-controls{display:none}
+body[data-theme="snes"][data-variant="snes-america"] .gbc-console-shell{background:#b9bac2;border-radius:18px}
+body[data-theme="snes"][data-variant="snes-america"] .snes-system-buttons i{background:#777a88}
+body[data-theme="snes"][data-variant="snes-mini"] .gbc-console-shell{background:#d0d0d6;border-radius:32px;padding:clamp(12px,2.5vw,20px)}
+body[data-theme="snes"][data-variant="snes-mini"] .gbc-bezel{border-radius:24px}
+body[data-theme="snes"][data-variant="snes-mini"] .snes-cartridge{max-width:150px;height:48px}
+body[data-theme="snes"][data-variant="snes-mini"] .snes-cart-label b{font-size:12px}
+body[data-theme="snes"][data-variant="snes-pal"] .gbc-console-shell{background:#c8c9ce;border-radius:34px 34px 18px 18px}
+body[data-theme="snes"][data-variant="snes-pal"] .snes-cartridge{border-radius:12px 12px 3px 3px}
+body[data-theme="snes"][data-variant="snes-pal"] .snes-cart-label{background:linear-gradient(135deg,#dddde1,#a3a4ad)}
+body[data-theme="snes"][data-variant="snes-japan"] .gbc-console-shell{background:#c5c6ce;border-radius:34px 34px 18px 18px}
+body[data-theme="snes"][data-variant="snes-japan"] .snes-cart-label{background:linear-gradient(135deg,#d5c5a0,#b69c72);color:#3c3023}
+body[data-theme="snes"][data-variant="snes-japan"] .snes-cart-label b{letter-spacing:1px}
+@media(max-width:520px){body[data-theme="snes"] .gbc-console-shell{border-radius:16px;padding:12px}body[data-theme="snes"] .gbc-bezel{padding:10px;border-radius:10px}body[data-theme="snes"] .snes-controls{height:125px;padding:8px 3%}body[data-theme="snes"] .snes-system-buttons{bottom:8px}}
+
+/* Region-specific controller button finishes */
+/* American SNES SNS-001: gray button well, lavender X/Y and deep-purple A/B */
+body[data-theme="snes"][data-variant="snes-america"] .snes-button-cluster{width:clamp(94px,19vw,126px);height:clamp(94px,19vw,126px);background:#777781;border:2px solid #64646e;border-radius:50%;box-shadow:inset 2px 3px 5px #fff2,inset -3px -4px 6px #0002;padding:5px}
+body[data-theme="snes"][data-variant="snes-america"] .snes-button-cluster i{width:clamp(29px,6vw,40px);height:clamp(29px,6vw,40px);border-color:#777;box-shadow:inset 1px 2px 3px #fff5,1px 3px 3px #0005}
+body[data-theme="snes"][data-variant="snes-america"] .snes-x,body[data-theme="snes"][data-variant="snes-america"] .snes-y{background:#b7a9dc;color:#4b4266}
+body[data-theme="snes"][data-variant="snes-america"] .snes-a,body[data-theme="snes"][data-variant="snes-america"] .snes-b{background:#6c5a9b;color:#f4efff!important}
+body[data-theme="snes"][data-variant="snes-america"] .snes-system-buttons{position:static;transform:none;display:flex;justify-content:center;gap:12px;margin-top:4px}
+body[data-theme="snes"][data-variant="snes-america"] .snes-system-buttons i{height:clamp(18px,3vw,24px);min-width:48px;padding:3px 15px;background:#777781;border:1px solid #64646e;border-radius:5px;color:#4b4b53;font:9px Arial,sans-serif;letter-spacing:.8px;transform:none;box-shadow:inset 1px 1px 2px #fff3,0 1px 2px #0002}
+body[data-theme="snes"][data-variant="snes-america"] .snes-system-buttons i:first-child{background:#8c8c96}
+body[data-theme="snes"][data-variant="snes-mini"] .snes-button-cluster i{background:#77758d;border-color:#575568;color:#f1eff8}
+body[data-theme="snes"][data-variant="snes-mini"] .snes-b{background:#67657d;color:#f1eff8!important}
+
+/* American SNES front panel: figurative power and reset sliders */
+.snes-power-reset{display:none}
+body[data-theme="snes"] .snes-power-reset{display:flex;align-items:center;justify-content:center;gap:clamp(28px,7vw,44px);padding:12px 0 7px}
+body[data-theme="snes"] .snes-power-button,body[data-theme="snes"] .snes-reset-button{width:clamp(76px,15vw,96px);height:clamp(24px,4.5vw,30px);border-radius:5px;background:#8878a3;border:1px solid #75658f;box-shadow:inset 1px 1px 2px #fff5,0 2px 2px #0003;display:flex;align-items:center;justify-content:center;position:relative}
+body[data-theme="snes"] .snes-power-button:before,body[data-theme="snes"] .snes-reset-button:before{content:"";width:45%;height:75%;border-radius:3px;background:#b5a8ca;border:1px solid #998bb0;box-shadow:1px 1px 1px #0002}
+body[data-theme="snes"] .snes-power-button span,body[data-theme="snes"] .snes-reset-button span{position:absolute;top:calc(100% + 3px);font:7px Arial,sans-serif;letter-spacing:1px;color:#55565d}
+body[data-theme="snes"][data-variant="snes-america"] .snes-power-reset{gap:clamp(34px,8vw,52px)}
+body[data-theme="snes"][data-variant="snes-america"] .snes-power-button{background:#8878a3;border-color:#75658f}
+body[data-theme="snes"][data-variant="snes-america"] .snes-reset-button{background:#8878a3;border-color:#75658f}
+body[data-theme="snes"][data-variant="snes-america"] .snes-power-button:before{background:#b5a8ca}
+body[data-theme="snes"][data-variant="snes-america"] .snes-reset-button:before{background:#b5a8ca}
+body[data-theme="snes"][data-variant="snes-america"] .snes-controls{padding-top:clamp(15px,4vw,22px)}
+
+/* SNES Compact (SNS-101): lilac face buttons and side-mounted controls */
+body[data-theme="snes"][data-variant="snes-mini"] .snes-button-cluster{width:clamp(94px,19vw,126px);height:clamp(94px,19vw,126px);background:#777781;border:2px solid #64646e;border-radius:50%;box-shadow:inset 2px 3px 5px #fff2,inset -3px -4px 6px #0002;padding:5px}
+body[data-theme="snes"][data-variant="snes-mini"] .snes-button-cluster i{width:clamp(29px,6vw,40px);height:clamp(29px,6vw,40px);border-color:#777;box-shadow:inset 1px 2px 3px #fff5,1px 3px 3px #0005}
+body[data-theme="snes"][data-variant="snes-mini"] .snes-x,body[data-theme="snes"][data-variant="snes-mini"] .snes-y{background:#b7a9dc;color:#4b4266}
+body[data-theme="snes"][data-variant="snes-mini"] .snes-a,body[data-theme="snes"][data-variant="snes-mini"] .snes-b{background:#6c5a9b;color:#f4efff!important}
+body[data-theme="snes"][data-variant="snes-mini"] .gbc-bezel{position:relative;min-height:clamp(180px,35vw,280px);padding-right:clamp(54px,11vw,78px)}
+body[data-theme="snes"][data-variant="snes-mini"] .gbc-screen-and-logo{width:100%;min-width:0}
+body[data-theme="snes"][data-variant="snes-mini"] .snes-power-reset{position:absolute;right:clamp(8px,2vw,15px);top:50%;transform:translateY(-50%);flex-direction:column;gap:clamp(8px,2vw,12px);padding:0}
+body[data-theme="snes"][data-variant="snes-mini"] .snes-power-button{width:clamp(25px,5vw,34px);height:clamp(25px,5vw,34px);border-radius:50%;background:#8878a3;border-color:#75658f}
+body[data-theme="snes"][data-variant="snes-mini"] .snes-reset-button{width:clamp(22px,4.5vw,30px);height:clamp(42px,8vw,55px);border-radius:12px;background:#8878a3;border-color:#75658f}
+body[data-theme="snes"][data-variant="snes-mini"] .snes-power-button:before{width:0;height:0;border:0}
+body[data-theme="snes"][data-variant="snes-mini"] .snes-reset-button:before{width:55%;height:70%;border-radius:8px;background:#b5a8ca}
+body[data-theme="snes"][data-variant="snes-mini"] .snes-power-button span,body[data-theme="snes"][data-variant="snes-mini"] .snes-reset-button span{display:none}
+
+/* Compact SNES corrections: explicit face-button colors and left-side system controls */
+body[data-theme="snes"][data-variant="snes-mini"] .snes-x,body[data-theme="snes"][data-variant="snes-mini"] .snes-y{background:#b7a9dc!important;color:#4b4266!important}
+body[data-theme="snes"][data-variant="snes-mini"] .snes-a,body[data-theme="snes"][data-variant="snes-mini"] .snes-b{background:#6c5a9b!important;color:#f4efff!important}
+body[data-theme="snes"][data-variant="snes-mini"] .gbc-bezel{padding-left:clamp(62px,13vw,88px);padding-right:clamp(10px,2vw,16px)}
+body[data-theme="snes"][data-variant="snes-mini"] .snes-power-reset{left:clamp(8px,2vw,15px);right:auto;top:50%;transform:translateY(-50%);flex-direction:column;gap:clamp(12px,3vw,18px)}
+body[data-theme="snes"][data-variant="snes-mini"] .snes-power-button{width:clamp(36px,7vw,46px);height:clamp(36px,7vw,46px);border-radius:50%;background:#8878a3;border-color:#75658f}
+body[data-theme="snes"][data-variant="snes-mini"] .snes-reset-button{width:clamp(30px,6vw,38px);height:clamp(54px,10vw,68px);border-radius:14px;background:#8878a3;border-color:#75658f}
+
+/* European/PAL SNES: dark grey button recess and square system controls */
+body[data-theme="snes"][data-variant="snes-pal"] .snes-button-cluster{width:clamp(94px,19vw,126px);height:clamp(94px,19vw,126px);background:#66666d;border:2px solid #55555c;border-radius:50%;box-shadow:inset 2px 3px 5px #fff2,inset -3px -4px 6px #0003;padding:5px}
+body[data-theme="snes"][data-variant="snes-pal"] .snes-button-cluster i{width:clamp(29px,6vw,40px);height:clamp(29px,6vw,40px);border-color:#5a5a61;box-shadow:inset 1px 2px 3px #fff4,1px 3px 3px #0005}
+body[data-theme="snes"][data-variant="snes-pal"] .snes-power-reset{gap:clamp(14px,4vw,24px);padding:12px 0 7px}
+body[data-theme="snes"][data-variant="snes-pal"] .snes-power-button,body[data-theme="snes"][data-variant="snes-pal"] .snes-reset-button{width:clamp(38px,8vw,52px);height:clamp(38px,8vw,52px);border-radius:5px;background:#66666d;border:2px solid #55555c;box-shadow:inset 2px 2px 3px #fff3,0 2px 2px #0004}
+body[data-theme="snes"][data-variant="snes-pal"] .snes-power-button:before{content:"";width:38%;height:70%;border-radius:2px;background:#96969d;border:1px solid #55555c;box-shadow:1px 1px 2px #0005;transform:translateY(-3px)}
+body[data-theme="snes"][data-variant="snes-pal"] .snes-reset-button:before{width:65%;height:65%;border-radius:3px;background:#85858c;border:1px solid #55555c;box-shadow:inset 1px 1px 2px #fff3}
+body[data-theme="snes"][data-variant="snes-pal"] .snes-power-button span,body[data-theme="snes"][data-variant="snes-pal"] .snes-reset-button span{color:#4d4d54}
+
+/* PAL system buttons: slightly larger with more spacing */
+body[data-theme="snes"][data-variant="snes-pal"] .snes-power-reset{gap:clamp(22px,5vw,34px)}
+body[data-theme="snes"][data-variant="snes-pal"] .snes-power-button,body[data-theme="snes"][data-variant="snes-pal"] .snes-reset-button{width:clamp(46px,9vw,60px);height:clamp(46px,9vw,60px)}
+
+
+/* Japanese Super Famicom: PAL-style controls with lighter gray accents */
+body[data-theme="snes"][data-variant="snes-japan"] .snes-button-cluster{width:clamp(94px,19vw,126px);height:clamp(94px,19vw,126px);background:#85858d;border:2px solid #73737b;border-radius:50%;box-shadow:inset 2px 3px 5px #fff3,inset -3px -4px 6px #0002;padding:5px}
+body[data-theme="snes"][data-variant="snes-japan"] .snes-button-cluster i{width:clamp(29px,6vw,40px);height:clamp(29px,6vw,40px);border-color:#777780;box-shadow:inset 1px 2px 3px #fff5,1px 3px 3px #0004}
+body[data-theme="snes"][data-variant="snes-japan"] .snes-power-reset{gap:clamp(22px,5vw,34px);padding:12px 0 7px}
+body[data-theme="snes"][data-variant="snes-japan"] .snes-power-button,body[data-theme="snes"][data-variant="snes-japan"] .snes-reset-button{width:clamp(46px,9vw,60px);height:clamp(46px,9vw,60px);border-radius:5px;background:#85858d;border:2px solid #73737b;box-shadow:inset 2px 2px 3px #fff4,0 2px 2px #0003}
+body[data-theme="snes"][data-variant="snes-japan"] .snes-power-button:before{content:"";width:38%;height:70%;border-radius:2px;background:#b0b0b7;border:1px solid #73737b;box-shadow:1px 1px 2px #0004;transform:translateY(-3px)}
+body[data-theme="snes"][data-variant="snes-japan"] .snes-reset-button:before{width:65%;height:65%;border-radius:3px;background:#a6a6ad;border:1px solid #73737b;box-shadow:inset 1px 1px 2px #fff4}
+body[data-theme="snes"][data-variant="snes-japan"] .snes-power-button span,body[data-theme="snes"][data-variant="snes-japan"] .snes-reset-button span{color:#55555c}
+body[data-theme="snes"][data-variant="snes-japan"] .snes-cart-label b{font-size:0}
+body[data-theme="snes"][data-variant="snes-japan"] .snes-cart-label b:after{content:"SUPER FAMICOM";font-size:inherit;letter-spacing:1px}
+body[data-theme="snes"][data-variant="snes-japan"] .snes-cart-label b:after{font-size:12px}
+
+
+/* SNES aged plastic option: subtle warm yellowing, independent of selected model */
+body[data-theme="snes"][data-snes-age="old"][data-variant="snes-america"] .gbc-console-shell{background:#d1c5a3!important}
+body[data-theme="snes"][data-snes-age="old"][data-variant="snes-mini"] .gbc-console-shell{background:#d8cba8!important}
+body[data-theme="snes"][data-snes-age="old"][data-variant="snes-pal"] .gbc-console-shell{background:#d6c9a7!important}
+body[data-theme="snes"][data-snes-age="old"][data-variant="snes-japan"] .gbc-console-shell{background:#d4c5a0!important}
+body[data-theme="snes"][data-snes-age="old"] .snes-cartridge{filter:sepia(.22) saturate(.82)}
+body[data-theme="snes"][data-snes-age="old"] .snes-button-cluster{background:#a49a7e!important;border-color:#8f856d!important}
+body[data-theme="snes"][data-snes-age="old"] .snes-power-button,body[data-theme="snes"][data-snes-age="old"] .snes-reset-button{background:#b6aa8a!important;border-color:#988d74!important}
+body[data-theme="snes"][data-snes-age="old"] .snes-power-button:before,body[data-theme="snes"][data-snes-age="old"] .snes-reset-button:before{background:#c8bc9b!important;border-color:#a1967c!important}
+body[data-theme="snes"][data-snes-age="old"] .snes-button-cluster i{border-color:#8f856d!important}
+body[data-theme="snes"][data-snes-age="old"] .snes-power-button span,body[data-theme="snes"][data-snes-age="old"] .snes-reset-button span{color:#665d4b!important}
+
+/* Expanded Game Boy Color palette: solid, translucent, and special editions. */
+body[data-theme="gbc"][data-variant="clear-green"] .gbc-console-shell{background:linear-gradient(145deg,#b7f5c7aa,#28a85b99 45%,#137443aa);border-color:#b8f6d0;box-shadow:inset 5px 5px 14px #ffffff65,inset -7px -8px 15px #003b2440,0 18px 34px #0005}
+body[data-theme="gbc"][data-variant="clear-blue"] .gbc-console-shell{background:linear-gradient(145deg,#b4e9ffaa,#3498d899 48%,#1563a9aa);border-color:#d4f5ff;box-shadow:inset 5px 5px 14px #ffffff65,inset -7px -8px 15px #003b5b40,0 18px 34px #0005}
+body[data-theme="gbc"][data-variant="ice-blue"] .gbc-console-shell{background:linear-gradient(145deg,#d8f4ff,#87c9e8 55%,#5ba6d2);border-color:#e9fbff}
+body[data-theme="gbc"][data-variant="clear-black"] .gbc-console-shell{background:linear-gradient(145deg,#9fa8b5aa,#414b5cbb 48%,#1d2533cc);border-color:#c0c8d2;box-shadow:inset 5px 5px 14px #ffffff45,inset -7px -8px 15px #0007,0 18px 34px #0005}
+body[data-theme="gbc"][data-variant="water-blue"] .gbc-console-shell{background:linear-gradient(145deg,#69d7f5,#1d98d2 55%,#0873b1);border-color:#b8f3ff}
+body[data-theme="gbc"][data-variant="clear-orange"] .gbc-console-shell{background:linear-gradient(145deg,#ffd4a3bb,#ff8d32aa 48%,#d65a13bb);border-color:#ffe3c2;box-shadow:inset 5px 5px 14px #ffffff65,inset -7px -8px 15px #69290040,0 18px 34px #0005}
+body[data-theme="gbc"][data-variant="clear-pink"] .gbc-console-shell{background:linear-gradient(145deg,#ffd5edbb,#e96db5aa 48%,#a8377bbb);border-color:#ffe7f5;box-shadow:inset 5px 5px 14px #ffffff65,inset -7px -8px 15px #56002c40,0 18px 34px #0005}
+body[data-theme="gbc"][data-variant="pokemon-yellow"] .gbc-console-shell{background:linear-gradient(145deg,#f6df53,#e9bd25);border-color:#fff09b}
+body[data-theme="gbc"][data-variant="pokemon-yellow"] .gbc-action-buttons i{background:#2875bd;border-color:#4798de;color:#fff}
+body[data-theme="gbc"][data-variant="pikachu"] .gbc-console-shell{background:linear-gradient(145deg,#ffe76b,#f5c832 58%,#e7a91c);border-color:#fff2a9}
+body[data-theme="gbc"][data-variant="pikachu"] .gbc-action-buttons i{background:#d94339;border-color:#f36b5d;color:#fff}
+body[data-theme="gbc"][data-variant="pikachu"] .gbc-system-buttons i{background:#3c76b7;color:#eaf4ff;border-color:#6ca6df}
+body[data-theme="gbc"][data-variant="pokemon-gold"] .gbc-console-shell{background:linear-gradient(145deg,#f5d66d,#c99c36 58%,#9d7624);border-color:#fff0a8}
+body[data-theme="gbc"][data-variant="pokemon-gold"] .gbc-action-buttons i{background:#7b4b83;border-color:#a56cad}
+body[data-theme="gbc"][data-variant="pokemon-silver"] .gbc-console-shell{background:linear-gradient(145deg,#e9edf2,#aeb9c8 58%,#78889d);border-color:#fff}
+body[data-theme="gbc"][data-variant="pokemon-silver"] .gbc-action-buttons i{background:#6c4f83;border-color:#9272a9}
+body[data-theme="gbc"][data-variant^="clear-"] .gbc-console-shell:after{content:"";position:absolute;inset:5px;border-radius:inherit;pointer-events:none;border:1px solid #ffffff45;background:linear-gradient(125deg,#ffffff35,transparent 28%,transparent 65%,#ffffff15)}
+
+/* Pokémon Yellow special edition detailing */
+body[data-theme="gbc"][data-variant="pokemon-yellow"] .gbc-console-shell{
+ background:linear-gradient(90deg,#f5d33b 0%,#ffdf43 78%,#3266a9 78%,#24528e 100%);
+ border-color:#f9ed9c;
+ box-shadow:inset 5px 5px 12px #fff6a055,inset -7px -8px 14px #4b330022,0 18px 34px #0005;
+}
+body[data-theme="gbc"][data-variant="pokemon-yellow"] .gbc-dpad i{background:#174c9a;border-color:#2e70c7;box-shadow:inset 1px 1px 3px #ffffff20}
+body[data-theme="gbc"][data-variant="pokemon-yellow"] .gbc-dpad .center{background:#0d3979}
+body[data-theme="gbc"][data-variant="pokemon-yellow"] .gbc-action-buttons .gbc-b{background:#25a45a;border-color:#47c77b;color:#eaffef}
+body[data-theme="gbc"][data-variant="pokemon-yellow"] .gbc-action-buttons .gbc-a{background:#dc3c38;border-color:#f36b60;color:#fff0ed}
+body[data-theme="gbc"][data-variant="pokemon-yellow"] .gbc-system-buttons i{background:#273c7d;border-color:#506db3;color:#e2eaff}
+body[data-theme="gbc"][data-variant="pokemon-yellow"] .gbc-power .gbc-power-led{display:none}
+body[data-theme="gbc"][data-variant="pokemon-yellow"] .gbc-power::before{
+ content:"";display:block;width:19px;height:19px;border-radius:50%;
+ background:linear-gradient(#e83e36 0 46%,#222 46% 55%,#f7f5ec 55% 100%);
+ border:1px solid #222;box-shadow:0 0 0 2px #f5d33b, inset 0 0 0 2px #ffffff35;
+ position:relative;
+}
+body[data-theme="gbc"][data-variant="pokemon-yellow"] .gbc-power::after{
+ content:"";position:absolute;left:50%;top:42px;width:7px;height:7px;border-radius:50%;
+ background:#fff;border:2px solid #222;transform:translateX(-50%);box-shadow:0 0 0 1px #fff8;
+}
+body[data-theme="gbc"][data-variant="pokemon-yellow"] .gbc-power{position:relative}
+body[data-theme="gbc"][data-variant="pokemon-yellow"] .gbc-screen-and-logo::before,
+body[data-theme="gbc"][data-variant="pokemon-yellow"] .gbc-screen-and-logo::after{
+ position:absolute;z-index:2;bottom:42px;font-size:clamp(13px,3vw,22px);line-height:1;
+ filter:drop-shadow(0 1px 1px #0005);pointer-events:none;
+}
+body[data-theme="gbc"][data-variant="pokemon-yellow"] .gbc-screen-and-logo::before{content:"⚡🐭";left:2px}
+body[data-theme="gbc"][data-variant="pokemon-yellow"] .gbc-screen-and-logo::after{content:"🌸🐣";right:2px}
+body[data-theme="gbc"][data-variant="pokemon-yellow"] .gbc-controls::before{
+ content:"Pokémon";position:absolute;left:50%;top:12px;transform:translateX(-50%) rotate(-5deg);
+ font:bold italic clamp(15px,3.3vw,23px) Arial,sans-serif;color:#ffcf24;
+ -webkit-text-stroke:1px #2454a3;text-shadow:2px 2px 0 #183d85,0 1px 2px #0005;z-index:2;
+}
+body[data-theme="gbc"][data-variant="pokemon-yellow"] .gbc-system-buttons{top:clamp(140px,21vw,155px)}
+body[data-theme="gbc"][data-variant="pokemon-yellow"] .gbc-speaker span{background:#24528e}
+body[data-theme="gbc"][data-variant="pokemon-yellow"] .gbc-console-shell{background-clip:padding-box}
+
+/* Pikachu & Pichu edition: sunny shell, metallic accents, cheek-like power glow */
+body[data-theme="gbc"][data-variant="pikachu"] .gbc-console-shell{
+ background:linear-gradient(145deg,#ffe86c,#f4c92c 60%,#e5aa21);
+ border-color:#fff3a7;
+}
+body[data-theme="gbc"][data-variant="pikachu"] .gbc-dpad i{background:#174c9a;border-color:#2e70c7}
+body[data-theme="gbc"][data-variant="pikachu"] .gbc-dpad .center{background:#0d3979}
+body[data-theme="gbc"][data-variant="pikachu"] .gbc-action-buttons .gbc-b{background:#25a45a;border-color:#47c77b;color:#eaffef}
+body[data-theme="gbc"][data-variant="pikachu"] .gbc-action-buttons .gbc-a{background:#dc3c38;border-color:#f36b60;color:#fff0ed}
+body[data-theme="gbc"][data-variant="pikachu"] .gbc-system-buttons i{background:#273c7d;border-color:#506db3;color:#e2eaff}
+body[data-theme="gbc"][data-variant="pikachu"] .gbc-screen-and-logo::before,
+body[data-theme="gbc"][data-variant="pikachu"] .gbc-screen-and-logo::after{
+ position:absolute;z-index:2;bottom:42px;font-size:clamp(15px,3vw,23px);line-height:1;
+ filter:drop-shadow(0 1px 1px #0005);pointer-events:none;
+}
+body[data-theme="gbc"][data-variant="pikachu"] .gbc-screen-and-logo::before{content:"⚡🐭";left:2px}
+body[data-theme="gbc"][data-variant="pikachu"] .gbc-screen-and-logo::after{content:"🐭✨";right:2px}
+body[data-theme="gbc"][data-variant="pikachu"] .gbc-controls::before{
+ content:"Pokémon";position:absolute;left:50%;top:12px;transform:translateX(-50%) rotate(-5deg);
+ font:bold italic clamp(15px,3.3vw,23px) Arial,sans-serif;color:#ffcf24;
+ -webkit-text-stroke:1px #2454a3;text-shadow:2px 2px 0 #183d85,0 1px 2px #0005;z-index:2;
+}
+body[data-theme="gbc"][data-variant="pikachu"] .gbc-system-buttons{top:clamp(140px,21vw,155px)}
+body[data-theme="gbc"][data-variant="pikachu"] .gbc-speaker span{background:#8c6b20}
+
+/* Anchor the Pokémon decals to the screen assembly and keep the Poké Ball power icon self-contained. */
+body[data-theme="gbc"] .gbc-screen-and-logo{position:relative}
+body[data-theme="gbc"][data-variant="pokemon-yellow"] .gbc-power::before{
+ background:radial-gradient(circle at 50% 50%,#f5f3eb 0 3px,#222 3px 4px,transparent 4px),linear-gradient(#e83e36 0 46%,#222 46% 55%,#f7f5ec 55% 100%);
+}
+body[data-theme="gbc"][data-variant="pokemon-yellow"] .gbc-power::after{display:none}
+
+/* Angiru community palette: soft sky blues, white cards, and signature pink. */
+body[data-theme="angiru"] .hero h1 span,body[data-theme="angiru"] .brand b,body[data-theme="angiru"] .brand-mark{color:var(--pink)}
+body[data-theme="angiru"] .eyebrow{color:#4f91bd}
+body[data-theme="angiru"] .start-button{background:linear-gradient(110deg,#5596c4,#78b9df);color:#fff}
+body[data-theme="angiru"] .library-filter.active,body[data-theme="angiru"] .save-game-button{background:#e4f1fb;color:#397aa8;border-color:#75add2}
+body[data-theme="angiru"] .library-action.play{color:#397aa8;border-color:#75add2}
+body[data-theme="angiru"] .library-count{color:#397aa8}
+body[data-theme="angiru"] .step-number,body[data-theme="angiru"] .library-action.fav{color:var(--pink)}
+body[data-theme="angiru"] .pixel-console{background:linear-gradient(145deg,#77b7dc,#4d88b6);border-color:#9ccce9;box-shadow:10px 10px 0 #b6cde0}
+body[data-theme="angiru"] .console-screen{border-color:#b7dff2;color:#d9f3ff}
+body[data-theme="angiru"] .console-controls i:first-child{background:var(--pink)}
+body[data-theme="angiru"] .console-controls i:nth-child(2){background:#77c5e5}
+body[data-theme="angiru"] .console-controls i:nth-child(3){background:#f5ce49}
+
+/* Angiru palette selector: light and dark community-inspired appearances. */
+body[data-theme="angiru"][data-variant="light"]{--bg:#dce9f6;--panel:#fff;--panel2:#f3f7fc;--text:#34495f;--muted:#899bad;--purple:#5b94bd;--pink:#f04f9b;--cyan:#78c5e6;--line:#c9dceb;--green:#65b984}
+body[data-theme="angiru"][data-variant="dark"]{--bg:#35374c;--panel:#42455d;--panel2:#35374c;--text:#f1eff9;--muted:#b4b5c8;--purple:#bd8df5;--pink:#ed4c9c;--cyan:#59a9ff;--line:#555871;--green:#72c68b}
+body[data-theme="angiru"][data-variant="dark"]{background:radial-gradient(ellipse at 72% 0%,color-mix(in srgb,var(--purple) 20%,transparent),transparent 42%),var(--bg)}
+body[data-theme="angiru"][data-variant="dark"] .player-card,body[data-theme="angiru"][data-variant="dark"] .step,body[data-theme="angiru"][data-variant="dark"] .library-card{background:var(--panel);border-color:var(--line);box-shadow:0 5px 18px #15152235}
+body[data-theme="angiru"][data-variant="dark"] .frame-toolbar,body[data-theme="angiru"][data-variant="dark"] .library-card-main,body[data-theme="angiru"][data-variant="dark"] .library-empty{background:var(--panel2);border-color:var(--line)}
+body[data-theme="angiru"][data-variant="dark"] .game-stage{background:radial-gradient(ellipse,#4a4d68,#303246 75%)}
+body[data-theme="angiru"][data-variant="dark"] .input-row input,body[data-theme="angiru"][data-variant="dark"] .library-tools input{background:#303246;color:var(--text);border-color:#5b5e78}
+body[data-theme="angiru"][data-variant="dark"] select,body[data-theme="angiru"][data-variant="dark"] .library-filter,body[data-theme="angiru"][data-variant="dark"] .library-action,body[data-theme="angiru"][data-variant="dark"] .secondary-button{background:#35374c;color:var(--text);border-color:#5b5e78}
+body[data-theme="angiru"][data-variant="dark"] .library-filter.active,body[data-theme="angiru"][data-variant="dark"] .save-game-button{background:#57466e;color:#f3e8ff;border-color:var(--purple)}
+body[data-theme="angiru"][data-variant="dark"] .start-button{background:linear-gradient(110deg,#b78bf0,#c697f7);color:#30283f}
+body[data-theme="angiru"][data-variant="dark"] .library-action.play{color:#c8a0ff;border-color:#b78bf0}
+body[data-theme="angiru"][data-variant="dark"] .library-action.fav,body[data-theme="angiru"][data-variant="dark"] .library-action.remove{color:#ff84bd}
+body[data-theme="angiru"][data-variant="dark"] .pixel-console{background:linear-gradient(145deg,#71638e,#4c5275);border-color:#b78bf0;box-shadow:10px 10px 0 #25283b}
+body[data-theme="angiru"][data-variant="dark"] .console-screen{border-color:#75c9ee;color:#75c9ee}
+body[data-theme="angiru"][data-variant="dark"] .console-controls i:first-child{background:#ed4c9c}
+body[data-theme="angiru"][data-variant="dark"] .console-controls i:nth-child(2){background:#59a9ff}
+body[data-theme="angiru"][data-variant="dark"] .console-controls i:nth-child(3){background:#f5ce49}
+body[data-theme="angiru"][data-variant="dark"] .library-count{color:#c8a0ff;border-color:var(--line)}
+body[data-theme="angiru"][data-variant="dark"] .eyebrow{color:#78c5e6}
+body[data-theme="angiru"][data-variant="dark"] .hero h1 span,body[data-theme="angiru"][data-variant="dark"] .brand b,body[data-theme="angiru"][data-variant="dark"] .brand-mark{color:#ed4c9c}
+body[data-theme="angiru"][data-variant="dark"] .step-number{color:#ed4c9c}
