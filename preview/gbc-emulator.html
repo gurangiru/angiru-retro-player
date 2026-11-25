@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Angiru GBC Emulator</title>
+<style>
+html,body,#game{margin:0;width:100%;height:100%;background:#000;overflow:hidden} .ejs_virtualGamepad_parent,.ejs_virtualGamepad_left,.ejs_virtualGamepad_right,.ejs_virtualGamepad_bottom,.ejs_virtualGamepad_top{display:none!important}
+body{font-family:system-ui,sans-serif}#status{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#d5d5d5;background:#000;font-size:14px;text-align:center;padding:20px;z-index:3}#game{position:absolute;inset:0}#game canvas{max-width:100%;max-height:100%;object-fit:contain}
+</style>
+</head>
+<body><div id="status">Aguardando jogo…</div><div id="game"></div>
+<script>
+let loaded=false, pending=[];
+function send(type,detail){try{parent.postMessage({angiruGBC:true,type,detail},location.origin)}catch{}}
+function press(index,value){if(window.EJS_emulator?.gameManager){window.EJS_emulator.gameManager.simulateInput(0,index,value);return true}return false}
+window.addEventListener("message",event=>{
+ if(event.origin!==location.origin||!event.data?.angiruGBC)return;
+ const msg=event.data;
+ if(msg.type==="load-rom"&&msg.file){
+   if(window.EJS_terminate)try{window.EJS_terminate()}catch{}
+   document.querySelector("#game").replaceChildren();document.querySelector("#status").textContent=msg.language==="en"?"Loading emulator…":msg.language==="es"?"Cargando emulador…":"Carregando emulador…";document.querySelector("#status").style.display="flex";
+   
+   window.EJS_player="#game";window.EJS_core="gb";window.EJS_controlScheme="gb";window.EJS_gameUrl=msg.file;
+   window.EJS_pathtodata="https://cdn.emulatorjs.org/stable/data/";
+   window.EJS_language=msg.language==="en"?"en-US":msg.language==="es"?"es-ES":"pt-BR";window.EJS_startOnLoaded=true;window.EJS_color="#8b5cf6";
+   window.EJS_Buttons={playPause:false,restart:false,mute:false,settings:false,fullscreen:false,saveState:false,loadState:false,screenRecord:false,gamepad:false,cheat:false,volume:false,saveSavFiles:false,loadSavFiles:false,quickSave:false,quickLoad:false,screenshot:false,cacheManager:false,exitEmulation:false};
+   window.EJS_ready=function(){loaded=true;document.querySelector("#status").style.display="none";send("ready",{name:msg.file.name});pending.splice(0).forEach(([i,v])=>press(i,v));};
+   const loader=document.createElement("script");loader.src=window.EJS_pathtodata+"loader.js";loader.onerror=()=>{document.querySelector("#status").textContent="Não foi possível carregar o EmulatorJS. Verifique sua conexão e tente novamente.";send("error")};document.body.append(loader);
+ }
+ if(msg.type==="input"){if(!press(msg.index,msg.value))pending.push([msg.index,msg.value])}
+ if(msg.type==="reset"){try{window.EJS_emulator?.gameManager?.restart()}catch{}}
+});
+</script></body></html>
