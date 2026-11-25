@@ -53,6 +53,7 @@ function titleSimilarity(a,b){
 function gameSlugTitle(game){try{const path=String(game.url||"").split(/[?#]/,1)[0].split("/"),slug=path[path.length-1].replace(/\.html?$/i,"").replace(/^\d{2,8}[-_]/,"").replace(/[-_]+/g," ");return normalizeGameTitle(slug)}catch{return ""}}
 function coverSearchQueries(game){const title=normalizeGameTitle(game.name),slug=gameSlugTitle(game),primary=title||slug;return [...new Set([title,slug,primary+" box art",primary+" cover"].filter(Boolean))].slice(0,4)}
 function inferLibretroSystem(game){
+ if(game.skipLibretro)return "";
  const title=normalizeGameTitle(game.name),slug=gameSlugTitle(game),hint=(title+" "+slug+" "+String(game.platform||"")).toLowerCase();
  if(/\bsuper bomberman\s*[1-5]\b/.test(hint)||/\b(snes|super nintendo|super famicom)\b/.test(hint))return "Nintendo - Super Nintendo Entertainment System";
  if(/\b(nes|nintendo entertainment system|famicom)\b/.test(hint))return "Nintendo - Nintendo Entertainment System";
