@@ -52,6 +52,36 @@ function titleSimilarity(a,b){
 }
 function gameSlugTitle(game){try{const path=String(game.url||"").split(/[?#]/,1)[0].split("/"),slug=path[path.length-1].replace(/\.html?$/i,"").replace(/^\d{2,8}[-_]/,"").replace(/[-_]+/g," ");return normalizeGameTitle(slug)}catch{return ""}}
 function coverSearchQueries(game){const title=normalizeGameTitle(game.name),slug=gameSlugTitle(game),primary=title||slug;return [...new Set([title,slug,primary+" box art",primary+" cover"].filter(Boolean))].slice(0,4)}
+function inferLibretroSystem(game){
+ const title=normalizeGameTitle(game.name),slug=gameSlugTitle(game),hint=(title+" "+slug+" "+String(game.platform||"")).toLowerCase();
+ if(/\bsuper bomberman\s*[1-5]\b/.test(hint)||/\b(snes|super nintendo|super famicom)\b/.test(hint))return "Nintendo - Super Nintendo Entertainment System";
+ if(/\b(nes|nintendo entertainment system|famicom)\b/.test(hint))return "Nintendo - Nintendo Entertainment System";
+ if(/\b(game boy color|gbc)\b/.test(hint))return "Nintendo - Game Boy Color";
+ if(/\b(game boy advance|gba)\b/.test(hint))return "Nintendo - Game Boy Advance";
+ if(/\b(game boy|\bgb\b)\b/.test(hint))return "Nintendo - Game Boy";
+ if(/\b(nintendo 64|n64)\b/.test(hint))return "Nintendo - Nintendo 64";
+ if(/\b(mega drive|genesis|megadrive)\b/.test(hint))return "Sega - Mega Drive - Genesis";
+ return "";
+}
+function libretroCoverCandidates(game){
+ const system=inferLibretroSystem(game);if(!system)return[];
+ const title=normalizeGameTitle(game.name),slug=gameSlugTitle(game);
+ let names=[];
+ if(/super bomberman\s*4/.test(title+" "+slug)){
+  names=["Super Bomber Man 4 (Japan).png","Super Bomberman 4 (Japan).png","Super Bomber Man 4 (Japan) (En).png","Super Bomberman 4 (Japan) (En).png","Super Bomberman 4.png"];
+ }else{
+  const base=(title||slug).replace(/\b(?:english translated|translated|translation)\b/g,"").trim();
+  if(base)names=[base+" (Japan).png",base+" (USA).png",base+" (Europe).png",base+".png"];
+ }
+ const folder=encodeURIComponent(system).replace(/%20/g,"%20");
+ return [...new Set(names)].map(name=>"https://thumbnails.libretro.com/"+folder+"/Named_Boxarts/"+encodeURIComponent(name).replace(/%28/g,"(").replace(/%29/g,")"));
+}
+function coverNeedsRetry(game){
+ if(!game.coverChecked)return true;
+ if(game.coverUrl)return false;
+ const checked=Number(game.coverCheckedAt)||0,delay=game.coverSearchFailed?86400000:604800000;
+ return !checked||Date.now()-checked>=delay;
+}
 function coverMatchScore(game,candidate){return Math.max(titleSimilarity(game.name,candidate.title),gameSlugTitle(game)?titleSimilarity(gameSlugTitle(game),candidate.title):0)}
 function cleanMetadata(v){return String(v||"").replace(/<[^>]*>/g," ").replace(/&nbsp;/gi," ").replace(/&amp;/gi,"&").replace(/&#39;/g,"'").replace(/&quot;/g,'"').replace(/\s+/g," ").trim()}
 async function searchCommonsCover(query){
@@ -73,26 +103,34 @@ async function searchWikidataCover(query){
 const coverLookupQueue=[];let activeCoverLookups=0;
 function scheduleCoverLookup(task){return new Promise((resolve,reject)=>{coverLookupQueue.push({task,resolve,reject});pumpCoverLookupQueue()})}
 function pumpCoverLookupQueue(){while(activeCoverLookups<2&&coverLookupQueue.length){const x=coverLookupQueue.shift();activeCoverLookups++;Promise.resolve().then(x.task).then(x.resolve,x.reject).finally(()=>{activeCoverLookups--;pumpCoverLookupQueue()})}}
-async function findRealCover(game,force=false){
- if(coverLookupPromises.has(game.url))return coverLookupPromises.get(game.url);if(game.coverChecked&&!force)return game.coverUrl||null;
- if(force){game.coverChecked=false;game.coverSearchFailed=false;game.coverUrl=null;game.coverPage=null;game.coverSource=null;game.coverLicense=null;game.coverLicenseUrl=null;game.coverArtist=null}
+async function findRealCover(game,force=false,skipLibretro=false){
+ if(coverLookupPromises.has(game.url))return coverLookupPromises.get(game.url);
+ if(!force&&game.coverChecked&&!coverNeedsRetry(game))return game.coverUrl||null;
+ if(force){game.coverChecked=false;game.coverSearchFailed=false;game.coverCheckedAt=0;game.coverUrl=null;game.coverCandidates=[];game.coverLibretroTried=false;game.coverPage=null;game.coverSource=null;game.coverLicense=null;game.coverLicenseUrl=null;game.coverArtist=null}
  game.coverSearching=true;game.coverSearchFailed=false;libraryPersist();
  const promise=scheduleCoverLookup(async()=>{try{
+  if(!skipLibretro&&!game.coverLibretroTried){
+   const direct=libretroCoverCandidates(game);
+   game.coverLibretroTried=true;
+   if(direct.length){
+    game.coverUrl=direct[0];game.coverCandidates=direct.slice(1);game.coverSource="Libretro Thumbnails";game.coverPage="https://github.com/libretro-thumbnails/libretro-thumbnails";game.coverLicense="";game.coverLicenseUrl="";game.coverArtist="";game.coverChecked=true;game.coverCheckedAt=Date.now();game.coverSearchFailed=false;return game.coverUrl;
+   }
+  }
   const qs=coverSearchQueries(game);let candidates=[],searchHadError=false;
   for(let n=0;n<qs.length;n++){const settled=await Promise.allSettled([searchCommonsCover(qs[n])]);for(const x of settled){if(x.status==="fulfilled")candidates.push(...x.value);else searchHadError=true}if(candidates.some(c=>coverMatchScore(game,c)>=.88&&c.image&&/^https:/.test(c.image)&&c.license))break}
   let ranked=candidates.map(c=>({...c,score:coverMatchScore(game,c)})).filter(c=>c.score>=.88&&c.image&&/^https:/.test(c.image)&&c.license);
   if(!ranked.length){const wq=[normalizeGameTitle(game.name),gameSlugTitle(game)].filter((q,i,a)=>q&&a.indexOf(q)===i);for(const q of wq){try{candidates.push(...await searchWikidataCover(q))}catch{searchHadError=true}}ranked=candidates.map(c=>({...c,score:titleSimilarity(game.name,c.title)})).filter(c=>c.score>=.88&&c.image&&/^https:/.test(c.image)&&c.license)}
   const priority=c=>["Wikimedia Commons","Wikidata · Wikimedia Commons"].includes(c.source)?0:1;ranked.sort((a,b)=>b.score-a.score||priority(a)-priority(b));const best=ranked[0];
-  if(best){game.coverUrl=best.image;game.coverSource=best.source;game.coverPage=best.page;game.coverLicense=best.license||"";game.coverLicenseUrl=best.licenseUrl||"";game.coverArtist=best.artist||"";game.coverSearchFailed=false;game.coverChecked=true;return best.image}
-  game.coverSearchFailed=searchHadError;game.coverChecked=true;return null;
- }catch{game.coverSearchFailed=true;game.coverChecked=true;return null}finally{game.coverSearching=false;libraryPersist();coverLookupPromises.delete(game.url);if(library.some(g=>g.url===game.url))renderLibrary()}});
+  if(best){game.coverUrl=best.image;game.coverSource=best.source;game.coverPage=best.page;game.coverLicense=best.license||"";game.coverLicenseUrl=best.licenseUrl||"";game.coverArtist=best.artist||"";game.coverSearchFailed=false;game.coverChecked=true;game.coverCheckedAt=Date.now();game.coverCandidates=[];return best.image}
+  game.coverSearchFailed=searchHadError;game.coverChecked=true;game.coverCheckedAt=Date.now();game.coverCandidates=[];return null;
+ }catch{game.coverSearchFailed=true;game.coverChecked=true;game.coverCheckedAt=Date.now();return null}finally{game.coverSearching=false;libraryPersist();coverLookupPromises.delete(game.url);if(library.some(g=>g.url===game.url))renderLibrary()}});
  coverLookupPromises.set(game.url,promise);return promise;
 }
 const coverObserver=typeof IntersectionObserver!=="undefined"?new IntersectionObserver(entries=>entries.forEach(entry=>{
  if(!entry.isIntersecting)return;
  coverObserver.unobserve(entry.target);
  const game=entry.target.__coverGame,status=entry.target.querySelector(".cover-status");
- if(game&&!game.coverChecked&&!game.coverSearching){if(status)status.textContent=(translations[languageSelect.value]||translations.pt)["cover-searching"];findRealCover(game)}
+ if(game&&coverNeedsRetry(game)&&!game.coverUrl&&!game.coverSearching){if(status)status.textContent=(translations[languageSelect.value]||translations.pt)["cover-searching"];findRealCover(game)}
 }),{rootMargin:"220px 0px"}):null;
 /* COVER_SEARCH_TESTS_END */
 function renderLibrary(){
@@ -106,23 +144,27 @@ function renderLibrary(){
   const cover=document.createElement("div");cover.className="library-cover";const palette=coverPalette(game.url);cover.style.background="linear-gradient(135deg,"+palette[0]+","+palette[1]+" 70%)";cover.style.setProperty("--cover-accent",palette[2]);
   const orbit=document.createElement("span");orbit.className="cover-orbit";const tag=document.createElement("span");tag.className="cover-console";tag.textContent="ANGIRU RETRO";const ct=document.createElement("span");ct.className="cover-title";ct.textContent=game.name;const status=document.createElement("span");status.className="cover-status";status.textContent=game.coverSearching?d["cover-searching"]:game.coverChecked?(game.coverSearchFailed?d["cover-error"]:game.coverUrl?d["cover-found"]:d["cover-none"]):"";const symbol=document.createElement("span");symbol.className="cover-symbol";symbol.textContent="✦";cover.append(orbit,tag,ct,symbol,status);
   if(game.favorite){const favmark=document.createElement("span");favmark.className="cover-favorite";favmark.textContent="♥";cover.append(favmark)}
-  if(game.coverUrl&&/^https:/.test(game.coverUrl)){const img=document.createElement("img");img.className="library-artwork";img.src=game.coverUrl;img.alt=(d["cover-alt"]||"Artwork")+" "+game.name;img.loading="lazy";img.decoding="async";img.referrerPolicy="no-referrer";img.addEventListener("error",()=>{game.coverUrl=null;game.coverChecked=true;game.coverSearchFailed=true;game.coverPage=null;game.coverSource=null;game.coverLicense=null;game.coverLicenseUrl=null;game.coverArtist=null;libraryPersist();renderLibrary()},{once:true});cover.append(img);cover.classList.add("has-artwork")}else if(game.coverUrl){game.coverUrl=null;game.coverChecked=true;game.coverSearchFailed=true;game.coverPage=null;game.coverSource=null;game.coverLicense=null;game.coverLicenseUrl=null;game.coverArtist=null;libraryPersist()}
+  if(game.coverUrl&&/^https:/.test(game.coverUrl)){const img=document.createElement("img");img.className="library-artwork";img.src=game.coverUrl;img.alt=(d["cover-alt"]||"Artwork")+" "+game.name;img.loading="lazy";img.decoding="async";img.referrerPolicy="no-referrer";img.addEventListener("load",()=>{game.coverVerifiedAt=Date.now();game.coverChecked=true;game.coverSearchFailed=false;libraryPersist()},{once:true});img.addEventListener("error",()=>{
+ if(Array.isArray(game.coverCandidates)&&game.coverCandidates.length){game.coverUrl=game.coverCandidates.shift();libraryPersist();renderLibrary();return}
+ const failedSource=game.coverSource;game.coverUrl=null;game.coverCandidates=[];game.coverCheckedAt=Date.now();game.coverSearchFailed=true;game.coverPage=null;game.coverSource=null;game.coverLicense=null;game.coverLicenseUrl=null;game.coverArtist=null;libraryPersist();renderLibrary();
+ if(failedSource==="Libretro Thumbnails"){game.coverChecked=false;game.coverLibretroTried=true;findRealCover(game,true,true)}
+},{once:true});cover.append(img);cover.classList.add("has-artwork")}else if(game.coverUrl){game.coverUrl=null;game.coverChecked=true;game.coverSearchFailed=true;game.coverPage=null;game.coverSource=null;game.coverLicense=null;game.coverLicenseUrl=null;game.coverArtist=null;libraryPersist()}
   const main=document.createElement("div");main.className="library-card-main";const title=document.createElement("div");title.className="library-card-title";title.textContent=game.name;const meta=document.createElement("div");meta.className="library-card-meta";meta.textContent=game.lastPlayed?d["last-played"]+" · "+new Date(game.lastPlayed).toLocaleDateString():"RETROGAMES.CC";main.append(title,meta);
   if(game.coverPage){const credit=document.createElement("a");credit.className="art-credit";credit.href=game.coverPage;credit.target="_blank";credit.rel="noopener noreferrer";credit.textContent=(d["cover-source"]||"IMAGE SOURCE")+": "+(game.coverSource||"")+(game.coverLicense?" · "+game.coverLicense:"")+(game.coverArtist?" · "+game.coverArtist:"");const details=[game.coverArtist,game.coverLicense].filter(Boolean).join(" · ");if(details)credit.title=details;main.append(credit);if(game.coverLicenseUrl&&/^https:/.test(game.coverLicenseUrl)){const licenseLink=document.createElement("a");licenseLink.className="art-credit";licenseLink.href=game.coverLicenseUrl;licenseLink.target="_blank";licenseLink.rel="noopener noreferrer";licenseLink.textContent=game.coverLicense;main.append(licenseLink)}}
-  const actions=document.createElement("div");actions.className="library-card-actions";const retry=document.createElement("button");retry.className="library-action cover-retry";retry.textContent=d["cover-retry"];retry.disabled=!!game.coverSearching;retry.addEventListener("click",()=>{if(coverObserver)coverObserver.unobserve(card);game.coverChecked=false;game.coverSearching=true;renderLibrary();findRealCover(game,true)});
+  const actions=document.createElement("div");actions.className="library-card-actions";const retry=document.createElement("button");retry.className="library-action cover-retry";retry.textContent=d["cover-retry"];retry.disabled=!!game.coverSearching;retry.addEventListener("click",()=>{if(coverObserver)coverObserver.unobserve(card);game.coverChecked=false;game.coverCandidates=[];game.coverSearching=true;renderLibrary();findRealCover(game,true)});
   const play=document.createElement("button");play.className="library-action play";play.textContent=d.play;play.addEventListener("click",()=>{game.lastPlayed=Date.now();libraryPersist();loadGame(game.url)});
   const fav=document.createElement("button");fav.className="library-action fav";fav.textContent=game.favorite?d.unfavorite:d.favorite;fav.title=game.favorite?d.unfavorite:d.favorite;fav.addEventListener("click",()=>{game.favorite=!game.favorite;libraryPersist();renderLibrary()});
   const remove=document.createElement("button");remove.className="library-action remove";remove.textContent=d.remove;remove.addEventListener("click",()=>{library=library.filter(g=>g.url!==game.url);libraryPersist();renderLibrary();if(currentEmbedUrl===game.url)saveGameButton.hidden=false});
   actions.append(play,fav,retry,remove);card.append(cover,main,actions);libraryList.append(card);
-  if(!game.coverUrl&&!game.coverChecked&&!game.coverSearching){if(coverObserver)coverObserver.observe(card);else{status.textContent=d["cover-searching"];findRealCover(game)}}
+  if(!game.coverUrl&&coverNeedsRetry(game)&&!game.coverSearching){if(coverObserver)coverObserver.observe(card);else{status.textContent=d["cover-searching"];findRealCover(game)}}
  });
 }
 document.querySelectorAll(".library-filter").forEach(button=>button.addEventListener("click",()=>{libraryFilter=button.dataset.filter;document.querySelectorAll(".library-filter").forEach(b=>b.classList.toggle("active",b===button));renderLibrary()}));librarySearch.addEventListener("input",renderLibrary);
-saveGameButton.addEventListener("click",()=>{if(!currentEmbedUrl)return;const d=translations[languageSelect.value]||translations.pt;if(library.some(g=>g.url===currentEmbedUrl)){message.textContent=d.alreadySaved;return}library.push({url:currentEmbedUrl,name:friendlyName(currentEmbedUrl),favorite:false,lastPlayed:Date.now(),coverChecked:false});libraryPersist();renderLibrary();message.textContent=d.saved;});
+saveGameButton.addEventListener("click",()=>{if(!currentEmbedUrl)return;const d=translations[languageSelect.value]||translations.pt;if(library.some(g=>g.url===currentEmbedUrl)){message.textContent=d.alreadySaved;return}library.push({url:currentEmbedUrl,name:friendlyName(currentEmbedUrl),favorite:false,lastPlayed:Date.now(),coverChecked:false,coverLibretroTried:false});libraryPersist();renderLibrary();message.textContent=d.saved;});
 function loadGame(embedUrl,save=true){const d=translations[languageSelect.value]||translations.pt;currentEmbedUrl=embedUrl;input.value=embedUrl;message.textContent=d.loading;message.classList.remove("error");emptyState.hidden=true;iframe.hidden=false;iframe.src=embedUrl;gameName.textContent=friendlyName(embedUrl);liveIndicator.classList.add("active");document.querySelector(".gbc-power-led")?.classList.add("on");actions.hidden=false;renderLibrary();if(save){try{localStorage.setItem(STORAGE_KEY,embedUrl)}catch{}}}
 form.addEventListener("submit",e=>{e.preventDefault();const url=getEmbedUrl(input.value);if(!url){message.textContent=translations[languageSelect.value].error;message.classList.add("error");return}loadGame(url)});
 iframe.addEventListener("load",()=>{if(iframe.src&&iframe.src!=="about:blank")message.textContent=translations[languageSelect.value].loaded});
 copyButton.addEventListener("click",async()=>{const d=translations[languageSelect.value]||translations.pt;if(!currentEmbedUrl)return;try{await navigator.clipboard.writeText(currentEmbedUrl);message.textContent=d.copied}catch{message.textContent=d.copyError}});
 clearButton.addEventListener("click",()=>{try{localStorage.removeItem(STORAGE_KEY)}catch{}currentEmbedUrl="";input.value="";iframe.src="about:blank";iframe.hidden=true;emptyState.hidden=false;actions.hidden=true;gameName.textContent=translations[languageSelect.value]["no-game"];liveIndicator.classList.remove("active");document.querySelector(".gbc-power-led")?.classList.remove("on");message.textContent=translations[languageSelect.value].cleared;message.classList.remove("error");input.focus()});
 fullscreenButton.addEventListener("click",async()=>{try{if(document.fullscreenElement){await document.exitFullscreen();try{if(screen.orientation?.unlock)screen.orientation.unlock()}catch{}}else{await gameArea.requestFullscreen();try{await screen.orientation?.lock?.("landscape")}catch{}}}catch{message.textContent="Fullscreen is not available in this browser."}});
-setLanguage("pt");try{setTheme(localStorage.getItem(THEME_KEY)||"angiru")}catch{setTheme("angiru")}syncSnesAge(document.body.dataset.theme);try{const stored=JSON.parse(localStorage.getItem(LIBRARY_KEY)||"[]");if(Array.isArray(stored))library=stored.filter(g=>g&&typeof g.url==="string"&&typeof g.name==="string").map(g=>({...g,coverSearching:false}))}catch{library=[]}renderLibrary();try{const saved=localStorage.getItem(STORAGE_KEY),valid=saved&&getEmbedUrl(saved);if(valid)loadGame(valid,false)}catch{}
+setLanguage("pt");try{setTheme(localStorage.getItem(THEME_KEY)||"angiru")}catch{setTheme("angiru")}syncSnesAge(document.body.dataset.theme);try{const stored=JSON.parse(localStorage.getItem(LIBRARY_KEY)||"[]");if(Array.isArray(stored))library=stored.filter(g=>g&&typeof g.url==="string"&&typeof g.name==="string").map(g=>({...g,coverSearching:false,coverCandidates:Array.isArray(g.coverCandidates)?g.coverCandidates:[],coverLibretroTried:!!g.coverLibretroTried,coverChecked:!!g.coverUrl?!!g.coverChecked:(g.coverChecked&&g.coverCheckedAt?true:false)}))}catch{library=[]}renderLibrary();try{const saved=localStorage.getItem(STORAGE_KEY),valid=saved&&getEmbedUrl(saved);if(valid)loadGame(valid,false)}catch{}
